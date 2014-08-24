@@ -69,11 +69,10 @@ public func /= (inout lhs:CGPoint, rhs:CGFloat) {
 
 public extension CGPoint {
     func clamped(rect:CGRect) -> CGPoint {
-    
-        var point : CGPoint = CGPointZero
-        point.x = min(self.x, rect.minX)
-    
-        return self
+        return CGPoint(
+            x:clamp(self.x, rect.minX, rect.maxX),
+            y:clamp(self.y, rect.minY, rect.maxY)
+        )
     }
 }
 
@@ -87,11 +86,9 @@ public extension CGPoint {
     var normalized : CGPoint { get { return CGPoint(x:x / length, y:y / length) } }
 }
 
-
 func atan2(point:CGPoint) -> CGFloat {
     return atan2(point.y, point.x)
 }
-
 
 // MARK: CGSize
 
