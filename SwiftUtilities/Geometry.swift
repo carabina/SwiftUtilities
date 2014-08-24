@@ -77,6 +77,22 @@ public extension CGPoint {
     }
 }
 
+public extension CGPoint {
+    init(length:CGFloat, theta:CGFloat) {
+        x = cos(theta) * length
+        y = sin(theta) * length
+    }
+
+    var length : CGFloat { get { return sqrt(x * x + y * y) } }
+    var normalized : CGPoint { get { return CGPoint(x:x / length, y:y / length) } }
+}
+
+
+func atan2(point:CGPoint) -> CGFloat {
+    return atan2(point.y, point.x)
+}
+
+
 // MARK: CGSize
 
 public extension CGSize {
@@ -154,6 +170,11 @@ public extension CGRect {
     init(P1:CGPoint, P2:CGPoint) {
         self.origin = CGPoint(x:min(P1.x, P2.x), y:min(P1.y, P2.y))
         self.size = CGSize(width:abs(P2.x - P1.x), height:abs(P2.y - P1.y))
+    }
+
+    init(center:CGPoint, size:CGSize) {
+        self.origin = CGPoint(x:center.x - size.width * 0.5, y:center.y - size.height * 0.5)
+        self.size = size
     }
 }
 
@@ -253,12 +274,12 @@ public extension Quadrant {
 
 // MARK: Degrees/Radians
 
-func DegreesToRadians(degrees:Double) -> Double {
-    return degrees * 180 / M_PI
+func DegreesToRadians(v:Double) -> Double {
+    return v * M_PI / 180
 }
 
-func RadiansToDegrees(radians:Double) -> Double {
-    return radians * M_PI / 180
+func RadiansToDegrees(v:Double) -> Double {
+    return v * 180 / M_PI
 }
 
 // MARK: Scaling and alignment.
