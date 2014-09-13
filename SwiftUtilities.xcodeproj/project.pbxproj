@@ -9,25 +9,18 @@
 /* Begin PBXBuildFile section */
 		45052CE7199AE2750037C05D /* Walker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45052CE6199AE2750037C05D /* Walker.swift */; };
 		45052CE8199AE2750037C05D /* Walker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45052CE6199AE2750037C05D /* Walker.swift */; };
-		45582156199D20D000BD7EC4 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45582155199D20D000BD7EC4 /* main.swift */; };
+		45BA690C19C4C26600FA7252 /* NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA690B19C4C26600FA7252 /* NSRange.swift */; };
+		45BA690D19C4C26600FA7252 /* NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA690B19C4C26600FA7252 /* NSRange.swift */; };
+		45BA691019C4C48E00FA7252 /* NSRange_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA690F19C4C48E00FA7252 /* NSRange_Tests.swift */; };
 		45E8EEAA199A8E080035C722 /* SwiftUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E8EEA9199A8E080035C722 /* SwiftUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45E8EEBE199A8E1C0035C722 /* FoundationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEBD199A8E1C0035C722 /* FoundationUtilities.swift */; };
-		45E8EEC0199A8E660035C722 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEBF199A8E660035C722 /* Geometry.swift */; };
 		45E8EEE7199A90720035C722 /* SwiftUtilities_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEE6199A90720035C722 /* SwiftUtilities_Tests.swift */; };
 		45E8EEED199AAA4E0035C722 /* BoolEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEEC199AAA4E0035C722 /* BoolEnum.swift */; };
 		45E8EEEE199AAA4E0035C722 /* BoolEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEEC199AAA4E0035C722 /* BoolEnum.swift */; };
 		45E8EF09199AD3320035C722 /* FoundationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEBD199A8E1C0035C722 /* FoundationUtilities.swift */; };
-		45E8EF0A199AD3360035C722 /* Geometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEBF199A8E660035C722 /* Geometry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		45052CE2199ADF6B0037C05D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 45E8EE9B199A8E080035C722 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 45E8EEA3199A8E080035C722;
-			remoteInfo = "SwiftUtilities (Mac OS X)";
-		};
 		45052CE4199ADF700037C05D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 45E8EE9B199A8E080035C722 /* Project object */;
@@ -37,32 +30,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		45E8EEFF199ABF8F0035C722 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
 		45052CE6199AE2750037C05D /* Walker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Walker.swift; sourceTree = "<group>"; };
-		45582155199D20D000BD7EC4 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		45BA690B19C4C26600FA7252 /* NSRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRange.swift; sourceTree = "<group>"; };
+		45BA690E19C4C29D00FA7252 /* Walker.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Walker.playground; sourceTree = "<group>"; };
+		45BA690F19C4C48E00FA7252 /* NSRange_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRange_Tests.swift; sourceTree = "<group>"; };
+		45BA691119C4C50900FA7252 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		45E8EEA4199A8E080035C722 /* SwiftUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E8EEA8199A8E080035C722 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45E8EEA9199A8E080035C722 /* SwiftUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftUtilities.h; sourceTree = "<group>"; };
 		45E8EEBD199A8E1C0035C722 /* FoundationUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationUtilities.swift; sourceTree = "<group>"; };
-		45E8EEBF199A8E660035C722 /* Geometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Geometry.swift; sourceTree = "<group>"; };
 		45E8EEC6199A8EA50035C722 /* SwiftUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E8EEE2199A90720035C722 /* SwiftUtilities Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftUtilities Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E8EEE5199A90720035C722 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45E8EEE6199A90720035C722 /* SwiftUtilities_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUtilities_Tests.swift; sourceTree = "<group>"; };
 		45E8EEEC199AAA4E0035C722 /* BoolEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolEnum.swift; sourceTree = "<group>"; };
-		45E8EF01199ABF8F0035C722 /* Testbed */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Testbed; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,30 +69,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		45E8EEFE199ABF8F0035C722 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		45582154199D20D000BD7EC4 /* SwiftUtilities Testbed */ = {
-			isa = PBXGroup;
-			children = (
-				45582155199D20D000BD7EC4 /* main.swift */,
-			);
-			path = "SwiftUtilities Testbed";
-			sourceTree = "<group>";
-		};
 		45E8EE9A199A8E080035C722 = {
 			isa = PBXGroup;
 			children = (
+				45BA690E19C4C29D00FA7252 /* Walker.playground */,
+				45BA691119C4C50900FA7252 /* MyPlayground.playground */,
 				45E8EEA6199A8E080035C722 /* SwiftUtilities */,
 				45E8EEE3199A90720035C722 /* SwiftUtilities Tests */,
-				45582154199D20D000BD7EC4 /* SwiftUtilities Testbed */,
 				45E8EEA5199A8E080035C722 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -121,7 +89,6 @@
 				45E8EEA4199A8E080035C722 /* SwiftUtilities.framework */,
 				45E8EEC6199A8EA50035C722 /* SwiftUtilities.framework */,
 				45E8EEE2199A90720035C722 /* SwiftUtilities Tests.xctest */,
-				45E8EF01199ABF8F0035C722 /* Testbed */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,7 +98,7 @@
 			children = (
 				45E8EEA9199A8E080035C722 /* SwiftUtilities.h */,
 				45E8EEBD199A8E1C0035C722 /* FoundationUtilities.swift */,
-				45E8EEBF199A8E660035C722 /* Geometry.swift */,
+				45BA690B19C4C26600FA7252 /* NSRange.swift */,
 				45E8EEEC199AAA4E0035C722 /* BoolEnum.swift */,
 				45052CE6199AE2750037C05D /* Walker.swift */,
 				45E8EEA7199A8E080035C722 /* Supporting Files */,
@@ -151,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				45E8EEE6199A90720035C722 /* SwiftUtilities_Tests.swift */,
+				45BA690F19C4C48E00FA7252 /* NSRange_Tests.swift */,
 				45E8EEE4199A90720035C722 /* Supporting Files */,
 			);
 			path = "SwiftUtilities Tests";
@@ -239,24 +207,6 @@
 			productReference = 45E8EEE2199A90720035C722 /* SwiftUtilities Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		45E8EF00199ABF8F0035C722 /* Testbed */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 45E8EF05199ABF8F0035C722 /* Build configuration list for PBXNativeTarget "Testbed" */;
-			buildPhases = (
-				45E8EEFD199ABF8F0035C722 /* Sources */,
-				45E8EEFE199ABF8F0035C722 /* Frameworks */,
-				45E8EEFF199ABF8F0035C722 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				45052CE3199ADF6B0037C05D /* PBXTargetDependency */,
-			);
-			name = Testbed;
-			productName = Testbed;
-			productReference = 45E8EF01199ABF8F0035C722 /* Testbed */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -273,9 +223,6 @@
 						CreatedOnToolsVersion = 6.0;
 					};
 					45E8EEE1199A90720035C722 = {
-						CreatedOnToolsVersion = 6.0;
-					};
-					45E8EF00199ABF8F0035C722 = {
 						CreatedOnToolsVersion = 6.0;
 					};
 				};
@@ -295,7 +242,6 @@
 				45E8EEA3199A8E080035C722 /* SwiftUtilities (Mac OS X) */,
 				45E8EEC5199A8EA50035C722 /* SwiftUtilities (iOS) */,
 				45E8EEE1199A90720035C722 /* SwiftUtilities Tests */,
-				45E8EF00199ABF8F0035C722 /* Testbed */,
 			);
 		};
 /* End PBXProject section */
@@ -331,8 +277,8 @@
 			files = (
 				45E8EEBE199A8E1C0035C722 /* FoundationUtilities.swift in Sources */,
 				45052CE7199AE2750037C05D /* Walker.swift in Sources */,
+				45BA690C19C4C26600FA7252 /* NSRange.swift in Sources */,
 				45E8EEED199AAA4E0035C722 /* BoolEnum.swift in Sources */,
-				45E8EEC0199A8E660035C722 /* Geometry.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,7 +288,7 @@
 			files = (
 				45E8EF09199AD3320035C722 /* FoundationUtilities.swift in Sources */,
 				45052CE8199AE2750037C05D /* Walker.swift in Sources */,
-				45E8EF0A199AD3360035C722 /* Geometry.swift in Sources */,
+				45BA690D19C4C26600FA7252 /* NSRange.swift in Sources */,
 				45E8EEEE199AAA4E0035C722 /* BoolEnum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,26 +297,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45BA691019C4C48E00FA7252 /* NSRange_Tests.swift in Sources */,
 				45E8EEE7199A90720035C722 /* SwiftUtilities_Tests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		45E8EEFD199ABF8F0035C722 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				45582156199D20D000BD7EC4 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		45052CE3199ADF6B0037C05D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 45E8EEA3199A8E080035C722 /* SwiftUtilities (Mac OS X) */;
-			targetProxy = 45052CE2199ADF6B0037C05D /* PBXContainerItemProxy */;
-		};
 		45052CE5199ADF700037C05D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 45E8EEA3199A8E080035C722 /* SwiftUtilities (Mac OS X) */;
@@ -575,24 +509,6 @@
 			};
 			name = Release;
 		};
-		45E8EF06199ABF8F0035C722 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		45E8EF07199ABF8F0035C722 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -628,15 +544,6 @@
 			buildConfigurations = (
 				45E8EEE9199A90720035C722 /* Debug */,
 				45E8EEEA199A90720035C722 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		45E8EF05199ABF8F0035C722 /* Build configuration list for PBXNativeTarget "Testbed" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				45E8EF06199ABF8F0035C722 /* Debug */,
-				45E8EF07199ABF8F0035C722 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
