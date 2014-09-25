@@ -100,13 +100,3 @@ public func < (lhs:NSRange, rhs:NSRange) -> Bool {
     }
 }
 
-internal func ordered <T:Comparable> (tuple:(T, T)) -> (T, T) {
-    let (lhs, rhs) = tuple
-    if lhs <= rhs {
-        return (lhs, rhs)
-    }
-    else {
-        return (rhs, lhs)
-    }
-}
-
