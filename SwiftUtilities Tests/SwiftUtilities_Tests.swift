@@ -14,7 +14,7 @@ class SwiftUtilities_Tests: XCTestCase {
     
     func testBoolEnum() {
         let b = BoolEnum(false)
-        XCTAssertEqual(b, false)
+//        XCTAssertEqual(b, false)
         XCTAssertEqual(b, BoolEnum.False)
     }
 

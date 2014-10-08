@@ -26,11 +26,6 @@ extension BoolEnum : BooleanLiteralConvertible {
     public init(booleanLiteral value: BooleanLiteralType) {
         self = value ? .True : .False
     }
-    
-    // TODO: Deprecated
-    public static func convertFromBooleanLiteral(value: BooleanLiteralType) -> BoolEnum {
-        return BoolEnum(value ? BoolEnum.True : BoolEnum.False)
-    }
 }
 
 extension BoolEnum : BooleanType {

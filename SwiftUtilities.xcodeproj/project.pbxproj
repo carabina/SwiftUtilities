@@ -6,6 +6,21 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		4507E37519E5B79500106ECF /* All */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 4507E37819E5B79500106ECF /* Build configuration list for PBXAggregateTarget "All" */;
+			buildPhases = (
+			);
+			dependencies = (
+				4507E37A19E5B7A100106ECF /* PBXTargetDependency */,
+				4507E37C19E5B7A100106ECF /* PBXTargetDependency */,
+			);
+			name = All;
+			productName = All;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		45052CE7199AE2750037C05D /* Walker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45052CE6199AE2750037C05D /* Walker.swift */; };
 		45052CE8199AE2750037C05D /* Walker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45052CE6199AE2750037C05D /* Walker.swift */; };
@@ -29,6 +44,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 45E8EEA3199A8E080035C722;
 			remoteInfo = "SwiftUtilities (Mac OS X)";
+		};
+		4507E37919E5B7A100106ECF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45E8EE9B199A8E080035C722 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45E8EEA3199A8E080035C722;
+			remoteInfo = "SwiftUtilities (Mac OS X)";
+		};
+		4507E37B19E5B7A100106ECF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 45E8EE9B199A8E080035C722 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 45E8EEC5199A8EA50035C722;
+			remoteInfo = "SwiftUtilities (iOS)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -157,9 +186,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		45E8EEA3199A8E080035C722 /* SwiftUtilities (Mac OS X) */ = {
+		45E8EEA3199A8E080035C722 /* SwiftUtilities_OSX */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45E8EEB7199A8E080035C722 /* Build configuration list for PBXNativeTarget "SwiftUtilities (Mac OS X)" */;
+			buildConfigurationList = 45E8EEB7199A8E080035C722 /* Build configuration list for PBXNativeTarget "SwiftUtilities_OSX" */;
 			buildPhases = (
 				45E8EE9F199A8E080035C722 /* Sources */,
 				45E8EEA0199A8E080035C722 /* Frameworks */,
@@ -170,14 +199,14 @@
 			);
 			dependencies = (
 			);
-			name = "SwiftUtilities (Mac OS X)";
+			name = SwiftUtilities_OSX;
 			productName = SwiftUtilities;
 			productReference = 45E8EEA4199A8E080035C722 /* SwiftUtilities.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		45E8EEC5199A8EA50035C722 /* SwiftUtilities (iOS) */ = {
+		45E8EEC5199A8EA50035C722 /* SwiftUtilities_iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45E8EED6199A8EA60035C722 /* Build configuration list for PBXNativeTarget "SwiftUtilities (iOS)" */;
+			buildConfigurationList = 45E8EED6199A8EA60035C722 /* Build configuration list for PBXNativeTarget "SwiftUtilities_iOS" */;
 			buildPhases = (
 				45E8EEC1199A8EA50035C722 /* Sources */,
 				45E8EEC2199A8EA50035C722 /* Frameworks */,
@@ -188,7 +217,7 @@
 			);
 			dependencies = (
 			);
-			name = "SwiftUtilities (iOS)";
+			name = SwiftUtilities_iOS;
 			productName = SwiftUtilities;
 			productReference = 45E8EEC6199A8EA50035C722 /* SwiftUtilities.framework */;
 			productType = "com.apple.product-type.framework";
@@ -220,6 +249,9 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = schwa.io;
 				TargetAttributes = {
+					4507E37519E5B79500106ECF = {
+						CreatedOnToolsVersion = 6.1;
+					};
 					45E8EEA3199A8E080035C722 = {
 						CreatedOnToolsVersion = 6.0;
 					};
@@ -243,8 +275,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				45E8EEA3199A8E080035C722 /* SwiftUtilities (Mac OS X) */,
-				45E8EEC5199A8EA50035C722 /* SwiftUtilities (iOS) */,
+				4507E37519E5B79500106ECF /* All */,
+				45E8EEA3199A8E080035C722 /* SwiftUtilities_OSX */,
+				45E8EEC5199A8EA50035C722 /* SwiftUtilities_iOS */,
 				45E8EEE1199A90720035C722 /* SwiftUtilities Tests */,
 			);
 		};
@@ -313,12 +346,36 @@
 /* Begin PBXTargetDependency section */
 		45052CE5199ADF700037C05D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 45E8EEA3199A8E080035C722 /* SwiftUtilities (Mac OS X) */;
+			target = 45E8EEA3199A8E080035C722 /* SwiftUtilities_OSX */;
 			targetProxy = 45052CE4199ADF700037C05D /* PBXContainerItemProxy */;
+		};
+		4507E37A19E5B7A100106ECF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45E8EEA3199A8E080035C722 /* SwiftUtilities_OSX */;
+			targetProxy = 4507E37919E5B7A100106ECF /* PBXContainerItemProxy */;
+		};
+		4507E37C19E5B7A100106ECF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 45E8EEC5199A8EA50035C722 /* SwiftUtilities_iOS */;
+			targetProxy = 4507E37B19E5B7A100106ECF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		4507E37619E5B79500106ECF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4507E37719E5B79500106ECF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		45E8EEB5199A8E080035C722 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -518,6 +575,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4507E37819E5B79500106ECF /* Build configuration list for PBXAggregateTarget "All" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4507E37619E5B79500106ECF /* Debug */,
+				4507E37719E5B79500106ECF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		45E8EE9E199A8E080035C722 /* Build configuration list for PBXProject "SwiftUtilities" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -527,7 +592,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45E8EEB7199A8E080035C722 /* Build configuration list for PBXNativeTarget "SwiftUtilities (Mac OS X)" */ = {
+		45E8EEB7199A8E080035C722 /* Build configuration list for PBXNativeTarget "SwiftUtilities_OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45E8EEB8199A8E080035C722 /* Debug */,
@@ -536,7 +601,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45E8EED6199A8EA60035C722 /* Build configuration list for PBXNativeTarget "SwiftUtilities (iOS)" */ = {
+		45E8EED6199A8EA60035C722 /* Build configuration list for PBXNativeTarget "SwiftUtilities_iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				45E8EED7199A8EA60035C722 /* Debug */,
