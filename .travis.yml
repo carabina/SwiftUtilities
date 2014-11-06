@@ -1,0 +1,4 @@
+language: objective-c
+xcode_project: 'SwiftUtilities.xcodeproj'
+xcode_scheme: 'All'
+osx_image: xcode61
