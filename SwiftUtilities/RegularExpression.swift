@@ -34,7 +34,7 @@ public struct RegularExpression {
         public let string: String
         public let result: NSTextCheckingResult
         
-        public init(string:String, result:NSTextCheckingResult) {
+        init(string:String, result:NSTextCheckingResult) {
             self.string = string
             self.result = result
         }
@@ -56,8 +56,8 @@ public struct RegularExpression {
         }
 
         public struct Group {
-            let string: String
-            let range: NSRange
+            public let string: String
+            public let range: NSRange
             
             init(string:String, range:NSRange) {
                 self.string = string
