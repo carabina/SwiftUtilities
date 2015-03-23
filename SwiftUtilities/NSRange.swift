@@ -10,11 +10,6 @@ import Foundation
 
 public extension NSRange {
 
-    init() {
-        self.location = 0
-        self.length = 0
-    }
-
     init(location:Int, length:Int) {
         self.location = location
         self.length = length

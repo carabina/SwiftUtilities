@@ -13,7 +13,7 @@ import SwiftUtilities
 class NSRange_Tests: XCTestCase {
 
     func testRange() {
-        XCTAssertEqual(NSRange(), NSMakeRange(0, 0))
+
         XCTAssertEqual(NSRange(range:5..<15), NSMakeRange(5, 10))
         XCTAssertEqual(NSRange(5, 10), NSMakeRange(5, 10))
 

@@ -16,3 +16,5 @@ FOUNDATION_EXPORT double SwiftUtilitiesVersionNumber;
 FOUNDATION_EXPORT const unsigned char SwiftUtilitiesVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <SwiftUtilities/PublicHeader.h>
+
+#import <SwiftUtilities/CPPRandom.h>
