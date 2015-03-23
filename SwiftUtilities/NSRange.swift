@@ -61,13 +61,13 @@ public extension NSRange {
     func intersection(range:NSRange) -> NSRange? {
         let intersection = NSIntersectionRange(self, range)        
         if intersection.isEmpty {
-            return false
+            return nil
         }
         else {
             return intersection
         }
     }
-    
+
     func contiguous(range:NSRange) -> Bool {
         let (lhs, rhs) = ordered((self, range))
         return lhs.endIndex == rhs.startIndex 
