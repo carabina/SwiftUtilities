@@ -21,8 +21,8 @@ public struct RegularExpression {
     }
 
     public func match(string:String, options:NSMatchingOptions = NSMatchingOptions()) -> Match? {
-        let range = 0..<string._bridgeToObjectiveC().length
-        if let result = expression.firstMatchInString(string, options:options, range:NSRange(range)) {
+        let length = (string as NSString).length
+        if let result = expression.firstMatchInString(string, options:options, range:NSMakeRange(0, length)) {
             return Match(string:string, result:result)
         }
         else {
@@ -30,24 +30,29 @@ public struct RegularExpression {
         }
     }
 
-    public struct Match {
+    public struct Match: Printable {
         public let string: String
         public let result: NSTextCheckingResult
-        
+
         init(string:String, result:NSTextCheckingResult) {
             self.string = string
             self.result = result
         }
 
-        public typealias Groups = BlockBackedCollection <Group>
+        public var description: String {
+            get {
+                return "Match(\(result.numberOfRanges))"
+            }
+        }
 
-        public var groups: Groups {
+        public typealias Group = (string:String,range:NSRange)
+
+        public var groups: BlockBackedCollection <Group> {
             get {
                 let count = result.numberOfRanges
-                let groups = Groups(count:count) {
-                    (index:Int) -> Group in
-                    let range = self.result.rangeAtIndex(index)
-                    let string = self.string._bridgeToObjectiveC().substringWithRange(range)
+                let groups = BlockBackedCollection <Group> (count:count) {
+                    let range = self.result.rangeAtIndex($0)
+                    let string = (self.string as NSString).substringWithRange(range)
                     let group = Group(string:string, range:range)
                     return group
                     }
@@ -55,20 +60,26 @@ public struct RegularExpression {
             }
         }
 
-        public struct Group {
-            public let string: String
-            public let range: NSRange
-            
-            init(string:String, range:NSRange) {
-                self.string = string
-                self.range = range
+        public var ranges: BlockBackedCollection <NSRange> {
+            get {
+                let count = result.numberOfRanges
+                let groups = BlockBackedCollection <NSRange> (count:count) {
+                    return self.result.rangeAtIndex($0)
+                    }
+                return groups
             }
         }
+
+        public var strings: BlockBackedCollection <String> {
+            get {
+                let count = result.numberOfRanges
+                let groups = BlockBackedCollection <String> (count:count) {
+                    let range = self.result.rangeAtIndex($0)
+                    return (self.string as NSString).substringWithRange(range)
+                    }
+                return groups
+            }
+        }
+
     }
 }
-
-//let groups = RegularExpression("([A-Za-z]+) ([A-Za-z]+)").match("Hello world").groups
-//
-//for f in groups {
-//    println(f.string)
-//}

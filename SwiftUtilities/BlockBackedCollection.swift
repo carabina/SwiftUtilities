@@ -26,7 +26,7 @@ public struct BlockBackedCollection <T>: CollectionType, SequenceType {
     }
 
     public subscript (index:Index) -> T {
-        assert(index > 0 && index < self.count)
+        assert(index >= 0 && index < self.count)
         return block(index: index)
     }
 
@@ -34,6 +34,19 @@ public struct BlockBackedCollection <T>: CollectionType, SequenceType {
         return Generator(sequence:self)
     }
 }
+
+extension BlockBackedCollection: Printable {
+    public var description: String {
+        get {
+            let strings:[String] = map(self) {
+                return toString($0)
+            }
+            let content = ", ".join(strings)
+            return "[\(content)]"
+        }
+    }
+}
+
 
 public struct BlockBackedCollectionGenerator <T>: GeneratorType {
     public typealias Sequence = BlockBackedCollection <T>

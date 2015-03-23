@@ -78,6 +78,7 @@
 
 /* Begin PBXFileReference section */
 		45052CE6199AE2750037C05D /* Walker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Walker.swift; sourceTree = "<group>"; };
+		452B30AB1AC0996100920B6A /* RegularExpressionPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RegularExpressionPlayground.playground; sourceTree = "<group>"; };
 		457DED7619DA218E000242E1 /* PureUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PureUtilities.swift; sourceTree = "<group>"; };
 		45B13E321AC076450035DEE9 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		45B13E331AC076450035DEE9 /* Walker.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Walker.playground; sourceTree = "<group>"; };
@@ -131,6 +132,7 @@
 			children = (
 				45B13E321AC076450035DEE9 /* MyPlayground.playground */,
 				45B13E331AC076450035DEE9 /* Walker.playground */,
+				452B30AB1AC0996100920B6A /* RegularExpressionPlayground.playground */,
 			);
 			path = Playgrounds;
 			sourceTree = "<group>";
