@@ -50,6 +50,8 @@
 		45E8EEED199AAA4E0035C722 /* BoolEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEEC199AAA4E0035C722 /* BoolEnum.swift */; };
 		45E8EEEE199AAA4E0035C722 /* BoolEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEEC199AAA4E0035C722 /* BoolEnum.swift */; };
 		45E8EF09199AD3320035C722 /* FoundationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEBD199A8E1C0035C722 /* FoundationUtilities.swift */; };
+		45F9C0ED1AC0D8100068164B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9C0EC1AC0D8100068164B /* String+Extensions.swift */; };
+		45F9C0EE1AC0D8100068164B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9C0EC1AC0D8100068164B /* String+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,7 @@
 		45E8EEE5199A90720035C722 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45E8EEE6199A90720035C722 /* SwiftUtilities_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUtilities_Tests.swift; sourceTree = "<group>"; };
 		45E8EEEC199AAA4E0035C722 /* BoolEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolEnum.swift; sourceTree = "<group>"; };
+		45F9C0EC1AC0D8100068164B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +165,7 @@
 			children = (
 				45E8EEA9199A8E080035C722 /* SwiftUtilities.h */,
 				45E8EEBD199A8E1C0035C722 /* FoundationUtilities.swift */,
+				45F9C0EC1AC0D8100068164B /* String+Extensions.swift */,
 				45BA690B19C4C26600FA7252 /* NSRange.swift */,
 				45E8EEEC199AAA4E0035C722 /* BoolEnum.swift */,
 				45052CE6199AE2750037C05D /* Walker.swift */,
@@ -358,6 +362,7 @@
 				45E8EEBE199A8E1C0035C722 /* FoundationUtilities.swift in Sources */,
 				45C6190A1AC078A100284D3F /* Math.swift in Sources */,
 				45C619061AC078A100284D3F /* RegularExpression.swift in Sources */,
+				45F9C0ED1AC0D8100068164B /* String+Extensions.swift in Sources */,
 				45052CE7199AE2750037C05D /* Walker.swift in Sources */,
 				45BA690C19C4C26600FA7252 /* NSRange.swift in Sources */,
 				45C619021AC078A100284D3F /* CPPRandom.mm in Sources */,
@@ -376,6 +381,7 @@
 				45E8EF09199AD3320035C722 /* FoundationUtilities.swift in Sources */,
 				45C6190B1AC078A100284D3F /* Math.swift in Sources */,
 				45C619071AC078A100284D3F /* RegularExpression.swift in Sources */,
+				45F9C0EE1AC0D8100068164B /* String+Extensions.swift in Sources */,
 				45052CE8199AE2750037C05D /* Walker.swift in Sources */,
 				45BA690D19C4C26600FA7252 /* NSRange.swift in Sources */,
 				45C619031AC078A100284D3F /* CPPRandom.mm in Sources */,

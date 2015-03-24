@@ -60,13 +60,16 @@ public struct RegularExpression {
             }
         }
 
-        public var ranges: BlockBackedCollection <NSRange> {
+        public var ranges: BlockBackedCollection <Range <String.Index>> {
             get {
                 let count = result.numberOfRanges
-                let groups = BlockBackedCollection <NSRange> (count:count) {
-                    return self.result.rangeAtIndex($0)
+                let ranges = BlockBackedCollection <Range <String.Index>> (count:count) {
+
+                    let nsRange = self.result.rangeAtIndex($0)
+                    let range = self.string.convert(nsRange)
+                    return range!
                     }
-                return groups
+                return ranges
             }
         }
 

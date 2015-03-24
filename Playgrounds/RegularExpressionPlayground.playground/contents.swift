@@ -5,16 +5,10 @@ import Cocoa
 
 import SwiftUtilities
 
-let expression = RegularExpression("(Hel)(lo)")
+let expression = RegularExpression("😀")
 
-let match = expression.match("Hello World")!
-println(match.strings)
-
-
-
-//let group = match!.groups[0]
-
-
-
-
+let haystack = "xxxxxx😀yyyy"
+let match = expression.match(haystack)!
+let range = match.ranges[0]
+haystack[range]
 
