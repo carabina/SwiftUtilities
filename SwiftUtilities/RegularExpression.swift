@@ -45,26 +45,10 @@ public struct RegularExpression {
             }
         }
 
-        public typealias Group = (string:String,range:NSRange)
-
-        public var groups: BlockBackedCollection <Group> {
-            get {
-                let count = result.numberOfRanges
-                let groups = BlockBackedCollection <Group> (count:count) {
-                    let range = self.result.rangeAtIndex($0)
-                    let string = (self.string as NSString).substringWithRange(range)
-                    let group = Group(string:string, range:range)
-                    return group
-                    }
-                return groups
-            }
-        }
-
         public var ranges: BlockBackedCollection <Range <String.Index>> {
             get {
                 let count = result.numberOfRanges
                 let ranges = BlockBackedCollection <Range <String.Index>> (count:count) {
-
                     let nsRange = self.result.rangeAtIndex($0)
                     let range = self.string.convert(nsRange)
                     return range!
