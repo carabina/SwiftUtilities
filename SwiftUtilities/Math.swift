@@ -63,27 +63,4 @@ public func RadiansToDegrees(v:Double) -> Double {
     return v * 180 / M_PI
 }
 
-// MARK: Conversion
-
-public extension UInt32 {
-    func asHex() -> String {
-        var s = ""
-        let characters:[Character] = [
-            "0","1","2","3","4","5","6","7","8","9",
-            "A","B","C","D","E","F",
-            ]
-        s.append(characters[Int(self >> 28 & 0x0F)])
-        s.append(characters[Int(self >> 24 & 0x0F)])
-        s.append(characters[Int(self >> 20 & 0x0F)])
-        s.append(characters[Int(self >> 16 & 0x0F)])
-        s.append(characters[Int(self >> 12 & 0x0F)])
-        s.append(characters[Int(self >> 8 & 0x0F)])
-        s.append(characters[Int(self >> 4 & 0x0F)])
-        s.append(characters[Int(self & 0x0F)])
-        
-        return s
-    }
-
-}
-
 
