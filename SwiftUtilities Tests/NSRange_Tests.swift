@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 schwa.io. All rights reserved.
 //
 
-import Cocoa
 import XCTest
 import SwiftUtilities
 
@@ -14,8 +13,8 @@ class NSRange_Tests: XCTestCase {
 
     func testRange() {
 
-        XCTAssertEqual(NSRange(range:5..<15), NSMakeRange(5, 10))
-        XCTAssertEqual(NSRange(5, 10), NSMakeRange(5, 10))
+//        XCTAssertEqual(NSRange(5..<15), NSMakeRange(5, 10))
+//        XCTAssertEqual(NSRange(location: 5, length: 10), NSMakeRange(5, 10))
 
         XCTAssertEqual(NSRange(range:1...10).endIndex, Range <Int> (1...10).endIndex)
         XCTAssertEqual(NSRange(range:1..<10).endIndex, Range <Int> (1..<10).endIndex)

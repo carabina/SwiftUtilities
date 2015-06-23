@@ -24,13 +24,18 @@
 /* Begin PBXBuildFile section */
 		45052CE7199AE2750037C05D /* Walker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45052CE6199AE2750037C05D /* Walker.swift */; };
 		45052CE8199AE2750037C05D /* Walker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45052CE6199AE2750037C05D /* Walker.swift */; };
+		452E96F61B3CA517002269CD /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F31B3CA517002269CD /* Base.swift */; };
+		452E96F71B3CA517002269CD /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F31B3CA517002269CD /* Base.swift */; };
+		452E96F81B3CA517002269CD /* BitRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F41B3CA517002269CD /* BitRange.swift */; };
+		452E96F91B3CA517002269CD /* BitRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F41B3CA517002269CD /* BitRange.swift */; };
+		452E96FA1B3CA517002269CD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F51B3CA517002269CD /* Utilities.swift */; };
+		452E96FB1B3CA517002269CD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F51B3CA517002269CD /* Utilities.swift */; };
+		452E96FE1B3CA523002269CD /* TestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FC1B3CA523002269CD /* TestBase.swift */; };
+		452E96FF1B3CA523002269CD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FD1B3CA523002269CD /* Utilities.swift */; };
+		452E97011B3CA529002269CD /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E97001B3CA529002269CD /* Tests.swift */; };
 		457DED7719DA218E000242E1 /* PureUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457DED7619DA218E000242E1 /* PureUtilities.swift */; };
 		457DED7819DA218E000242E1 /* PureUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457DED7619DA218E000242E1 /* PureUtilities.swift */; };
-		45B929CF1B39EC8F00206F2C /* bitrange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B929CE1B39EC8F00206F2C /* bitrange.swift */; };
-		45B929D01B39EC8F00206F2C /* bitrange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B929CE1B39EC8F00206F2C /* bitrange.swift */; };
 		45B929D21B39F31100206F2C /* BitRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B929D11B39F31100206F2C /* BitRange.swift */; };
-		45B929D51B3A013300206F2C /* Bases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B929D41B3A013300206F2C /* Bases.swift */; };
-		45B929D61B3A013300206F2C /* Bases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B929D41B3A013300206F2C /* Bases.swift */; };
 		45BA690C19C4C26600FA7252 /* NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA690B19C4C26600FA7252 /* NSRange.swift */; };
 		45BA690D19C4C26600FA7252 /* NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA690B19C4C26600FA7252 /* NSRange.swift */; };
 		45BA691019C4C48E00FA7252 /* NSRange_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA690F19C4C48E00FA7252 /* NSRange_Tests.swift */; };
@@ -55,8 +60,8 @@
 		45E504871B39E92D007AE307 /* DataScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E504821B39E92D007AE307 /* DataScanner.swift */; };
 		45E504881B39E92D007AE307 /* DataScanner+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E504831B39E92D007AE307 /* DataScanner+Extensions.swift */; };
 		45E504891B39E92D007AE307 /* DataScanner+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E504831B39E92D007AE307 /* DataScanner+Extensions.swift */; };
-		45E5048B1B39E984007AE307 /* Pointers+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E5048A1B39E984007AE307 /* Pointers+Extensions.swift */; };
-		45E5048C1B39E984007AE307 /* Pointers+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E5048A1B39E984007AE307 /* Pointers+Extensions.swift */; };
+		45E5048B1B39E984007AE307 /* Pointers+InternalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E5048A1B39E984007AE307 /* Pointers+InternalExtensions.swift */; };
+		45E5048C1B39E984007AE307 /* Pointers+InternalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E5048A1B39E984007AE307 /* Pointers+InternalExtensions.swift */; };
 		45E8EEAA199A8E080035C722 /* SwiftUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E8EEA9199A8E080035C722 /* SwiftUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45E8EEBE199A8E1C0035C722 /* FoundationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEBD199A8E1C0035C722 /* FoundationUtilities.swift */; };
 		45E8EEE7199A90720035C722 /* SwiftUtilities_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEE6199A90720035C722 /* SwiftUtilities_Tests.swift */; };
@@ -94,13 +99,15 @@
 /* Begin PBXFileReference section */
 		45052CE6199AE2750037C05D /* Walker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Walker.swift; sourceTree = "<group>"; };
 		452B30AB1AC0996100920B6A /* RegularExpressionPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RegularExpressionPlayground.playground; sourceTree = "<group>"; };
+		452E96F31B3CA517002269CD /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
+		452E96F41B3CA517002269CD /* BitRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitRange.swift; sourceTree = "<group>"; };
+		452E96F51B3CA517002269CD /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		452E96FC1B3CA523002269CD /* TestBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestBase.swift; sourceTree = "<group>"; };
+		452E96FD1B3CA523002269CD /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		452E97001B3CA529002269CD /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		457DED7619DA218E000242E1 /* PureUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PureUtilities.swift; sourceTree = "<group>"; };
-		45B13E321AC076450035DEE9 /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = MyPlayground.playground; sourceTree = "<group>"; };
 		45B13E331AC076450035DEE9 /* Walker.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Walker.playground; sourceTree = "<group>"; };
-		45B929CE1B39EC8F00206F2C /* bitrange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = bitrange.swift; sourceTree = "<group>"; };
 		45B929D11B39F31100206F2C /* BitRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitRange.swift; sourceTree = "<group>"; };
-		45B929D31B39F33200206F2C /* BitRange.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = BitRange.playground; path = ../BitRange.playground; sourceTree = "<group>"; };
-		45B929D41B3A013300206F2C /* Bases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bases.swift; sourceTree = "<group>"; };
 		45BA690B19C4C26600FA7252 /* NSRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRange.swift; sourceTree = "<group>"; };
 		45BA690F19C4C48E00FA7252 /* NSRange_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRange_Tests.swift; sourceTree = "<group>"; };
 		45C618F71AC078A100284D3F /* AssociatedObjects+Private.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AssociatedObjects+Private.swift"; sourceTree = "<group>"; };
@@ -113,7 +120,7 @@
 		45E504811B39E92D007AE307 /* CRC16.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRC16.swift; sourceTree = "<group>"; };
 		45E504821B39E92D007AE307 /* DataScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataScanner.swift; sourceTree = "<group>"; };
 		45E504831B39E92D007AE307 /* DataScanner+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataScanner+Extensions.swift"; sourceTree = "<group>"; };
-		45E5048A1B39E984007AE307 /* Pointers+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pointers+Extensions.swift"; sourceTree = "<group>"; };
+		45E5048A1B39E984007AE307 /* Pointers+InternalExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pointers+InternalExtensions.swift"; sourceTree = "<group>"; };
 		45E8EEA4199A8E080035C722 /* SwiftUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E8EEA8199A8E080035C722 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45E8EEA9199A8E080035C722 /* SwiftUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftUtilities.h; sourceTree = "<group>"; };
@@ -154,8 +161,6 @@
 		45B13E311AC076450035DEE9 /* Playgrounds */ = {
 			isa = PBXGroup;
 			children = (
-				45B929D31B39F33200206F2C /* BitRange.playground */,
-				45B13E321AC076450035DEE9 /* MyPlayground.playground */,
 				45B13E331AC076450035DEE9 /* Walker.playground */,
 				452B30AB1AC0996100920B6A /* RegularExpressionPlayground.playground */,
 			);
@@ -202,9 +207,10 @@
 				45E504811B39E92D007AE307 /* CRC16.swift */,
 				45E504821B39E92D007AE307 /* DataScanner.swift */,
 				45E504831B39E92D007AE307 /* DataScanner+Extensions.swift */,
-				45E5048A1B39E984007AE307 /* Pointers+Extensions.swift */,
-				45B929CE1B39EC8F00206F2C /* bitrange.swift */,
-				45B929D41B3A013300206F2C /* Bases.swift */,
+				45E5048A1B39E984007AE307 /* Pointers+InternalExtensions.swift */,
+				452E96F31B3CA517002269CD /* Base.swift */,
+				452E96F41B3CA517002269CD /* BitRange.swift */,
+				452E96F51B3CA517002269CD /* Utilities.swift */,
 				45E8EEA7199A8E080035C722 /* Supporting Files */,
 			);
 			path = SwiftUtilities;
@@ -223,6 +229,9 @@
 			children = (
 				45E8EEE6199A90720035C722 /* SwiftUtilities_Tests.swift */,
 				45BA690F19C4C48E00FA7252 /* NSRange_Tests.swift */,
+				452E96FC1B3CA523002269CD /* TestBase.swift */,
+				452E97001B3CA529002269CD /* Tests.swift */,
+				452E96FD1B3CA523002269CD /* Utilities.swift */,
 				45E8EEE4199A90720035C722 /* Supporting Files */,
 				45B929D11B39F31100206F2C /* BitRange.swift */,
 			);
@@ -321,7 +330,8 @@
 		45E8EE9B199A8E080035C722 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = schwa.io;
 				TargetAttributes = {
 					4507E37519E5B79500106ECF = {
@@ -389,17 +399,18 @@
 			files = (
 				45C619041AC078A100284D3F /* Random.swift in Sources */,
 				45E8EEBE199A8E1C0035C722 /* FoundationUtilities.swift in Sources */,
-				45B929D51B3A013300206F2C /* Bases.swift in Sources */,
 				45C6190A1AC078A100284D3F /* Math.swift in Sources */,
-				45E5048B1B39E984007AE307 /* Pointers+Extensions.swift in Sources */,
+				45E5048B1B39E984007AE307 /* Pointers+InternalExtensions.swift in Sources */,
 				45E504841B39E92D007AE307 /* CRC16.swift in Sources */,
 				45E504861B39E92D007AE307 /* DataScanner.swift in Sources */,
 				45C619061AC078A100284D3F /* RegularExpression.swift in Sources */,
 				45F9C0ED1AC0D8100068164B /* String+Extensions.swift in Sources */,
+				452E96F61B3CA517002269CD /* Base.swift in Sources */,
 				45052CE7199AE2750037C05D /* Walker.swift in Sources */,
-				45B929CF1B39EC8F00206F2C /* bitrange.swift in Sources */,
 				45BA690C19C4C26600FA7252 /* NSRange.swift in Sources */,
+				452E96F81B3CA517002269CD /* BitRange.swift in Sources */,
 				45C619021AC078A100284D3F /* CPPRandom.mm in Sources */,
+				452E96FA1B3CA517002269CD /* Utilities.swift in Sources */,
 				45E8EEED199AAA4E0035C722 /* BoolEnum.swift in Sources */,
 				45C618FE1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */,
 				457DED7719DA218E000242E1 /* PureUtilities.swift in Sources */,
@@ -414,17 +425,18 @@
 			files = (
 				45C619051AC078A100284D3F /* Random.swift in Sources */,
 				45E8EF09199AD3320035C722 /* FoundationUtilities.swift in Sources */,
-				45B929D61B3A013300206F2C /* Bases.swift in Sources */,
 				45C6190B1AC078A100284D3F /* Math.swift in Sources */,
-				45E5048C1B39E984007AE307 /* Pointers+Extensions.swift in Sources */,
+				45E5048C1B39E984007AE307 /* Pointers+InternalExtensions.swift in Sources */,
 				45E504851B39E92D007AE307 /* CRC16.swift in Sources */,
 				45E504871B39E92D007AE307 /* DataScanner.swift in Sources */,
 				45C619071AC078A100284D3F /* RegularExpression.swift in Sources */,
 				45F9C0EE1AC0D8100068164B /* String+Extensions.swift in Sources */,
+				452E96F71B3CA517002269CD /* Base.swift in Sources */,
 				45052CE8199AE2750037C05D /* Walker.swift in Sources */,
-				45B929D01B39EC8F00206F2C /* bitrange.swift in Sources */,
 				45BA690D19C4C26600FA7252 /* NSRange.swift in Sources */,
+				452E96F91B3CA517002269CD /* BitRange.swift in Sources */,
 				45C619031AC078A100284D3F /* CPPRandom.mm in Sources */,
+				452E96FB1B3CA517002269CD /* Utilities.swift in Sources */,
 				45E8EEEE199AAA4E0035C722 /* BoolEnum.swift in Sources */,
 				45C618FF1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */,
 				457DED7819DA218E000242E1 /* PureUtilities.swift in Sources */,
@@ -437,8 +449,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				452E96FE1B3CA523002269CD /* TestBase.swift in Sources */,
+				452E97011B3CA529002269CD /* Tests.swift in Sources */,
 				45BA691019C4C48E00FA7252 /* NSRange_Tests.swift in Sources */,
 				45E8EEE7199A90720035C722 /* SwiftUtilities_Tests.swift in Sources */,
+				452E96FF1B3CA523002269CD /* Utilities.swift in Sources */,
 				45B929D21B39F31100206F2C /* BitRange.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,6 +513,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -572,6 +588,7 @@
 				INFOPLIST_FILE = SwiftUtilities/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.schwa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SwiftUtilities;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -591,6 +608,7 @@
 				INFOPLIST_FILE = SwiftUtilities/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.schwa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SwiftUtilities;
 				SKIP_INSTALL = YES;
 			};
@@ -613,6 +631,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.schwa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SwiftUtilities;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -634,6 +653,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.schwa.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SwiftUtilities;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -656,6 +676,7 @@
 				);
 				INFOPLIST_FILE = "SwiftUtilities Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "schwa.io.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -670,6 +691,7 @@
 				);
 				INFOPLIST_FILE = "SwiftUtilities Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "schwa.io.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

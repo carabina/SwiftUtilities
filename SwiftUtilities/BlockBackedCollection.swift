@@ -35,11 +35,11 @@ public struct BlockBackedCollection <T>: CollectionType, SequenceType {
     }
 }
 
-extension BlockBackedCollection: Printable {
+extension BlockBackedCollection: CustomStringConvertible {
     public var description: String {
         get {
-            let strings:[String] = map(self) {
-                return toString($0)
+            let strings:[String] = self.map {
+                return String($0)
             }
             let content = ", ".join(strings)
             return "[\(content)]"

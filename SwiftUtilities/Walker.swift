@@ -11,7 +11,7 @@ public struct WalkerState <T> {
     public var depth : Int = 0
     public var stack : [T] = []
 
-    public func filler(_ string:String = " ") -> String {
+    public func filler(string:String = " ") -> String {
         return String(count:self.depth, repeatedValue:Character(string))
     }
 }

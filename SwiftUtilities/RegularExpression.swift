@@ -14,7 +14,13 @@ public struct RegularExpression {
 
     public init(_ pattern:String, options:NSRegularExpressionOptions = NSRegularExpressionOptions()) {
         var error:NSError?
-        let expression = NSRegularExpression(pattern:pattern, options:options, error:&error)
+        let expression: NSRegularExpression?
+        do {
+            expression = try NSRegularExpression(pattern:pattern, options:options)
+        } catch let error1 as NSError {
+            error = error1
+            expression = nil
+        }
         assert(error == nil)
         self.expression = expression!
         
@@ -30,7 +36,7 @@ public struct RegularExpression {
         }
     }
 
-    public struct Match: Printable {
+    public struct Match: CustomStringConvertible {
         public let string: String
         public let result: NSTextCheckingResult
 

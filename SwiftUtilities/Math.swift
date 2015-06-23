@@ -40,7 +40,7 @@ public func clamp <T:Comparable> (value:T, lower:T, upper:T) -> T {
 }
 
 public func round(value:CGFloat, decimal:Int) -> CGFloat {
-    let e10n = pow(10.0, CGFloat(clamp(decimal, -6, 7)))
+    let e10n = pow(10.0, CGFloat(clamp(decimal, lower: -6, upper: 7)))
     let fl = floor(e10n * value + 0.5)
     return fl / e10n
 }
