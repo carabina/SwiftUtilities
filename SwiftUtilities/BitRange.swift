@@ -31,18 +31,21 @@ public func bitRange <T:UnsignedIntegerType> (value:T, start:Int, length:Int, fl
     }
 }
 
-public func bitRange(buffer:UnsafeBufferPointer <Void>, start:Int, length:Int) -> UIntMax {
+public func bitRange(buffer:UnsafeBufferPointer <Void>, start:Int, length:Int, endianess:Endianess = .native) -> UIntMax {
     let pointer = buffer.baseAddress
 
     // Fast path; we want whole integers and the range is aligned to integer size.
     if length == 64 && start % 64 == 0 {
-        return UnsafePointer <UInt64> (pointer)[start / 64]
+        let value = UInt64(endianess:endianess, value: UnsafePointer <UInt64> (pointer)[start / 64])
+        return value
     }
     else if length == 32 && start % 32 == 0 {
-        return UInt64(UnsafePointer <UInt32> (pointer)[start / 32])
+        let value = UInt32(endianess:endianess, value: UnsafePointer <UInt32> (pointer)[start / 32])
+        return UInt64(value)
     }
     else if length == 16 && start % 16 == 0 {
-        return UInt64(UnsafePointer <UInt16> (pointer)[start / 16])
+        let value = UInt16(endianess:endianess, value: UnsafePointer <UInt16> (pointer)[start / 16])
+        return UInt64(value)
     }
     else if length == 8 && start % 8 == 0 {
         return UInt64(UnsafePointer <UInt8> (pointer)[start / 8])
@@ -59,6 +62,7 @@ public func bitRange(buffer:UnsafeBufferPointer <Void>, start:Int, length:Int) -
 
             let offset = start / wordSize
             let result = bitRange(pointer[offset].bigEndian, start: start, length: length, flipped:true)
+            // TODO: ENDIANNESS: Do we need an endian converter that works on bit ranges instead of 2/4/8 bytes? Can we convert to next highest 2/4/8 bytes?
             return result
         }
         else {
@@ -67,11 +71,12 @@ public func bitRange(buffer:UnsafeBufferPointer <Void>, start:Int, length:Int) -
             let msw = bitRange(pointer[offset].bigEndian, range: start ..< wordSize, flipped:true)
             let bits = (end - offset * wordSize) % wordSize
             let lsw = bitRange(pointer[offset + 1].bigEndian, range: 0 ..< bits, flipped:true)
+            // TODO: ENDIANNESS
             return msw << UIntMax(bits) | lsw
         }
     }
 }
 
-public func bitRange(buffer:UnsafeBufferPointer <Void>, range:Range <Int>) -> UIntMax {
-    return bitRange(buffer, start:range.startIndex, length:range.endIndex - range.startIndex)
+public func bitRange(buffer:UnsafeBufferPointer <Void>, range:Range <Int>, endianess:Endianess = .native) -> UIntMax {
+    return bitRange(buffer, start:range.startIndex, length:range.endIndex - range.startIndex, endianess:endianess)
 }
