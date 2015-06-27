@@ -33,6 +33,10 @@
 		452E96FE1B3CA523002269CD /* TestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FC1B3CA523002269CD /* TestBase.swift */; };
 		452E96FF1B3CA523002269CD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FD1B3CA523002269CD /* Utilities.swift */; };
 		452E97011B3CA529002269CD /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E97001B3CA529002269CD /* Tests.swift */; };
+		454F7D9D1B3E009E00A2B37E /* MutableBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */; };
+		454F7D9E1B3E009E00A2B37E /* MutableBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */; };
+		454F7DA01B3E00CA00A2B37E /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9F1B3E00CA00A2B37E /* Buffer.swift */; };
+		454F7DA11B3E00CA00A2B37E /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9F1B3E00CA00A2B37E /* Buffer.swift */; };
 		457DED7719DA218E000242E1 /* PureUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457DED7619DA218E000242E1 /* PureUtilities.swift */; };
 		457DED7819DA218E000242E1 /* PureUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457DED7619DA218E000242E1 /* PureUtilities.swift */; };
 		45B2B4CE1B3DC3B500D81A43 /* Endianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B2B4CD1B3DC3B500D81A43 /* Endianness.swift */; };
@@ -107,6 +111,8 @@
 		452E96FC1B3CA523002269CD /* TestBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestBase.swift; sourceTree = "<group>"; };
 		452E96FD1B3CA523002269CD /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		452E97001B3CA529002269CD /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableBuffer.swift; sourceTree = "<group>"; };
+		454F7D9F1B3E00CA00A2B37E /* Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
 		457DED7619DA218E000242E1 /* PureUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PureUtilities.swift; sourceTree = "<group>"; };
 		45B13E331AC076450035DEE9 /* Walker.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Walker.playground; sourceTree = "<group>"; };
 		45B2B4CD1B3DC3B500D81A43 /* Endianness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endianness.swift; sourceTree = "<group>"; };
@@ -216,6 +222,8 @@
 				452E96F51B3CA517002269CD /* Utilities.swift */,
 				45E8EEA7199A8E080035C722 /* Supporting Files */,
 				45B2B4CD1B3DC3B500D81A43 /* Endianness.swift */,
+				454F7D9F1B3E00CA00A2B37E /* Buffer.swift */,
+				454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */,
 			);
 			path = SwiftUtilities;
 			sourceTree = "<group>";
@@ -408,6 +416,7 @@
 				45E504841B39E92D007AE307 /* CRC16.swift in Sources */,
 				45E504861B39E92D007AE307 /* DataScanner.swift in Sources */,
 				45C619061AC078A100284D3F /* RegularExpression.swift in Sources */,
+				454F7DA01B3E00CA00A2B37E /* Buffer.swift in Sources */,
 				45F9C0ED1AC0D8100068164B /* String+Extensions.swift in Sources */,
 				452E96F61B3CA517002269CD /* Base.swift in Sources */,
 				45052CE7199AE2750037C05D /* Walker.swift in Sources */,
@@ -420,6 +429,7 @@
 				45C618FE1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */,
 				457DED7719DA218E000242E1 /* PureUtilities.swift in Sources */,
 				45E504881B39E92D007AE307 /* DataScanner+Extensions.swift in Sources */,
+				454F7D9D1B3E009E00A2B37E /* MutableBuffer.swift in Sources */,
 				45D772A91AC08281002AF6F7 /* BlockBackedCollection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,6 +445,7 @@
 				45E504851B39E92D007AE307 /* CRC16.swift in Sources */,
 				45E504871B39E92D007AE307 /* DataScanner.swift in Sources */,
 				45C619071AC078A100284D3F /* RegularExpression.swift in Sources */,
+				454F7DA11B3E00CA00A2B37E /* Buffer.swift in Sources */,
 				45F9C0EE1AC0D8100068164B /* String+Extensions.swift in Sources */,
 				452E96F71B3CA517002269CD /* Base.swift in Sources */,
 				45052CE8199AE2750037C05D /* Walker.swift in Sources */,
@@ -447,6 +458,7 @@
 				45C618FF1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */,
 				457DED7819DA218E000242E1 /* PureUtilities.swift in Sources */,
 				45E504891B39E92D007AE307 /* DataScanner+Extensions.swift in Sources */,
+				454F7D9E1B3E009E00A2B37E /* MutableBuffer.swift in Sources */,
 				45D772B41AC083A1002AF6F7 /* BlockBackedCollection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
