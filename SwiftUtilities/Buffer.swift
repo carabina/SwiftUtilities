@@ -32,12 +32,12 @@ public struct Buffer <T> {
 
     // MARK: -
 
-    internal init(data:NSData) {
+    public init(data:NSData) {
         assert(data.length == 0 || data.length >= Buffer <T>.elementSize)
         self.data = data.copy() as! NSData
     }
 
-    internal var data:NSData = NSData()
+    public var data:NSData = NSData()
 }
 
 // MARK: -
