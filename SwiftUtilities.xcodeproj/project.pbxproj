@@ -28,8 +28,8 @@
 		452E96F71B3CA517002269CD /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F31B3CA517002269CD /* Base.swift */; };
 		452E96F81B3CA517002269CD /* BitRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F41B3CA517002269CD /* BitRange.swift */; };
 		452E96F91B3CA517002269CD /* BitRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F41B3CA517002269CD /* BitRange.swift */; };
-		452E96FA1B3CA517002269CD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F51B3CA517002269CD /* Utilities.swift */; };
-		452E96FB1B3CA517002269CD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F51B3CA517002269CD /* Utilities.swift */; };
+		452E96FA1B3CA517002269CD /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F51B3CA517002269CD /* Timestamp.swift */; };
+		452E96FB1B3CA517002269CD /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F51B3CA517002269CD /* Timestamp.swift */; };
 		452E96FE1B3CA523002269CD /* TestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FC1B3CA523002269CD /* TestBase.swift */; };
 		452E96FF1B3CA523002269CD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FD1B3CA523002269CD /* Utilities.swift */; };
 		452E97011B3CA529002269CD /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E97001B3CA529002269CD /* Tests.swift */; };
@@ -45,6 +45,10 @@
 		45BA690C19C4C26600FA7252 /* NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA690B19C4C26600FA7252 /* NSRange.swift */; };
 		45BA690D19C4C26600FA7252 /* NSRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA690B19C4C26600FA7252 /* NSRange.swift */; };
 		45BA691019C4C48E00FA7252 /* NSRange_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45BA690F19C4C48E00FA7252 /* NSRange_Tests.swift */; };
+		45C52C341B3EE577005BE79E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C52C331B3EE577005BE79E /* String+Extensions.swift */; };
+		45C52C351B3EE577005BE79E /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C52C331B3EE577005BE79E /* String+Extensions.swift */; };
+		45C52C371B3EE58F005BE79E /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C52C361B3EE58F005BE79E /* Errors.swift */; };
+		45C52C381B3EE58F005BE79E /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C52C361B3EE58F005BE79E /* Errors.swift */; };
 		45C618FE1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C618F71AC078A100284D3F /* AssociatedObjects+Private.swift */; };
 		45C618FF1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C618F71AC078A100284D3F /* AssociatedObjects+Private.swift */; };
 		45C619001AC078A100284D3F /* CPPRandom.h in Headers */ = {isa = PBXBuildFile; fileRef = 45C618F81AC078A100284D3F /* CPPRandom.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -76,8 +80,8 @@
 		45E8EF09199AD3320035C722 /* FoundationUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E8EEBD199A8E1C0035C722 /* FoundationUtilities.swift */; };
 		45F3EDAE1B3E54CE007F55E3 /* BufferType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3EDAD1B3E54CE007F55E3 /* BufferType.swift */; };
 		45F3EDAF1B3E54CE007F55E3 /* BufferType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F3EDAD1B3E54CE007F55E3 /* BufferType.swift */; };
-		45F9C0ED1AC0D8100068164B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9C0EC1AC0D8100068164B /* String+Extensions.swift */; };
-		45F9C0EE1AC0D8100068164B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9C0EC1AC0D8100068164B /* String+Extensions.swift */; };
+		45F9C0ED1AC0D8100068164B /* String+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9C0EC1AC0D8100068164B /* String+Foundation.swift */; };
+		45F9C0EE1AC0D8100068164B /* String+Foundation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F9C0EC1AC0D8100068164B /* String+Foundation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,7 +114,7 @@
 		452BAC241B3E8A7300F3DF48 /* Random.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Random.playground; sourceTree = "<group>"; };
 		452E96F31B3CA517002269CD /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		452E96F41B3CA517002269CD /* BitRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitRange.swift; sourceTree = "<group>"; };
-		452E96F51B3CA517002269CD /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		452E96F51B3CA517002269CD /* Timestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timestamp.swift; sourceTree = "<group>"; };
 		452E96FC1B3CA523002269CD /* TestBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestBase.swift; sourceTree = "<group>"; };
 		452E96FD1B3CA523002269CD /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		452E97001B3CA529002269CD /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -122,6 +126,8 @@
 		45B929D11B39F31100206F2C /* BitRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitRange.swift; sourceTree = "<group>"; };
 		45BA690B19C4C26600FA7252 /* NSRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRange.swift; sourceTree = "<group>"; };
 		45BA690F19C4C48E00FA7252 /* NSRange_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRange_Tests.swift; sourceTree = "<group>"; };
+		45C52C331B3EE577005BE79E /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		45C52C361B3EE58F005BE79E /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		45C618F71AC078A100284D3F /* AssociatedObjects+Private.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AssociatedObjects+Private.swift"; sourceTree = "<group>"; };
 		45C618F81AC078A100284D3F /* CPPRandom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CPPRandom.h; sourceTree = "<group>"; };
 		45C618F91AC078A100284D3F /* CPPRandom.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CPPRandom.mm; sourceTree = "<group>"; };
@@ -144,7 +150,7 @@
 		45E8EEEC199AAA4E0035C722 /* BoolEnum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolEnum.swift; sourceTree = "<group>"; };
 		45F3EDAC1B3E50E6007F55E3 /* Buffer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Buffer.playground; sourceTree = "<group>"; };
 		45F3EDAD1B3E54CE007F55E3 /* BufferType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferType.swift; sourceTree = "<group>"; };
-		45F9C0EC1AC0D8100068164B /* String+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		45F9C0EC1AC0D8100068164B /* String+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Foundation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +189,42 @@
 			path = Playgrounds;
 			sourceTree = "<group>";
 		};
+		45C52C301B3EE26D005BE79E /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				452E96F31B3CA517002269CD /* Base.swift */,
+				45E504821B39E92D007AE307 /* DataScanner.swift */,
+				45E504831B39E92D007AE307 /* DataScanner+Extensions.swift */,
+				45E5048A1B39E984007AE307 /* UnsafeBufferPointers.swift */,
+				452E96F41B3CA517002269CD /* BitRange.swift */,
+				45B2B4CD1B3DC3B500D81A43 /* Endianness.swift */,
+				45F3EDAD1B3E54CE007F55E3 /* BufferType.swift */,
+				454F7D9F1B3E00CA00A2B37E /* Buffer.swift */,
+				454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
+		45C52C311B3EE277005BE79E /* Random */ = {
+			isa = PBXGroup;
+			children = (
+				45C618F81AC078A100284D3F /* CPPRandom.h */,
+				45C618F91AC078A100284D3F /* CPPRandom.mm */,
+				45C618FA1AC078A100284D3F /* Random.swift */,
+			);
+			name = Random;
+			sourceTree = "<group>";
+		};
+		45C52C321B3EE29B005BE79E /* Foundation Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				45F9C0EC1AC0D8100068164B /* String+Foundation.swift */,
+				45E8EEBD199A8E1C0035C722 /* FoundationUtilities.swift */,
+				45BA690B19C4C26600FA7252 /* NSRange.swift */,
+			);
+			name = "Foundation Extensions";
+			sourceTree = "<group>";
+		};
 		45E8EE9A199A8E080035C722 = {
 			isa = PBXGroup;
 			children = (
@@ -207,31 +249,21 @@
 			isa = PBXGroup;
 			children = (
 				45E8EEA9199A8E080035C722 /* SwiftUtilities.h */,
-				45E8EEBD199A8E1C0035C722 /* FoundationUtilities.swift */,
-				45F9C0EC1AC0D8100068164B /* String+Extensions.swift */,
-				45BA690B19C4C26600FA7252 /* NSRange.swift */,
+				45C52C321B3EE29B005BE79E /* Foundation Extensions */,
 				45E8EEEC199AAA4E0035C722 /* BoolEnum.swift */,
+				45C52C331B3EE577005BE79E /* String+Extensions.swift */,
 				45052CE6199AE2750037C05D /* Walker.swift */,
 				457DED7619DA218E000242E1 /* PureUtilities.swift */,
 				45C618F71AC078A100284D3F /* AssociatedObjects+Private.swift */,
-				45C618F81AC078A100284D3F /* CPPRandom.h */,
-				45C618F91AC078A100284D3F /* CPPRandom.mm */,
-				45C618FA1AC078A100284D3F /* Random.swift */,
+				45C52C311B3EE277005BE79E /* Random */,
 				45C618FB1AC078A100284D3F /* RegularExpression.swift */,
 				45D772A81AC08281002AF6F7 /* BlockBackedCollection.swift */,
 				45C618FD1AC078A100284D3F /* Math.swift */,
 				45E504811B39E92D007AE307 /* CRC16.swift */,
-				45E504821B39E92D007AE307 /* DataScanner.swift */,
-				45E504831B39E92D007AE307 /* DataScanner+Extensions.swift */,
-				45E5048A1B39E984007AE307 /* UnsafeBufferPointers.swift */,
-				452E96F31B3CA517002269CD /* Base.swift */,
-				452E96F41B3CA517002269CD /* BitRange.swift */,
-				452E96F51B3CA517002269CD /* Utilities.swift */,
+				45C52C301B3EE26D005BE79E /* Data */,
+				452E96F51B3CA517002269CD /* Timestamp.swift */,
+				45C52C361B3EE58F005BE79E /* Errors.swift */,
 				45E8EEA7199A8E080035C722 /* Supporting Files */,
-				45B2B4CD1B3DC3B500D81A43 /* Endianness.swift */,
-				45F3EDAD1B3E54CE007F55E3 /* BufferType.swift */,
-				454F7D9F1B3E00CA00A2B37E /* Buffer.swift */,
-				454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */,
 			);
 			path = SwiftUtilities;
 			sourceTree = "<group>";
@@ -421,19 +453,21 @@
 				45E8EEBE199A8E1C0035C722 /* FoundationUtilities.swift in Sources */,
 				45C6190A1AC078A100284D3F /* Math.swift in Sources */,
 				45E5048B1B39E984007AE307 /* UnsafeBufferPointers.swift in Sources */,
+				45C52C341B3EE577005BE79E /* String+Extensions.swift in Sources */,
 				45E504841B39E92D007AE307 /* CRC16.swift in Sources */,
 				45E504861B39E92D007AE307 /* DataScanner.swift in Sources */,
 				45C619061AC078A100284D3F /* RegularExpression.swift in Sources */,
 				454F7DA01B3E00CA00A2B37E /* Buffer.swift in Sources */,
-				45F9C0ED1AC0D8100068164B /* String+Extensions.swift in Sources */,
+				45F9C0ED1AC0D8100068164B /* String+Foundation.swift in Sources */,
 				452E96F61B3CA517002269CD /* Base.swift in Sources */,
 				45052CE7199AE2750037C05D /* Walker.swift in Sources */,
 				45F3EDAE1B3E54CE007F55E3 /* BufferType.swift in Sources */,
 				45BA690C19C4C26600FA7252 /* NSRange.swift in Sources */,
 				45B2B4CE1B3DC3B500D81A43 /* Endianness.swift in Sources */,
 				452E96F81B3CA517002269CD /* BitRange.swift in Sources */,
+				45C52C371B3EE58F005BE79E /* Errors.swift in Sources */,
 				45C619021AC078A100284D3F /* CPPRandom.mm in Sources */,
-				452E96FA1B3CA517002269CD /* Utilities.swift in Sources */,
+				452E96FA1B3CA517002269CD /* Timestamp.swift in Sources */,
 				45E8EEED199AAA4E0035C722 /* BoolEnum.swift in Sources */,
 				45C618FE1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */,
 				457DED7719DA218E000242E1 /* PureUtilities.swift in Sources */,
@@ -451,19 +485,21 @@
 				45E8EF09199AD3320035C722 /* FoundationUtilities.swift in Sources */,
 				45C6190B1AC078A100284D3F /* Math.swift in Sources */,
 				45E5048C1B39E984007AE307 /* UnsafeBufferPointers.swift in Sources */,
+				45C52C351B3EE577005BE79E /* String+Extensions.swift in Sources */,
 				45E504851B39E92D007AE307 /* CRC16.swift in Sources */,
 				45E504871B39E92D007AE307 /* DataScanner.swift in Sources */,
 				45C619071AC078A100284D3F /* RegularExpression.swift in Sources */,
 				454F7DA11B3E00CA00A2B37E /* Buffer.swift in Sources */,
-				45F9C0EE1AC0D8100068164B /* String+Extensions.swift in Sources */,
+				45F9C0EE1AC0D8100068164B /* String+Foundation.swift in Sources */,
 				452E96F71B3CA517002269CD /* Base.swift in Sources */,
 				45052CE8199AE2750037C05D /* Walker.swift in Sources */,
 				45F3EDAF1B3E54CE007F55E3 /* BufferType.swift in Sources */,
 				45BA690D19C4C26600FA7252 /* NSRange.swift in Sources */,
 				45B2B4CF1B3DC3B500D81A43 /* Endianness.swift in Sources */,
 				452E96F91B3CA517002269CD /* BitRange.swift in Sources */,
+				45C52C381B3EE58F005BE79E /* Errors.swift in Sources */,
 				45C619031AC078A100284D3F /* CPPRandom.mm in Sources */,
-				452E96FB1B3CA517002269CD /* Utilities.swift in Sources */,
+				452E96FB1B3CA517002269CD /* Timestamp.swift in Sources */,
 				45E8EEEE199AAA4E0035C722 /* BoolEnum.swift in Sources */,
 				45C618FF1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */,
 				457DED7819DA218E000242E1 /* PureUtilities.swift in Sources */,

@@ -33,6 +33,10 @@ public func ** (lhs:CGFloat, rhs:CGFloat) -> CGFloat {
     return pow(lhs, rhs)
 }
 
+public func log(x:Double, base:Double) -> Double {
+    return log(x) / log(base)
+}
+
 // MARK: Basics
 
 public func clamp <T:Comparable> (value:T, lower:T, upper:T) -> T {
@@ -47,12 +51,70 @@ public func round(value:CGFloat, decimal:Int) -> CGFloat {
 
 // MARK: Degrees/Radians
 
-public func DegreesToRadians(v:CGFloat) -> CGFloat {
-    return v * CGFloat(M_PI) / 180
+// In the spirit of UInt(bigEndian:) etc
+
+extension Float {
+    init(radians:Float) {
+        self = radians
+    }
+
+    init(degrees:Float) {
+        self = degrees * Float(M_PI) / 180
+    }
+
+    var radians:Float {
+        return self
+    }
+
+    var degrees:Float {
+        return self * 180 / Float(M_PI)
+    }
 }
 
-public func RadiansToDegrees(v:CGFloat) -> CGFloat {
-    return v * 180 / CGFloat(M_PI)
+extension Double {
+    init(radians:Double) {
+        self = radians
+    }
+
+    init(degrees:Double) {
+        self = degrees * M_PI / 180
+    }
+
+    var radians:Double {
+        return self
+    }
+
+    var degrees:Double {
+        return self * 180 / M_PI
+    }
+}
+
+extension CGFloat {
+    init(radians:CGFloat) {
+        self = radians
+    }
+
+    init(degrees:CGFloat) {
+        self = degrees * CGFloat(M_PI) / 180
+    }
+
+    var radians:CGFloat {
+        return self
+    }
+
+    var degrees:CGFloat {
+        return self * 180 / CGFloat(M_PI)
+    }
+}
+
+// Basic functions
+
+public func DegreesToRadians(v:Float) -> Float {
+    return v * Float(M_PI) / 180
+}
+
+public func RadiansToDegrees(v:Float) -> Float {
+    return v * 180 / Float(M_PI)
 }
 
 public func DegreesToRadians(v:Double) -> Double {
@@ -61,6 +123,14 @@ public func DegreesToRadians(v:Double) -> Double {
 
 public func RadiansToDegrees(v:Double) -> Double {
     return v * 180 / M_PI
+}
+
+public func DegreesToRadians(v:CGFloat) -> CGFloat {
+    return v * CGFloat(M_PI) / 180
+}
+
+public func RadiansToDegrees(v:CGFloat) -> CGFloat {
+    return v * 180 / CGFloat(M_PI)
 }
 
 

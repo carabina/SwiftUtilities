@@ -134,7 +134,7 @@ public extension String {
         if value != 0 {
             let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
             s = ""
-            let count = UIntMax(log(value, base:base))
+            let count = UIntMax(log(Double(value), base:Double(base)))
             var value = value
             for _ in stride(from: 0, through: count, by: 1) {
                 let digit = value % UIntMax(base)

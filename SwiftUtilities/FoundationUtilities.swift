@@ -12,19 +12,8 @@ import Foundation
 
 public extension NSURL {
     func URLByResolvingURL() throws -> NSURL {
-        var error: NSError! = NSError(domain: "Migrator", code: 0, userInfo: nil)
-        let bookmark = try self.bookmarkDataWithOptions(NSURLBookmarkCreationOptions.MinimalBookmark, includingResourceValuesForKeys:nil, relativeToURL:nil)
-        let bookmarkedURL: NSURL?
-        do {
-            bookmarkedURL = try NSURL(byResolvingBookmarkData:bookmark, options: .WithoutUI, relativeToURL:nil, bookmarkDataIsStale:nil)
-        } catch let error1 as NSError {
-            error = error1
-            bookmarkedURL = nil
-        }
-        if let value = bookmarkedURL {
-            return value
-        }
-        throw error
+        let bookmarkData = try self.bookmarkDataWithOptions(NSURLBookmarkCreationOptions.MinimalBookmark, includingResourceValuesForKeys:nil, relativeToURL:nil)
+        return try NSURL(byResolvingBookmarkData:bookmarkData, options: .WithoutUI, relativeToURL:nil, bookmarkDataIsStale:nil)
     }
 }
 
