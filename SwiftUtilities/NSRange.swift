@@ -30,10 +30,10 @@ public extension NSRange {
         self.length = range.endIndex - range.startIndex
     }
 
-    var startIndex:Int { get { return location } }
-    var endIndex:Int { get { return location + length } }
-    var asRange:Range<Int> { get { return location..<location + length } }
-    var isEmpty:Bool { get { return length == 0 } }
+    var startIndex:Int { return location }
+    var endIndex:Int { return location + length }
+    var asRange:Range<Int> { return location..<location + length }
+    var isEmpty:Bool { return length == 0 }
 
     func contains(index:Int) -> Bool {
         return index >= location && index < endIndex

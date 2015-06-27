@@ -6,19 +6,6 @@
 //  Copyright © 2015 schwa.io. All rights reserved.
 //
 
-internal func hexNibbleToInt(nibble:UInt8) throws -> UInt8? {
-    switch nibble {
-        case 0x30 ... 0x39:
-            return UInt8(nibble) - 0x30
-        case 0x41 ... 0x46:
-            return UInt8(nibble) - 0x41 + 0x0A
-        case 0x61 ... 0x66:
-            return UInt8(nibble) - 0x61 + 0x0A
-        default:
-            return nil
-    }
-}
-
 // MARK: -
 
 public extension NSData {
@@ -189,35 +176,19 @@ public func binary <T:UnsignedIntegerType> (value:T, width:Int? = nil) -> String
     return String(value: value, base: 2, prefix: true, width: width)
 }
 
-
-
-
 public extension UInt8 {
     var asHex:String {
-        get {
-            return intToHex(Int(self))
-        }
+        return intToHex(Int(self))
     }
 }
 
 public extension UInt16 {
     var asHex:String {
-        get {
-            return intToHex(Int(self))
-        }
+        return intToHex(Int(self))
     }
 }
 
-
-
-func log2(v:Int) -> Int {
-    return Int(log2(Float(v)))
-}
-
-
 public func intToHex(value:Int, skipLeadingZeros:Bool = true, addPrefix:Bool = false, lowercase:Bool = false) -> String {
-
-
     var s = ""
     var skipZeros = skipLeadingZeros
     let digits = log2(Int.max) / 8
@@ -232,26 +203,41 @@ public func intToHex(value:Int, skipLeadingZeros:Bool = true, addPrefix:Bool = f
     return addPrefix ? "0x" + s : s
 }
 
-public func nibbleAsHex(nibble:Int, lowercase:Bool = false) -> String {
+// MARK: -
+
+public extension UnsafeBufferPointer {
+    var asHex:String {
+        let buffer:UnsafeBufferPointer <UInt8> = toUnsafeBufferPointer()
+        let hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+        return "".join(buffer.map {
+            let hiNibble = Int($0) >> 4
+            let loNibble = Int($0) & 0b1111
+            return hex[hiNibble] + hex[loNibble]
+        })
+    }
+}
+
+// MARK: -
+
+func log2(v:Int) -> Int {
+    return Int(log2(Float(v)))
+}
+
+func nibbleAsHex(nibble:Int, lowercase:Bool = false) -> String {
     let uppercaseDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
     let lowercaseDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
     return lowercase ? lowercaseDigits[nibble] : uppercaseDigits[nibble]
 }
 
-// MARK: -
-
-// Following all marked private because we can't make public extensions on generic types.
-
-public extension UnsafeBufferPointer {
-    var asHex:String {
-        get {
-            let buffer:UnsafeBufferPointer <UInt8> = toUnsafeBufferPointer()
-            let hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
-            return "".join(buffer.map {
-                let hiNibble = Int($0) >> 4
-                let loNibble = Int($0) & 0b1111
-                return hex[hiNibble] + hex[loNibble]
-            })
-        }
+func hexNibbleToInt(nibble:UInt8) throws -> UInt8? {
+    switch nibble {
+        case 0x30 ... 0x39:
+            return UInt8(nibble) - 0x30
+        case 0x41 ... 0x46:
+            return UInt8(nibble) - 0x41 + 0x0A
+        case 0x61 ... 0x66:
+            return UInt8(nibble) - 0x61 + 0x0A
+        default:
+            return nil
     }
 }

@@ -46,33 +46,26 @@ public struct RegularExpression {
         }
 
         public var description: String {
-            get {
-                return "Match(\(result.numberOfRanges))"
-            }
+            return "Match(\(result.numberOfRanges))"
         }
 
         public var ranges: BlockBackedCollection <Range <String.Index>> {
-            get {
-                let count = result.numberOfRanges
-                let ranges = BlockBackedCollection <Range <String.Index>> (count:count) {
-                    let nsRange = self.result.rangeAtIndex($0)
-                    let range = self.string.convert(nsRange)
-                    return range!
-                    }
-                return ranges
-            }
+            let count = result.numberOfRanges
+            let ranges = BlockBackedCollection <Range <String.Index>> (count:count) {
+                let nsRange = self.result.rangeAtIndex($0)
+                let range = self.string.convert(nsRange)
+                return range!
+                }
+            return ranges
         }
 
         public var strings: BlockBackedCollection <String> {
-            get {
-                let count = result.numberOfRanges
-                let groups = BlockBackedCollection <String> (count:count) {
-                    let range = self.result.rangeAtIndex($0)
-                    return (self.string as NSString).substringWithRange(range)
-                    }
-                return groups
-            }
+            let count = result.numberOfRanges
+            let groups = BlockBackedCollection <String> (count:count) {
+                let range = self.result.rangeAtIndex($0)
+                return (self.string as NSString).substringWithRange(range)
+                }
+            return groups
         }
-
     }
 }

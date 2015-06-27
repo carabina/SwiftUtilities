@@ -15,8 +15,8 @@ public struct BlockBackedCollection <T>: CollectionType, SequenceType {
     public typealias Block = (index:Index) -> T
     public typealias Generator = BlockBackedCollectionGenerator <T>
 
-    public var startIndex: Index { get { return 0 } }
-    public var endIndex: Index { get { return count } }
+    public var startIndex: Index { return 0 }
+    public var endIndex: Index { return count }
     public let count: Int
     public let block: Block
 
@@ -37,13 +37,11 @@ public struct BlockBackedCollection <T>: CollectionType, SequenceType {
 
 extension BlockBackedCollection: CustomStringConvertible {
     public var description: String {
-        get {
-            let strings:[String] = self.map {
-                return String($0)
-            }
-            let content = ", ".join(strings)
-            return "[\(content)]"
+        let strings:[String] = self.map {
+            return String($0)
         }
+        let content = ", ".join(strings)
+        return "[\(content)]"
     }
 }
 
@@ -55,7 +53,7 @@ public struct BlockBackedCollectionGenerator <T>: GeneratorType {
     public typealias Block = Sequence.Block
 
     public let startIndex: Index = 0
-    public var endIndex: Index { get { return count } }
+    public var endIndex: Index { return count }
     public let count: Int
     public let block: Block
     public var nextIndex: Index = 0

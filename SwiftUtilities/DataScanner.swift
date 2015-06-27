@@ -14,9 +14,7 @@ public class DataScanner {
     internal(set) var current:BufferType.Index
 
     public var remaining:BufferType {
-        get {
-            return BufferType(start: buffer.baseAddress + current, count: buffer.count - current)
-        }
+        return BufferType(start: buffer.baseAddress + current, count: buffer.count - current)
     }
 
     public init(buffer:BufferType) {
@@ -169,8 +167,6 @@ public class DataScanner {
     }
 
     public var atEnd:Bool {
-        get {
-            return current == buffer.endIndex
-        }
+        return current == buffer.endIndex
     }
 }

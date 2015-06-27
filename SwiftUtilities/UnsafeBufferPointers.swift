@@ -26,9 +26,7 @@ public extension UnsafeBufferPointer {
     }
 
     subscript (range:Range <Int>) -> UnsafeBufferPointer <T> {
-        get {
-            return UnsafeBufferPointer <T> (start: baseAddress + range.startIndex, count:range.endIndex - range.startIndex)
-        }
+        return UnsafeBufferPointer <T> (start: baseAddress + range.startIndex, count:range.endIndex - range.startIndex)
     }
 }
 
@@ -38,9 +36,7 @@ public func convert <T, U>(pointer:UnsafeMutablePointer <T>) -> UnsafeMutablePoi
 
 public extension NSData {
     var buffer:UnsafeBufferPointer <Void> {
-        get {
-            return UnsafeBufferPointer <Void> (start: bytes, count: length)
-        }
+        return UnsafeBufferPointer <Void> (start: bytes, count: length)
     }
 }
 
