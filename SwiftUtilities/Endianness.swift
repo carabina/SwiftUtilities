@@ -11,11 +11,11 @@ import Foundation
 public enum Endianess {
     case big
     case little
-    static var native: Endianess {
+    public static var native: Endianess {
         // TODO: This is a lie!!!
         return .little
     }
-    static var network: Endianess = .big
+    public static var network: Endianess = .big
 }
 
 extension UInt16 {
