@@ -107,6 +107,7 @@
 /* Begin PBXFileReference section */
 		45052CE6199AE2750037C05D /* Walker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Walker.swift; sourceTree = "<group>"; };
 		452B30AB1AC0996100920B6A /* RegularExpressionPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RegularExpressionPlayground.playground; sourceTree = "<group>"; };
+		452BAC241B3E8A7300F3DF48 /* Random.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Random.playground; sourceTree = "<group>"; };
 		452E96F31B3CA517002269CD /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		452E96F41B3CA517002269CD /* BitRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitRange.swift; sourceTree = "<group>"; };
 		452E96F51B3CA517002269CD /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
@@ -177,6 +178,7 @@
 				45F3EDAC1B3E50E6007F55E3 /* Buffer.playground */,
 				452B30AB1AC0996100920B6A /* RegularExpressionPlayground.playground */,
 				45B13E331AC076450035DEE9 /* Walker.playground */,
+				452BAC241B3E8A7300F3DF48 /* Random.playground */,
 			);
 			path = Playgrounds;
 			sourceTree = "<group>";

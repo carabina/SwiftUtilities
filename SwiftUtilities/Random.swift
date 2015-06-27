@@ -6,12 +6,10 @@
 //  Copyright (c) 2015 schwa.io. All rights reserved.
 //
 
-// MARK: Random Provider Protocol
-
 import CoreGraphics
 import Darwin
 
-public protocol RandomProvider {
+public protocol Random {
     var seedless: Bool { get }
     var max: UInt64 { get }
     var seed: UInt64 { get }
@@ -23,45 +21,9 @@ public protocol RandomProvider {
 
 // MARK: Random
 
-/**
- *  Defines a random number generator struct.
- *  This struct delegates the actual generation of random numbers to objects of RandomProvider protocol.
- *  This struct (and its extensions) provides lots of useful random utilities.
- */
-public struct Random {
+public let random = DefaultRandom()
 
-    public let provider: RandomProvider!
-
-
-    public var max: UInt64 {
-        return provider.max
-    }
-
-    public var seed: UInt64 {
-        return provider.seed
-    }
-
-    public init(provider:RandomProvider) {
-        self.provider = provider
-    }
-
-    public func random() -> UInt64 {
-        return provider.random()
-    }
-
-    public func random(uniform:UInt64) -> UInt64 {
-        return provider.random(uniform)
-    }
-
-    public func random(range:ClosedInterval<UInt64>) -> UInt64 {
-        return random(range.end - range.start) + range.start
-    }
-
-    /// Default random number generator. Uses arc4random
-    public static var rng: Random = Random(provider: MersenneTwisterRandomProvider())
-}
-
-// MARK: Ints
+// MARK: Random
 
 public extension Random {
 
@@ -71,7 +33,7 @@ public extension Random {
     }
 
     func random(uniform:Int) -> Int {
-        assert(UInt64(uniform) <= provider.max && uniform >= 0)
+        assert(UInt64(uniform) <= max && uniform >= 0)
         let value:UInt64 = random(UInt64(uniform))
         return Int(value)
     }
@@ -88,13 +50,13 @@ public extension Random {
     func random() -> Double {
         typealias Type = Double
         let value:UInt64 = random()
-        return Type(value) / Type(provider.max)
+        return Type(value) / Type(max)
     }
 
     func random(uniform:Double) -> Double {
         typealias Type = Double
         let value:UInt64 = random()
-        return Type(value) / Type(provider.max - 1) * uniform
+        return Type(value) / Type(max - 1) * uniform
     }
 
     func random(range:ClosedInterval<Double>) -> Double {
@@ -110,13 +72,13 @@ public extension Random {
     func random() -> CGFloat {
         typealias Type = CGFloat
         let value:UInt64 = random()
-        return Type(value) / Type(provider.max)
+        return Type(value) / Type(max)
     }
 
     func random(uniform:CGFloat) -> CGFloat {
         typealias Type = CGFloat
         let value:UInt64 = random()
-        return Type(value) / Type(provider.max - 1) * uniform
+        return Type(value) / Type(max - 1) * uniform
     }
 
     func random(range:ClosedInterval<CGFloat>) -> CGFloat {
@@ -180,9 +142,11 @@ public extension Random {
 
 // MARK: -
 
-public typealias MersenneTwisterRandomProvider = MT19937RandomProvider
+public typealias DefaultRandom = MT19937Random
 
-public class MT19937RandomProvider: RandomProvider {
+public typealias MersenneTwisterRandom = MT19937Random
+
+public class MT19937Random: Random {
 
     public let seedless: Bool = false
     public let max: UInt64 = UInt64.max
