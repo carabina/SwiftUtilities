@@ -31,24 +31,21 @@ public func bitRange <T:UnsignedIntegerType> (value:T, start:Int, length:Int, fl
     }
 }
 
-public func bitRange(buffer:UnsafeBufferPointer <Void>, start:Int, length:Int, endianess:Endianess = .native) -> UIntMax {
+public func bitRange(buffer:UnsafeBufferPointer <Void>, start:Int, length:Int) -> UIntMax {
     let pointer = buffer.baseAddress
 
     // Fast path; we want whole integers and the range is aligned to integer size.
     if length == 64 && start % 64 == 0 {
-        let value = UInt64(endianess:endianess, value: UnsafePointer <UInt64> (pointer)[start / 64])
-        return value
+        return UnsafePointer <UInt64> (pointer)[start / 64]
     }
     else if length == 32 && start % 32 == 0 {
-        let value = UInt32(endianess:endianess, value: UnsafePointer <UInt32> (pointer)[start / 32])
-        return UInt64(value)
+        return UIntMax(UnsafePointer <UInt32> (pointer)[start / 32])
     }
     else if length == 16 && start % 16 == 0 {
-        let value = UInt16(endianess:endianess, value: UnsafePointer <UInt16> (pointer)[start / 16])
-        return UInt64(value)
+        return UIntMax(UnsafePointer <UInt16> (pointer)[start / 16])
     }
     else if length == 8 && start % 8 == 0 {
-        return UInt64(UnsafePointer <UInt8> (pointer)[start / 8])
+        return UIntMax(UnsafePointer <UInt8> (pointer)[start / 8])
     }
     else {
         // Slow(er) path. Range is not aligned.
@@ -77,6 +74,6 @@ public func bitRange(buffer:UnsafeBufferPointer <Void>, start:Int, length:Int, e
     }
 }
 
-public func bitRange(buffer:UnsafeBufferPointer <Void>, range:Range <Int>, endianess:Endianess = .native) -> UIntMax {
-    return bitRange(buffer, start:range.startIndex, length:range.endIndex - range.startIndex, endianess:endianess)
+public func bitRange(buffer:UnsafeBufferPointer <Void>, range:Range <Int>) -> UIntMax {
+    return bitRange(buffer, start:range.startIndex, length:range.endIndex - range.startIndex)
 }
