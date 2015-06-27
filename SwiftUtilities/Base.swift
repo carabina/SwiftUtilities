@@ -6,9 +6,7 @@
 //  Copyright © 2015 schwa.io. All rights reserved.
 //
 
-import Foundation
-
-internal func hexNibbleToInt(nibble:UInt8) throws -> UInt8 {
+internal func hexNibbleToInt(nibble:UInt8) throws -> UInt8? {
     switch nibble {
         case 0x30 ... 0x39:
             return UInt8(nibble) - 0x30
@@ -17,10 +15,9 @@ internal func hexNibbleToInt(nibble:UInt8) throws -> UInt8 {
         case 0x61 ... 0x66:
             return UInt8(nibble) - 0x61 + 0x0A
         default:
-            throw Error.generic("Invalid character")
+            return nil
     }
 }
-
 
 // MARK: -
 
@@ -36,15 +33,16 @@ public extension NSData {
                 continue
             }
             
-            let nibble = try hexNibbleToInt(hexNibble)
-            if hiNibble {
-                octet = nibble << 4
-                hiNibble = false
-            }
-            else {
-                hiNibble = true
-                octets.append(octet | nibble)
-                octet = 0
+            if let nibble = try hexNibbleToInt(hexNibble) {
+                if hiNibble {
+                    octet = nibble << 4
+                    hiNibble = false
+                }
+                else {
+                    hiNibble = true
+                    octets.append(octet | nibble)
+                    octet = 0
+                }
             }
         }
         if hiNibble == false {
@@ -84,13 +82,13 @@ public extension UIntMax {
 
         var result:UIntMax = 0
 
-        let conversion:(UInt8) throws -> UInt8
+        let conversion:(UInt8) throws -> UInt8?
         if base == 16 {
             conversion = hexNibbleToInt
         }
         else {
             conversion = {
-                (c:UInt8) throws -> UInt8 in
+                (c:UInt8) throws -> UInt8? in
                 if  (0x30 ... 0x39).contains(c) {
                     return c - 0x30
                 }
@@ -101,9 +99,10 @@ public extension UIntMax {
         }
 
         for c in string.utf8 {
-            let value = try conversion(c)
-            result *= UIntMax(base)
-            result += UIntMax(value)
+            if let value = try conversion(c) {
+                result *= UIntMax(base)
+                result += UIntMax(value)
+            }
         }
 
         return result
@@ -190,3 +189,69 @@ public func binary <T:UnsignedIntegerType> (value:T, width:Int? = nil) -> String
     return String(value: value, base: 2, prefix: true, width: width)
 }
 
+
+
+
+public extension UInt8 {
+    var asHex:String {
+        get {
+            return intToHex(Int(self))
+        }
+    }
+}
+
+public extension UInt16 {
+    var asHex:String {
+        get {
+            return intToHex(Int(self))
+        }
+    }
+}
+
+
+
+func log2(v:Int) -> Int {
+    return Int(log2(Float(v)))
+}
+
+
+public func intToHex(value:Int, skipLeadingZeros:Bool = true, addPrefix:Bool = false, lowercase:Bool = false) -> String {
+
+
+    var s = ""
+    var skipZeros = skipLeadingZeros
+    let digits = log2(Int.max) / 8
+    for var n:Int = digits; n >= 0; --n {
+        let shift = n * 4
+        let nibble = (value >> shift) & 0xF
+        if !(skipZeros == true && nibble == 0) {
+            s += nibbleAsHex(nibble, lowercase:lowercase)
+            skipZeros = false
+        }
+    }
+    return addPrefix ? "0x" + s : s
+}
+
+public func nibbleAsHex(nibble:Int, lowercase:Bool = false) -> String {
+    let uppercaseDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
+    let lowercaseDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+    return lowercase ? lowercaseDigits[nibble] : uppercaseDigits[nibble]
+}
+
+// MARK: -
+
+// Following all marked private because we can't make public extensions on generic types.
+
+public extension UnsafeBufferPointer {
+    var asHex:String {
+        get {
+            let buffer:UnsafeBufferPointer <UInt8> = toUnsafeBufferPointer()
+            let hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+            return "".join(buffer.map {
+                let hiNibble = Int($0) >> 4
+                let loNibble = Int($0) & 0b1111
+                return hex[hiNibble] + hex[loNibble]
+            })
+        }
+    }
+}
