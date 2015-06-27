@@ -17,7 +17,7 @@ internal func hexNibbleToInt(nibble:UInt8) throws -> UInt8 {
         case 0x61 ... 0x66:
             return UInt8(nibble) - 0x61 + 0x0A
         default:
-            throw Error.generic(message: "Invalid character")
+            throw Error.generic("Invalid character")
     }
 }
 
@@ -77,7 +77,7 @@ public extension UIntMax {
                 case 16:
                     prefix = "0x"
                 default:
-                    throw Error.generic(message: "No standard prefix for base \(base).")
+                    throw Error.generic("No standard prefix for base \(base).")
             }
             string = try string.substringFromPrefix(prefix)
         }
@@ -95,7 +95,7 @@ public extension UIntMax {
                     return c - 0x30
                 }
                 else {
-                    throw Error.generic(message: "Character not a digit.")
+                    throw Error.generic("Character not a digit.")
                 }
             }
         }
