@@ -85,7 +85,7 @@ public extension MutableBuffer {
 
 public extension MutableBuffer {
 
-    func append <T> (buffer:UnsafeBufferPointer <T>) {
+    func append <Buffer:BufferType> (buffer:Buffer) {
         mutableData.appendBytes(buffer.baseAddress, length: buffer.length)
     }
 
