@@ -31,7 +31,7 @@ public func bitRange <T:UnsignedIntegerType> (value:T, start:Int, length:Int, fl
     }
 }
 
-public func bitRange(buffer:UnsafeBufferPointer <Void>, start:Int, length:Int) -> UIntMax {
+public func bitRange(buffer:UnsafeBufferPointer <UInt8>, start:Int, length:Int) -> UIntMax {
     let pointer = buffer.baseAddress
 
     // Fast path; we want whole integers and the range is aligned to integer size.
@@ -56,24 +56,94 @@ public func bitRange(buffer:UnsafeBufferPointer <Void>, start:Int, length:Int) -
 
         if start / wordSize == (end - 1) / wordSize {
             // Bit range does not cross two words
-
             let offset = start / wordSize
-            let result = bitRange(pointer[offset].bigEndian, start: start, length: length, flipped:true)
-            // TODO: ENDIANNESS: Do we need an endian converter that works on bit ranges instead of 2/4/8 bytes? Can we convert to next highest 2/4/8 bytes?
+            let result = bitRange(pointer[offset].bigEndian, start: start % wordSize, length: length, flipped:true)
             return result
         }
         else {
             // Bit range spans two words, get bit ranges for both words and then combine them.
             let offset = start / wordSize
-            let msw = bitRange(pointer[offset].bigEndian, range: start ..< wordSize, flipped:true)
+            let offsettedStart = start % wordSize
+            let msw = bitRange(pointer[offset].bigEndian, range:offsettedStart ..< wordSize, flipped:true)
             let bits = (end - offset * wordSize) % wordSize
             let lsw = bitRange(pointer[offset + 1].bigEndian, range: 0 ..< bits, flipped:true)
-            // TODO: ENDIANNESS
             return msw << UIntMax(bits) | lsw
         }
     }
 }
 
-public func bitRange(buffer:UnsafeBufferPointer <Void>, range:Range <Int>) -> UIntMax {
+public func bitRange(buffer:UnsafeBufferPointer <UInt8>, range:Range <Int>) -> UIntMax {
     return bitRange(buffer, start:range.startIndex, length:range.endIndex - range.startIndex)
 }
+
+// MARK: -
+
+func onesMask <T:UnsignedIntegerType> (start start:Int, length:Int, flipped:Bool = false) -> T {
+    let size = UIntMax(sizeof(T) * 8)
+    let start = UIntMax(start)
+    let length = UIntMax(length)
+    let shift = flipped == false ? start : (size - start - length)
+    let mask = ((1 << length) - 1) << shift
+    return T(mask)
+}
+
+public func bitSet <T:UnsignedIntegerType> (value:T, start:Int, length:Int, flipped:Bool = false, newValue:T) -> T {
+    assert(start + length <= sizeof(T) * 8)
+    let mask:T = onesMask(start:start, length:length, flipped:flipped)
+    let shift = UIntMax(flipped == false ? start : sizeof(T) * 8 - start - length)
+    let shiftedNewValue = newValue.toUIntMax() << UIntMax(shift)
+    let result = (value.toUIntMax() & ~mask.toUIntMax()) | (shiftedNewValue & mask.toUIntMax())
+    return T(result)
+}
+
+// MARK: -
+
+public func bitSet(buffer:UnsafeMutableBufferPointer <UInt8>, start:Int, length:Int, newValue:UIntMax) {
+    let pointer = buffer.baseAddress
+
+    // Fast path; we want whole integers and the range is aligned to integer size.
+    if length == 64 && start % 64 == 0 {
+        UnsafeMutablePointer <UInt64> (pointer)[start / 64] = newValue
+    }
+    else if length == 32 && start % 32 == 0 {
+        UnsafeMutablePointer <UInt32> (pointer)[start / 32] = UInt32(newValue)
+    }
+    else if length == 16 && start % 16 == 0 {
+        UnsafeMutablePointer <UInt16> (pointer)[start / 16] = UInt16(newValue)
+    }
+    else if length == 8 && start % 8 == 0 {
+        UnsafeMutablePointer <UInt8> (pointer)[start / 8] = UInt8(newValue)
+    }
+    else {
+        // Slow(er) path. Range is not aligned.
+        let pointer = UnsafeMutablePointer <UIntMax> (pointer)
+        let wordSize = sizeof(UIntMax) * 8
+
+        let end = start + length
+
+        if start / wordSize == (end - 1) / wordSize {
+            // Bit range does not cross two words
+
+            let offset = start / wordSize
+            let value = pointer[offset].bigEndian
+            let result = UIntMax(bigEndian: bitSet(value, start: start % wordSize, length: length, flipped:true, newValue:newValue))
+            binary(result, width:64)
+            pointer[offset] = result
+        }
+        else {
+            // Bit range spans two words, get bit ranges for both words and then combine them.
+            unimplementedFailure()
+        }
+    }
+}
+
+
+
+public func bitSet(buffer:UnsafeMutableBufferPointer <UInt8>, range:Range <Int>, newValue:UIntMax) {
+    bitSet(buffer, start:range.startIndex, length:range.endIndex - range.startIndex, newValue:newValue)
+}
+
+
+
+
+

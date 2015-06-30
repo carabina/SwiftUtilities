@@ -30,9 +30,9 @@
 		452E96F91B3CA517002269CD /* BitRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F41B3CA517002269CD /* BitRange.swift */; };
 		452E96FA1B3CA517002269CD /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F51B3CA517002269CD /* Timestamp.swift */; };
 		452E96FB1B3CA517002269CD /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96F51B3CA517002269CD /* Timestamp.swift */; };
-		452E96FE1B3CA523002269CD /* TestBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FC1B3CA523002269CD /* TestBase.swift */; };
+		452E96FE1B3CA523002269CD /* NumberBases_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FC1B3CA523002269CD /* NumberBases_Tests.swift */; };
 		452E96FF1B3CA523002269CD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FD1B3CA523002269CD /* Utilities.swift */; };
-		452E97011B3CA529002269CD /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E97001B3CA529002269CD /* Tests.swift */; };
+		452E97011B3CA529002269CD /* BitRange_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E97001B3CA529002269CD /* BitRange_Tests.swift */; };
 		454F7D9D1B3E009E00A2B37E /* MutableBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */; };
 		454F7D9E1B3E009E00A2B37E /* MutableBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */; };
 		454F7DA01B3E00CA00A2B37E /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9F1B3E00CA00A2B37E /* Buffer.swift */; };
@@ -115,9 +115,9 @@
 		452E96F31B3CA517002269CD /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		452E96F41B3CA517002269CD /* BitRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitRange.swift; sourceTree = "<group>"; };
 		452E96F51B3CA517002269CD /* Timestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timestamp.swift; sourceTree = "<group>"; };
-		452E96FC1B3CA523002269CD /* TestBase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestBase.swift; sourceTree = "<group>"; };
+		452E96FC1B3CA523002269CD /* NumberBases_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberBases_Tests.swift; sourceTree = "<group>"; };
 		452E96FD1B3CA523002269CD /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		452E97001B3CA529002269CD /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		452E97001B3CA529002269CD /* BitRange_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitRange_Tests.swift; sourceTree = "<group>"; };
 		454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableBuffer.swift; sourceTree = "<group>"; };
 		454F7D9F1B3E00CA00A2B37E /* Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
 		457DED7619DA218E000242E1 /* PureUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PureUtilities.swift; sourceTree = "<group>"; };
@@ -151,6 +151,7 @@
 		45F3EDAC1B3E50E6007F55E3 /* Buffer.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Buffer.playground; sourceTree = "<group>"; };
 		45F3EDAD1B3E54CE007F55E3 /* BufferType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferType.swift; sourceTree = "<group>"; };
 		45F9C0EC1AC0D8100068164B /* String+Foundation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Foundation.swift"; sourceTree = "<group>"; };
+		45FDD2D01B423CD400BF207C /* Bits.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Bits.playground; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +186,7 @@
 				452B30AB1AC0996100920B6A /* RegularExpressionPlayground.playground */,
 				45B13E331AC076450035DEE9 /* Walker.playground */,
 				452BAC241B3E8A7300F3DF48 /* Random.playground */,
+				45FDD2D01B423CD400BF207C /* Bits.playground */,
 			);
 			path = Playgrounds;
 			sourceTree = "<group>";
@@ -281,8 +283,8 @@
 			children = (
 				45E8EEE6199A90720035C722 /* SwiftUtilities_Tests.swift */,
 				45BA690F19C4C48E00FA7252 /* NSRange_Tests.swift */,
-				452E96FC1B3CA523002269CD /* TestBase.swift */,
-				452E97001B3CA529002269CD /* Tests.swift */,
+				452E96FC1B3CA523002269CD /* NumberBases_Tests.swift */,
+				452E97001B3CA529002269CD /* BitRange_Tests.swift */,
 				452E96FD1B3CA523002269CD /* Utilities.swift */,
 				45E8EEE4199A90720035C722 /* Supporting Files */,
 				45B929D11B39F31100206F2C /* BitRange.swift */,
@@ -513,8 +515,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				452E96FE1B3CA523002269CD /* TestBase.swift in Sources */,
-				452E97011B3CA529002269CD /* Tests.swift in Sources */,
+				452E96FE1B3CA523002269CD /* NumberBases_Tests.swift in Sources */,
+				452E97011B3CA529002269CD /* BitRange_Tests.swift in Sources */,
 				45BA691019C4C48E00FA7252 /* NSRange_Tests.swift in Sources */,
 				45E8EEE7199A90720035C722 /* SwiftUtilities_Tests.swift in Sources */,
 				452E96FF1B3CA523002269CD /* Utilities.swift in Sources */,

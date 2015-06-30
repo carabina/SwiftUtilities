@@ -16,7 +16,6 @@ public extension UnsafeBufferPointer {
     var length:Int {
         return count * UnsafeBufferPointer <T>.elementSize
     }
-
 }
 
 public extension UnsafeBufferPointer {
@@ -38,15 +37,16 @@ public extension NSData {
     var buffer:UnsafeBufferPointer <Void> {
         return UnsafeBufferPointer <Void> (start: bytes, count: length)
     }
-}
-
-public extension NSData {
 
     func withUnsafeBufferPointer<T, R>(@noescape body: (UnsafeBufferPointer<T>) -> R) -> R {
         let voidBuffer = UnsafeBufferPointer<Void> (start: bytes, count: length)
         let buffer:UnsafeBufferPointer<T> = voidBuffer.toUnsafeBufferPointer()
         return body(buffer)
     }
-
 }
 
+public extension UnsafeMutableBufferPointer {
+    func toUnsafeBufferPointer() -> UnsafeBufferPointer <T> {
+        return UnsafeBufferPointer <T> (start: baseAddress, count: count)
+    }
+}
