@@ -89,11 +89,11 @@ public extension MutableBuffer {
         mutableData.appendBytes(buffer.baseAddress, length: buffer.length)
     }
 
-    func append(value:UInt32) {
+    func append <T>(value:T) {
         var copy = value
         withUnsafePointer(&copy) {
-            (pointer:UnsafePointer <UInt32>) -> Void in
-            let buffer = UnsafeBufferPointer <UInt32> (start:pointer, count:1)
+            (pointer:UnsafePointer <T>) -> Void in
+            let buffer = UnsafeBufferPointer <T> (start:pointer, count:1)
             append(buffer)
         }
     }

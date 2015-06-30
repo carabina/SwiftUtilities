@@ -33,6 +33,8 @@
 		452E96FE1B3CA523002269CD /* NumberBases_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FC1B3CA523002269CD /* NumberBases_Tests.swift */; };
 		452E96FF1B3CA523002269CD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FD1B3CA523002269CD /* Utilities.swift */; };
 		452E97011B3CA529002269CD /* BitRange_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E97001B3CA529002269CD /* BitRange_Tests.swift */; };
+		454280131B433B0400FEC0D0 /* NSData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454280121B433B0400FEC0D0 /* NSData+Extensions.swift */; };
+		454280141B433B0E00FEC0D0 /* NSData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454280121B433B0400FEC0D0 /* NSData+Extensions.swift */; };
 		454F7D9D1B3E009E00A2B37E /* MutableBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */; };
 		454F7D9E1B3E009E00A2B37E /* MutableBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */; };
 		454F7DA01B3E00CA00A2B37E /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9F1B3E00CA00A2B37E /* Buffer.swift */; };
@@ -118,6 +120,7 @@
 		452E96FC1B3CA523002269CD /* NumberBases_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberBases_Tests.swift; sourceTree = "<group>"; };
 		452E96FD1B3CA523002269CD /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		452E97001B3CA529002269CD /* BitRange_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitRange_Tests.swift; sourceTree = "<group>"; };
+		454280121B433B0400FEC0D0 /* NSData+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Extensions.swift"; sourceTree = "<group>"; };
 		454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableBuffer.swift; sourceTree = "<group>"; };
 		454F7D9F1B3E00CA00A2B37E /* Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
 		457DED7619DA218E000242E1 /* PureUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PureUtilities.swift; sourceTree = "<group>"; };
@@ -223,6 +226,7 @@
 				45F9C0EC1AC0D8100068164B /* String+Foundation.swift */,
 				45E8EEBD199A8E1C0035C722 /* FoundationUtilities.swift */,
 				45BA690B19C4C26600FA7252 /* NSRange.swift */,
+				454280121B433B0400FEC0D0 /* NSData+Extensions.swift */,
 			);
 			name = "Foundation Extensions";
 			sourceTree = "<group>";
@@ -469,6 +473,7 @@
 				452E96F81B3CA517002269CD /* BitRange.swift in Sources */,
 				45C52C371B3EE58F005BE79E /* Errors.swift in Sources */,
 				45C619021AC078A100284D3F /* CPPRandom.mm in Sources */,
+				454280131B433B0400FEC0D0 /* NSData+Extensions.swift in Sources */,
 				452E96FA1B3CA517002269CD /* Timestamp.swift in Sources */,
 				45E8EEED199AAA4E0035C722 /* BoolEnum.swift in Sources */,
 				45C618FE1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */,
@@ -501,6 +506,7 @@
 				452E96F91B3CA517002269CD /* BitRange.swift in Sources */,
 				45C52C381B3EE58F005BE79E /* Errors.swift in Sources */,
 				45C619031AC078A100284D3F /* CPPRandom.mm in Sources */,
+				454280141B433B0E00FEC0D0 /* NSData+Extensions.swift in Sources */,
 				452E96FB1B3CA517002269CD /* Timestamp.swift in Sources */,
 				45E8EEEE199AAA4E0035C722 /* BoolEnum.swift in Sources */,
 				45C618FF1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */,

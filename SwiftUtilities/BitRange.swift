@@ -8,10 +8,6 @@
 
 import Foundation
 
-public func bitRange <T:UnsignedIntegerType> (value:T, range:Range <Int>, flipped:Bool = false) -> T {
-    return bitRange(value, start:range.startIndex, length:range.endIndex - range.startIndex, flipped:flipped)
-}
-
 public func bitRange <T:UnsignedIntegerType> (value:T, start:Int, length:Int, flipped:Bool = false) -> T {
     assert(sizeof(T) <= sizeof(UIntMax))
     let bitSize = UIntMax(sizeof(T) * 8)
@@ -30,6 +26,12 @@ public func bitRange <T:UnsignedIntegerType> (value:T, start:Int, length:Int, fl
         return T.init(result)
     }
 }
+
+public func bitRange <T:UnsignedIntegerType> (value:T, range:Range <Int>, flipped:Bool = false) -> T {
+    return bitRange(value, start:range.startIndex, length:range.endIndex - range.startIndex, flipped:flipped)
+}
+
+// MARK: -
 
 public func bitRange(buffer:UnsafeBufferPointer <Void>, start:Int, length:Int) -> UIntMax {
     let pointer = buffer.baseAddress
@@ -78,22 +80,17 @@ public func bitRange(buffer:UnsafeBufferPointer <Void>, range:Range <Int>) -> UI
 
 // MARK: -
 
-func onesMask <T:UnsignedIntegerType> (start start:Int, length:Int, flipped:Bool = false) -> T {
-    let size = UIntMax(sizeof(T) * 8)
-    let start = UIntMax(start)
-    let length = UIntMax(length)
-    let shift = flipped == false ? start : (size - start - length)
-    let mask = ((1 << length) - 1) << shift
-    return T(mask)
-}
-
 public func bitSet <T:UnsignedIntegerType> (value:T, start:Int, length:Int, flipped:Bool = false, newValue:T) -> T {
     assert(start + length <= sizeof(T) * 8)
     let mask:T = onesMask(start:start, length:length, flipped:flipped)
-    let shift = UIntMax(flipped == false ? start : sizeof(T) * 8 - start - length)
+    let shift = UIntMax(flipped == false ? start : (sizeof(T) * 8 - start - length))
     let shiftedNewValue = newValue.toUIntMax() << UIntMax(shift)
     let result = (value.toUIntMax() & ~mask.toUIntMax()) | (shiftedNewValue & mask.toUIntMax())
     return T(result)
+}
+
+public func bitSet <T:UnsignedIntegerType> (value:T, range:Range <Int>, flipped:Bool = false, newValue:T) -> T {
+    return bitSet(value, start:range.startIndex, length:range.endIndex - range.startIndex, flipped:flipped, newValue:newValue)
 }
 
 // MARK: -
@@ -137,13 +134,18 @@ public func bitSet(buffer:UnsafeMutableBufferPointer <Void>, start:Int, length:I
     }
 }
 
-
-
 public func bitSet(buffer:UnsafeMutableBufferPointer <Void>, range:Range <Int>, newValue:UIntMax) {
     bitSet(buffer, start:range.startIndex, length:range.endIndex - range.startIndex, newValue:newValue)
 }
 
+// MARK: -
 
-
-
+func onesMask <T:UnsignedIntegerType> (start start:Int, length:Int, flipped:Bool = false) -> T {
+    let size = UIntMax(sizeof(T) * 8)
+    let start = UIntMax(start)
+    let length = UIntMax(length)
+    let shift = flipped == false ? start : (size - start - length)
+    let mask = ((1 << length) - 1) << shift
+    return T(mask)
+}
 

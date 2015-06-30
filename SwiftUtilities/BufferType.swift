@@ -41,12 +41,36 @@ extension BufferType {
 }
 
 public extension BufferType {
+
+    func subBuffer(start:Int, count:Int) -> UnsafeBufferPointer <T> {
+        return UnsafeBufferPointer <T> (start: baseAddress.advancedBy(start), count: count)
+    }
+
+    func inset(startInset:Int, endInset:Int) -> UnsafeBufferPointer <T> {
+        assert(startInset >= 0)
+        assert(endInset >= 0)
+        return UnsafeBufferPointer <T> (start: baseAddress.advancedBy(startInset), count: count - (startInset + endInset))
+    }
+
+
     subscript (range:Range <Int>) -> UnsafeBufferPointer <T> {
         return UnsafeBufferPointer <T> (start: baseAddress + range.startIndex, count:range.endIndex - range.startIndex)
+    }
+
+    func toUnsafeBufferPointer <U> () -> UnsafeBufferPointer <U> {
+        let count = length / UnsafeBufferPointer <U>.elementSize
+        return UnsafeBufferPointer <U> (start: UnsafePointer <U> (baseAddress), count: count)
     }
 }
 
 extension UnsafeBufferPointer: BufferType {
+    static var elementSize: Int {
+        return max(sizeof(T), 1)
+    }
+
+    var length:Int {
+        return count * UnsafeBufferPointer <T>.elementSize
+    }
 }
 
 extension Buffer: BufferType {
