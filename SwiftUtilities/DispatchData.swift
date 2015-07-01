@@ -46,6 +46,11 @@ public struct DispatchData <T> {
 
     // MARK: -
 
+    public func map() -> DispatchData <T> {
+        let mappedData = dispatch_data_create_map(data, nil, nil)
+        return DispatchData <T> (data:mappedData)
+    }
+
     public func map(@noescape block:UnsafeBufferPointer <Void> -> Void) -> DispatchData <T> {
 
         var pointer:UnsafePointer <Void> = nil
@@ -134,6 +139,24 @@ extension DispatchData: CustomStringConvertible {
 
         }
         let chunksString = ", ".join(chunks)
-        return "DispatchData(count:\(count), length:\(length), \(chunks.count) chunks:\(chunksString))"
+        return "DispatchData(count:\(count), length:\(length), chunk count:\(chunks.count), chunks:\(chunksString))"
+    }
+}
+
+
+extension DispatchData: CustomReflectable {
+    public func customMirror() -> Mirror {
+
+        var chunks:[(Range <Int>,String)] = []
+        apply() {
+            (range:Range<Int>, buffer:UnsafeBufferPointer <T>) -> Void in
+            chunks.append((range, buffer.dump(16)))
+        }
+
+        return Mirror(self, children: [
+            "count":count,
+            "length":length,
+            "data":chunks,
+        ])
     }
 }

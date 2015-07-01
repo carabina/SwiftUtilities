@@ -41,8 +41,16 @@ public func tryAndLogError <T> (@autoclosure block:(Void) throws -> T) -> T {
     }
 }
 
-public func makeOSStatusError(status:OSErr, description:String? = nil) -> ErrorType {
-    let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status), userInfo: nil)
+public func makeOSStatusError <T:IntegerType>(status:T, description:String? = nil) -> ErrorType {
+
+    var userInfo:[NSObject : AnyObject]? = nil
+
+    if let description = description {
+        userInfo = [NSLocalizedDescriptionKey:description]
+    }
+
+
+    let error = NSError(domain: NSOSStatusErrorDomain, code: Int(status.toIntMax()), userInfo: userInfo)
     return error
 }
 
