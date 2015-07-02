@@ -24,7 +24,7 @@ class Tests: XCTestCase {
     }
 
     func testBufferBitRange() {
-        let data = try! NSData(hexString: "0001020304050607F0F1F2F3F4F5F6F7")
+//        let data = try! NSData(hexString: "0001020304050607F0F1F2F3F4F5F6F7")
 
 //        data.withUnsafeBufferPointer {
 //            (p:UnsafeBufferPointer<UInt8>) -> Void in
@@ -44,6 +44,5 @@ class Tests: XCTestCase {
         XCTAssertEqual(bitSet(UInt8(0b00011111), start: 0, length: 3, flipped:true, newValue:UInt8(0b111)), UInt8(0b11111111))
         XCTAssertEqual(bitSet(UInt8(0b00000000), range:5..<8, flipped:true, newValue:UInt8(5)), UInt8(5))
     }
-
 
 }
