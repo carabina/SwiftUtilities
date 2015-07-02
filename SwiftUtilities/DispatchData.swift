@@ -13,21 +13,34 @@ public struct DispatchData <T> {
     public let data:dispatch_data_t
 
     public var count:Int {
-        return length / DispatchData <T>.elementSize
+        return length / elementSize
     }
 
     public static var elementSize:Int {
         return max(sizeof(T), 1)
     }
 
+    public var elementSize:Int {
+        return DispatchData <T>.elementSize
+    }
+
     public var length:Int {
         return dispatch_data_get_size(data)
+    }
+
+    public var startIndex:Int {
+        return 0
+    }
+
+    public var endIndex:Int {
+        return count
     }
 
     // MARK: -
 
     public init(data:dispatch_data_t) {
         self.data = data
+        assert(count * elementSize == length)
     }
 
     public init() {
@@ -41,50 +54,86 @@ public struct DispatchData <T> {
     // MARK: -
 
     public func subBuffer(range:Range <Int>) -> DispatchData <T> {
-        return DispatchData <T> (data:dispatch_data_create_subrange(data, range.startIndex, range.endIndex - range.startIndex))
+        assert(range.startIndex >= startIndex && range.startIndex <= endIndex)
+        assert(range.endIndex >= startIndex && range.endIndex <= endIndex)
+        assert(range.startIndex <= range.endIndex)
+        return DispatchData <T> (data:dispatch_data_create_subrange(data, range.startIndex * elementSize, (range.endIndex - range.startIndex) * elementSize))
     }
 
     // MARK: -
 
-    public func map() -> DispatchData <T> {
-        let mappedData = dispatch_data_create_map(data, nil, nil)
-        return DispatchData <T> (data:mappedData)
-    }
+//    public func map() -> DispatchData <T> {
+//        let mappedData = dispatch_data_create_map(data, nil, nil)
+//        return DispatchData <T> (data:mappedData)
+//    }
 
-    public func map(@noescape block:UnsafeBufferPointer <Void> -> Void) -> DispatchData <T> {
+//    public func map(@noescape block:UnsafeBufferPointer <Void> -> Void) -> DispatchData <T> {
+//        var pointer:UnsafePointer <Void> = nil
+//        var size:Int = 0
+//        let mappedData = dispatch_data_create_map(data, &pointer, &size)
+//        let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
+//        block(buffer)
+//        return DispatchData <T> (data:mappedData)
+//    }
 
+    public func map <R> (@noescape block:(DispatchData <T>, UnsafeBufferPointer <Void>) -> R) -> R {
         var pointer:UnsafePointer <Void> = nil
         var size:Int = 0
-
         let mappedData = dispatch_data_create_map(data, &pointer, &size)
-
         let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
-        block(buffer)
-
-        return DispatchData <T> (data:mappedData)
+        return block(DispatchData <T> (data:mappedData), buffer)
     }
 
-    public func map <R>(@noescape block:UnsafeBufferPointer <Void> throws -> R) rethrows -> R {
-
-        var pointer:UnsafePointer <Void> = nil
-        var size:Int = 0
-
-        let _ = dispatch_data_create_map(data, &pointer, &size)
-        let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
-        let result = try block(buffer)
-
-        return result
+    public func map <R> (@noescape block:UnsafeBufferPointer <Void> -> R) -> R {
+        return map() {
+            (data:DispatchData <T>, buffer:UnsafeBufferPointer <Void>) -> R in
+            return block(buffer)
+        }
     }
+
+//    public func map <R> (@noescape block:UnsafeBufferPointer <Void> -> R) -> R {
+//        var pointer:UnsafePointer <Void> = nil
+//        var size:Int = 0
+//        let keepAliveToken = Unmanaged.passRetained(dispatch_data_create_map(data, &pointer, &size))
+//        let _ = dispatch_data_create_map(data, &pointer, &size)
+//        let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
+//        keepAliveToken.release()
+//        return block(buffer)
+//    }
+
+//    public func map <R>(@noescape block:UnsafeBufferPointer <Void> -> R) -> R {
+//        var pointer:UnsafePointer <Void> = nil
+//        var size:Int = 0
+//
+//        let mappedData:dispatch_data_t! = dispatch_data_create_map(data, &pointer, &size)
+//        return keepAlive(mappedData) {
+//            let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
+//            return block(buffer)
+//        }
+//    }
+
+//    public func map <R>(@noescape block:UnsafeBufferPointer <Void> throws -> R) rethrows -> R {
+//        var pointer:UnsafePointer <Void> = nil
+//        var size:Int = 0
+//        let _ = dispatch_data_create_map(data, &pointer, &size)
+//        let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
+//        let result = try block(buffer)
+//        return result
+//    }
 
     // MARK: -
 
     public func apply(applier:(Range<Int>, UnsafeBufferPointer <T>) -> Void) {
         dispatch_data_apply(data) {
             (region:dispatch_data_t!, offset:Int, buffer:UnsafePointer <Void>, size:Int) -> Bool in
-            let buffer = UnsafeBufferPointer <T> (start: UnsafePointer <T> (buffer), count: size / DispatchData <T>.elementSize)
+            let buffer = UnsafeBufferPointer <T> (start: UnsafePointer <T> (buffer), count: size / self.elementSize)
             applier(offset..<offset + size, buffer)
             return true
         }
+    }
+
+    public func convert <U> () -> DispatchData <U> {
+        return DispatchData <U> (data:data)
     }
 }
 
@@ -98,21 +147,6 @@ public func + <T> (lhs:DispatchData <T>, rhs:DispatchData <T>) -> DispatchData <
 // MARK: -
 
 public extension DispatchData {
-
-    public func subBuffer(startIndex startIndex:Int, length:Int) -> DispatchData <T> {
-        return subBuffer(Range <Int> (start: startIndex, end: startIndex + length))
-    }
-
-    public func subBuffer(startIndex startIndex:Int, count:Int) -> DispatchData <T> {
-        return subBuffer(startIndex:startIndex, length:count * DispatchData <T>.elementSize)
-    }
-
-    public func inset(startInset startInset:Int = 0, endInset:Int = 0) -> DispatchData <T> {
-        assert(startInset >= 0)
-        assert(endInset >= 0)
-        return subBuffer(startIndex:startInset, count: count - (startInset + endInset))
-    }
-
     public subscript (range:Range <Int>) -> DispatchData <T> {
         return subBuffer(range)
     }
@@ -121,28 +155,44 @@ public extension DispatchData {
 // MARK: -
 
 public extension DispatchData {
-    func toBuffer() -> Buffer <Void> {
-        return try! map() {
-            return Buffer <Void> (buffer:$0)
-        }
+
+    public func subBuffer(startIndex startIndex:Int, count:Int) -> DispatchData <T> {
+        return subBuffer(Range <Int> (start: startIndex, end: startIndex + count))
+    }
+
+    public func inset(startInset startInset:Int = 0, endInset:Int = 0) -> DispatchData <T> {
+        assert(startInset >= 0)
+        assert(endInset >= 0)
+        return subBuffer(startIndex:startInset, count: count - (startInset + endInset))
+    }
+
+    public func split(count:Int) -> (DispatchData <T>, DispatchData <T>) {
+        let lhs = subBuffer(startIndex:0, count:count)
+        let rhs = subBuffer(startIndex:count, count:self.count - count)
+        return (lhs, rhs)
     }
 }
 
-// MARK: -
+// TODO: This is dangerous if length is not divisible by elementSize - just used T of <Void> or <UInt8>
+
+//public extension DispatchData {
+//    public func subBuffer(startIndex startIndex:Int, length:Int) -> DispatchData <T> {
+//        return subBuffer(Range <Int> (start: startIndex, end: startIndex + length))
+//    }
+//}
+
+// MARK: - 
 
 extension DispatchData: CustomStringConvertible {
-
     public var description: String {
         var chunks:[String] = []
         apply() {
             chunks.append("\($0.startIndex)..+\($0.endIndex - $0.startIndex) \($1.dump(16))")
-
         }
         let chunksString = ", ".join(chunks)
         return "DispatchData(count:\(count), length:\(length), chunk count:\(chunks.count), chunks:\(chunksString))"
     }
 }
-
 
 extension DispatchData: CustomReflectable {
     public func customMirror() -> Mirror {
@@ -158,5 +208,34 @@ extension DispatchData: CustomReflectable {
             "length":length,
             "data":chunks,
         ])
+    }
+}
+
+// MARK: -
+
+public extension DispatchData {
+    init <U:IntegerType> (value:U) {
+        var copy = value
+        self = withUnsafePointer(&copy) {
+            let buffer = UnsafeBufferPointer <U> (start:$0, count:1)
+            return DispatchData <U> (buffer: buffer).convert()
+        }
+    }
+}
+
+//func keepAlive <T, R> (param:T, @noescape block:Void -> R) -> R {
+//    let keepAliveToken = Unmanaged.passRetained(param)
+//    let result = block()
+//    keepAliveToken.release()
+//    return result
+//}
+
+// MARK: -
+
+public extension DispatchData {
+    func toBuffer() -> Buffer <Void> {
+        return map() {
+            return Buffer <Void> (buffer:$0)
+        }
     }
 }
