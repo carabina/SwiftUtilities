@@ -12,18 +12,8 @@ public struct RegularExpression {
 
     public let expression: NSRegularExpression
 
-    public init(_ pattern:String, options:NSRegularExpressionOptions = NSRegularExpressionOptions()) {
-        var error:NSError?
-        let expression: NSRegularExpression?
-        do {
-            expression = try NSRegularExpression(pattern:pattern, options:options)
-        } catch let error1 as NSError {
-            error = error1
-            expression = nil
-        }
-        assert(error == nil)
-        self.expression = expression!
-        
+    public init(_ pattern:String, options:NSRegularExpressionOptions = NSRegularExpressionOptions()) throws {
+        self.expression = try NSRegularExpression(pattern:pattern, options:options)
     }
 
     public func match(string:String, options:NSMatchingOptions = NSMatchingOptions()) -> Match? {
