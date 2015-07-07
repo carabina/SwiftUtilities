@@ -29,9 +29,9 @@ public func += (inout left: NSURL, right: String) {
 
 public class BlockValueTransformer: NSValueTransformer {
 
-    typealias TransformerBlock = (AnyObject!) -> (AnyObject!)
+    public typealias TransformerBlock = (AnyObject!) -> (AnyObject!)
 
-    let block : TransformerBlock
+    public let block : TransformerBlock
 
     /*
     Generally used:
@@ -39,13 +39,13 @@ public class BlockValueTransformer: NSValueTransformer {
     BlockValueTransformer.register(name:"Foo") { return Foo($0) }
     }
     */
-    class func register(name:String, block:TransformerBlock) -> BlockValueTransformer {
+    public static func register(name:String, block:TransformerBlock) -> BlockValueTransformer {
         let transformer = BlockValueTransformer(block:block)
         self.setValueTransformer(transformer, forName:name)
         return transformer
     }
 
-    init(block:TransformerBlock) {
+    public init(block:TransformerBlock) {
         self.block = block
     }
     
