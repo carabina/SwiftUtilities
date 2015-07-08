@@ -10,9 +10,11 @@ import Foundation
 
 public struct RegularExpression {
 
+    public let pattern: String
     public let expression: NSRegularExpression
 
     public init(_ pattern:String, options:NSRegularExpressionOptions = NSRegularExpressionOptions()) throws {
+        self.pattern = pattern
         self.expression = try NSRegularExpression(pattern:pattern, options:options)
     }
 
@@ -49,10 +51,13 @@ public struct RegularExpression {
             return ranges
         }
 
-        public var strings: BlockBackedCollection <String> {
+        public var strings: BlockBackedCollection <String?> {
             let count = result.numberOfRanges
-            let groups = BlockBackedCollection <String> (count:count) {
+            let groups = BlockBackedCollection <String?> (count:count) {
                 let range = self.result.rangeAtIndex($0)
+                if range.location == NSNotFound {
+                    return nil
+                }
                 return (self.string as NSString).substringWithRange(range)
                 }
             return groups

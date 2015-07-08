@@ -30,11 +30,11 @@ let walker = Walker <StringNode> () {
 
 walker.walk(root) {
     (node:StringNode, depth:Int) in
-    println("\(depth): \(node)")
+    print("\(depth): \(node)")
     }
     
 walker.walk(root) {
     (node:StringNode, state:WalkerState <StringNode>) in
     let filler = state.filler("\t")
-    println("\(filler)\(node)\(state.stack)")
+    print("\(filler)\(node)\(state.stack)")
     }

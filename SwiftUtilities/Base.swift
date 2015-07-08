@@ -169,6 +169,11 @@ public extension String {
         let value = value.toUIntMax()
         self.init(value: value, base:base, prefix:prefix, uppercase:uppercase, width:width)
     }
+
+    func toInt() -> Int {
+        return (self as NSString).integerValue
+    }
+
 }
 
 // TODO; Deprecate

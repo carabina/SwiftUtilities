@@ -14,6 +14,9 @@ public struct CRC16 {
     public typealias CRCType = UInt16
     public internal(set) var crc:CRCType!
 
+    public init() {
+    }
+
     public static func accumulate(buffer:UnsafeBufferPointer <UInt8>, crc:CRCType = 0xFFFF) -> CRCType {
         var accum = crc
         for b in buffer {

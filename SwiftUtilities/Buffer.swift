@@ -56,6 +56,10 @@ extension Buffer {
         self.init(data: NSData(bytes: pointer, length: length))
     }
 
+    public init(bufferPointer:UnsafeBufferPointer <T>) {
+        self.init(data: NSData(bytes: bufferPointer.baseAddress, length: bufferPointer.length))
+    }
+
     public var bufferPointer:UnsafeBufferPointer <T> {
         return UnsafeBufferPointer <T> (start:self.baseAddress, count:count)
     }

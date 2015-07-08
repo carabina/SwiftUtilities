@@ -72,8 +72,6 @@
 		45E504851B39E92D007AE307 /* CRC16.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E504811B39E92D007AE307 /* CRC16.swift */; };
 		45E504861B39E92D007AE307 /* DataScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E504821B39E92D007AE307 /* DataScanner.swift */; };
 		45E504871B39E92D007AE307 /* DataScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E504821B39E92D007AE307 /* DataScanner.swift */; };
-		45E504881B39E92D007AE307 /* DataScanner+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E504831B39E92D007AE307 /* DataScanner+Extensions.swift */; };
-		45E504891B39E92D007AE307 /* DataScanner+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E504831B39E92D007AE307 /* DataScanner+Extensions.swift */; };
 		45E5048B1B39E984007AE307 /* UnsafeBufferPointers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E5048A1B39E984007AE307 /* UnsafeBufferPointers.swift */; };
 		45E5048C1B39E984007AE307 /* UnsafeBufferPointers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E5048A1B39E984007AE307 /* UnsafeBufferPointers.swift */; };
 		45E8EEAA199A8E080035C722 /* SwiftUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E8EEA9199A8E080035C722 /* SwiftUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -144,7 +142,6 @@
 		45D772A81AC08281002AF6F7 /* BlockBackedCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockBackedCollection.swift; sourceTree = "<group>"; };
 		45E504811B39E92D007AE307 /* CRC16.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CRC16.swift; sourceTree = "<group>"; };
 		45E504821B39E92D007AE307 /* DataScanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataScanner.swift; sourceTree = "<group>"; };
-		45E504831B39E92D007AE307 /* DataScanner+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataScanner+Extensions.swift"; sourceTree = "<group>"; };
 		45E5048A1B39E984007AE307 /* UnsafeBufferPointers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsafeBufferPointers.swift; sourceTree = "<group>"; };
 		45E8EEA4199A8E080035C722 /* SwiftUtilities.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftUtilities.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E8EEA8199A8E080035C722 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -204,7 +201,6 @@
 			children = (
 				452E96F31B3CA517002269CD /* Base.swift */,
 				45E504821B39E92D007AE307 /* DataScanner.swift */,
-				45E504831B39E92D007AE307 /* DataScanner+Extensions.swift */,
 				45E5048A1B39E984007AE307 /* UnsafeBufferPointers.swift */,
 				452E96F41B3CA517002269CD /* BitRange.swift */,
 				45B2B4CD1B3DC3B500D81A43 /* Endianness.swift */,
@@ -486,7 +482,6 @@
 				4511DD691B4476C2004EA078 /* DispatchData.swift in Sources */,
 				45C618FE1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */,
 				457DED7719DA218E000242E1 /* PureUtilities.swift in Sources */,
-				45E504881B39E92D007AE307 /* DataScanner+Extensions.swift in Sources */,
 				454F7D9D1B3E009E00A2B37E /* MutableBuffer.swift in Sources */,
 				45D772A91AC08281002AF6F7 /* BlockBackedCollection.swift in Sources */,
 			);
@@ -520,7 +515,6 @@
 				4511DD6A1B4476C2004EA078 /* DispatchData.swift in Sources */,
 				45C618FF1AC078A100284D3F /* AssociatedObjects+Private.swift in Sources */,
 				457DED7819DA218E000242E1 /* PureUtilities.swift in Sources */,
-				45E504891B39E92D007AE307 /* DataScanner+Extensions.swift in Sources */,
 				454F7D9E1B3E009E00A2B37E /* MutableBuffer.swift in Sources */,
 				45D772B41AC083A1002AF6F7 /* BlockBackedCollection.swift in Sources */,
 			);

@@ -11,7 +11,7 @@ import Foundation
 public class DataScanner {
     public typealias BufferType = UnsafeBufferPointer <UInt8>
     public let buffer:BufferType
-    internal(set) var current:BufferType.Index
+    public var current:BufferType.Index
 
     public var remaining:BufferType {
         return BufferType(start: buffer.baseAddress + current, count: buffer.count - current)
@@ -168,5 +168,22 @@ public class DataScanner {
 
     public var atEnd:Bool {
         return current == buffer.endIndex
+    }
+}
+
+
+public extension DataScanner {
+
+    func scanUpTo(byte:UInt8) -> UnsafeBufferPointer <UInt8>? {
+        let start = current
+        for ; current != buffer.endIndex; ++current {
+            if buffer[current] == byte {
+                break
+            }
+        }
+        if start == current {
+            return nil
+        }
+        return buffer[start..<current]
     }
 }
