@@ -146,33 +146,33 @@ public extension DispatchData {
 
 // MARK: -
 
-extension DispatchData: CustomStringConvertible {
-    public var description: String {
-        var chunks:[String] = []
-        apply() {
-            chunks.append("\($0.startIndex)..+\($0.endIndex - $0.startIndex) \($1.dump(16))")
-        }
-        let chunksString = ", ".join(chunks)
-        return "DispatchData(count:\(count), length:\(length), chunk count:\(chunks.count), chunks:\(chunksString))"
-    }
-}
+//extension DispatchData: CustomStringConvertible {
+//    public var description: String {
+//        var chunks:[String] = []
+//        apply() {
+//            chunks.append("\($0.startIndex)..+\($0.endIndex - $0.startIndex) \($1.dump(16))")
+//        }
+//        let chunksString = ", ".join(chunks)
+//        return "DispatchData(count:\(count), length:\(length), chunk count:\(chunks.count), chunks:\(chunksString))"
+//    }
+//}
 
-extension DispatchData: CustomReflectable {
-    public func customMirror() -> Mirror {
-
-        var chunks:[(Range <Int>,String)] = []
-        apply() {
-            (range:Range<Int>, buffer:UnsafeBufferPointer <T>) -> Void in
-            chunks.append((range, buffer.dump(16)))
-        }
-
-        return Mirror(self, children: [
-            "count":count,
-            "length":length,
-            "data":chunks,
-        ])
-    }
-}
+//extension DispatchData: CustomReflectable {
+//    public func customMirror() -> Mirror {
+//
+//        var chunks:[(Range <Int>,String)] = []
+//        apply() {
+//            (range:Range<Int>, buffer:UnsafeBufferPointer <T>) -> Void in
+//            chunks.append((range, buffer.dump(16)))
+//        }
+//
+//        return Mirror(self, children: [
+//            "count":count,
+//            "length":length,
+//            "data":chunks,
+//        ])
+//    }
+//}
 
 // MARK: -
 

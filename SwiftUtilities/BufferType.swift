@@ -65,11 +65,11 @@ public extension BufferType {
 
 extension UnsafeBufferPointer: BufferType {
     static var elementSize: Int {
-        return max(sizeof(T), 1)
+        return max(sizeof(Element), 1)
     }
 
     var length:Int {
-        return count * UnsafeBufferPointer <T>.elementSize
+        return count * UnsafeBufferPointer <Element>.elementSize
     }
 }
 
