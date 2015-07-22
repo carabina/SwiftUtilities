@@ -18,10 +18,10 @@ public struct WalkerState <T> {
 
 public struct Walker <T> {
 
-    typealias State = WalkerState <T>
-    typealias Children = (node:T) -> [T]?
-    typealias StatelessVisitor = (node:T, depth:Int) -> Void
-    typealias StatefulVisitor = (node:T, state:State) -> Void
+    public typealias State = WalkerState <T>
+    public typealias Children = (node:T) -> [T]?
+    public typealias StatelessVisitor = (node:T, depth:Int) -> Void
+    public typealias StatefulVisitor = (node:T, state:State) -> Void
 
     public let childrenBlock : Children!
 
