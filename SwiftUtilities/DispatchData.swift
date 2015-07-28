@@ -71,26 +71,28 @@ public struct DispatchData <T> {
     }
 
     public func map <R> (@noescape block:UnsafeBufferPointer <Void> -> R) -> R {
-        return map() {
-            (data:DispatchData <T>, buffer:UnsafeBufferPointer <Void>) -> R in
-            return block(buffer)
-        }
+        var pointer:UnsafePointer <Void> = nil
+        var size:Int = 0
+        let _ = dispatch_data_create_map(data, &pointer, &size)
+        let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
+        return block(buffer)
     }
 
-//    public func map <R> (@noescape block:(DispatchData <T>, UnsafeBufferPointer <Void>) throws -> R) rethrows -> R {
-//        var pointer:UnsafePointer <Void> = nil
-//        var size:Int = 0
-//        let mappedData = dispatch_data_create_map(data, &pointer, &size)
-//        let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
-//        return try block(DispatchData <T> (data:mappedData), buffer)
-//    }
-//
-//    public func map <R> (@noescape block:UnsafeBufferPointer <Void> throws -> R) rethrows -> R {
-//        return map() {
-//            (data:DispatchData <T>, buffer:UnsafeBufferPointer <Void>) -> R in
-//            return try block(buffer)
-//        }
-//    }
+    public func map <R> (@noescape block:(DispatchData <T>, UnsafeBufferPointer <Void>) throws -> R) rethrows -> R {
+        var pointer:UnsafePointer <Void> = nil
+        var size:Int = 0
+        let mappedData = dispatch_data_create_map(data, &pointer, &size)
+        let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
+        return try block(DispatchData <T> (data:mappedData), buffer)
+    }
+
+    public func map <R> (@noescape block:UnsafeBufferPointer <Void> throws -> R) rethrows -> R {
+        var pointer:UnsafePointer <Void> = nil
+        var size:Int = 0
+        let _ = dispatch_data_create_map(data, &pointer, &size)
+        let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
+        return try block(buffer)
+    }
 
     // MARK: -
 
