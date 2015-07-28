@@ -14,6 +14,7 @@ public enum Error:ErrorType {
     case generic(String)
     case dispatchIO(Int32, String)
     case posix(Int32, String)
+    case todo
 }
 
 extension Error: CustomStringConvertible {
@@ -27,6 +28,8 @@ extension Error: CustomStringConvertible {
                 return "\(code) \(string)"
             case .posix(let code, let string):
                 return "\(code) \(string)"
+            case .todo:
+                return "todo"
         }
     }
 }
