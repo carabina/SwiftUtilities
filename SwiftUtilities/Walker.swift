@@ -33,7 +33,7 @@ public struct Walker <T> {
         self.walk(node, state:State(), visitor:visitor)
     }
 
-    func walk(node:T, var state:State, visitor:StatefulVisitor) {
+    public func walk(node:T, var state:State, visitor:StatefulVisitor) {
         visitor(node:node, state:state)
         state = State(depth:state.depth + 1, stack:state.stack + [node])
         if let children = self.childrenBlock(node:node) {

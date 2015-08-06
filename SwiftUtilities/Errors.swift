@@ -58,7 +58,7 @@ public func makeOSStatusError <T:IntegerType>(status:T, description:String? = ni
 }
 
 
-@noreturn public func unimplementedFailure(@autoclosure message: () -> String = "", file: StaticString = __FILE__, line: UWord = __LINE__) {
+@noreturn public func unimplementedFailure(@autoclosure message: () -> String = "", file: StaticString = __FILE__, line: UInt = __LINE__) {
     preconditionFailure(message, file:file, line:line)
 }
 
