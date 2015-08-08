@@ -67,6 +67,18 @@ extension Buffer {
 
 // MARK: -
 
+extension Buffer: Equatable {
+}
+
+public func == <T>(lhs: Buffer <T>, rhs: Buffer <T>) -> Bool {
+    if lhs.length != rhs.length {
+        return false
+    }
+    return memcmp(lhs.baseAddress, rhs.baseAddress, lhs.length) == 0
+}
+
+// MARK: -
+
 public func + <T> (lhs:Buffer <T>, rhs:Buffer <T>) -> Buffer <T> {
     let data = NSMutableData(data: lhs.data)
     data.appendData(data)
