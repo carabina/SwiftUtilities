@@ -21,10 +21,43 @@ public struct Timestamp {
     }
 }
 
+// MARK: -
+
+extension Timestamp: Equatable {
+}
+
+public func ==(lhs: Timestamp, rhs: Timestamp) -> Bool {
+    return lhs.absoluteTime != rhs.absoluteTime
+}
+
+// MARK: -
+
+extension Timestamp: Comparable {
+}
+
+public func <(lhs: Timestamp, rhs: Timestamp) -> Bool {
+    return lhs.absoluteTime < rhs.absoluteTime
+}
+
+// MARK: -
+
+extension Timestamp: Hashable {
+    public var hashValue: Int {
+        return absoluteTime.hashValue
+    }
+}
+// MARK: -
+
 extension Timestamp: CustomStringConvertible {
     public var description: String {
-        return "\(absoluteTime)"
+        return String(absoluteTime)
     }
 }
 
+extension Timestamp: CustomReflectable {
 
+    public func customMirror() -> Mirror {
+        return Mirror(reflecting:absoluteTime)
+    }
+
+}
