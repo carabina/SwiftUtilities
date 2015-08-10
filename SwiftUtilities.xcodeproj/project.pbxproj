@@ -43,6 +43,8 @@
 		454F7DA11B3E00CA00A2B37E /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9F1B3E00CA00A2B37E /* Buffer.swift */; };
 		457DED7719DA218E000242E1 /* PureUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457DED7619DA218E000242E1 /* PureUtilities.swift */; };
 		457DED7819DA218E000242E1 /* PureUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 457DED7619DA218E000242E1 /* PureUtilities.swift */; };
+		459410491B792BA2007FFBA0 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459410481B792BA2007FFBA0 /* Utilities.swift */; };
+		4594104A1B792BA2007FFBA0 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459410481B792BA2007FFBA0 /* Utilities.swift */; };
 		45B2B4CE1B3DC3B500D81A43 /* Endianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B2B4CD1B3DC3B500D81A43 /* Endianness.swift */; };
 		45B2B4CF1B3DC3B500D81A43 /* Endianness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B2B4CD1B3DC3B500D81A43 /* Endianness.swift */; };
 		45B929D21B39F31100206F2C /* BitRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B929D11B39F31100206F2C /* BitRange.swift */; };
@@ -126,6 +128,7 @@
 		454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableBuffer.swift; sourceTree = "<group>"; };
 		454F7D9F1B3E00CA00A2B37E /* Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
 		457DED7619DA218E000242E1 /* PureUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PureUtilities.swift; sourceTree = "<group>"; };
+		459410481B792BA2007FFBA0 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		45B13E331AC076450035DEE9 /* Walker.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Walker.playground; sourceTree = "<group>"; };
 		45B2B4CD1B3DC3B500D81A43 /* Endianness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endianness.swift; sourceTree = "<group>"; };
 		45B929D11B39F31100206F2C /* BitRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitRange.swift; sourceTree = "<group>"; };
@@ -271,6 +274,7 @@
 				45C52C301B3EE26D005BE79E /* Data */,
 				452E96F51B3CA517002269CD /* Timestamp.swift */,
 				45C52C361B3EE58F005BE79E /* Errors.swift */,
+				459410481B792BA2007FFBA0 /* Utilities.swift */,
 				45E8EEA7199A8E080035C722 /* Supporting Files */,
 			);
 			path = SwiftUtilities;
@@ -473,6 +477,7 @@
 				45F3EDAE1B3E54CE007F55E3 /* BufferType.swift in Sources */,
 				45BA690C19C4C26600FA7252 /* NSRange.swift in Sources */,
 				45B2B4CE1B3DC3B500D81A43 /* Endianness.swift in Sources */,
+				459410491B792BA2007FFBA0 /* Utilities.swift in Sources */,
 				452E96F81B3CA517002269CD /* BitRange.swift in Sources */,
 				45C52C371B3EE58F005BE79E /* Errors.swift in Sources */,
 				45C619021AC078A100284D3F /* CPPRandom.mm in Sources */,
@@ -506,6 +511,7 @@
 				45F3EDAF1B3E54CE007F55E3 /* BufferType.swift in Sources */,
 				45BA690D19C4C26600FA7252 /* NSRange.swift in Sources */,
 				45B2B4CF1B3DC3B500D81A43 /* Endianness.swift in Sources */,
+				4594104A1B792BA2007FFBA0 /* Utilities.swift in Sources */,
 				452E96F91B3CA517002269CD /* BitRange.swift in Sources */,
 				45C52C381B3EE58F005BE79E /* Errors.swift in Sources */,
 				45C619031AC078A100284D3F /* CPPRandom.mm in Sources */,
