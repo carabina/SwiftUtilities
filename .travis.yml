@@ -1,8 +1,5 @@
 language: objective-c
-osx_image: beta-xcode7
-#xcode_project: 'SwiftGraphics.xcodeproj'
-#xcode_scheme: 'All'
-#xcode_sdk: 'iphonesimulator'
+osx_image: xcode7
 script:
    - xctool -project SwiftUtilities.xcodeproj -scheme SwiftUtilities_OSX build test
    - xctool -project SwiftUtilities.xcodeproj -scheme SwiftUtilities_iOS -sdk iphonesimulator build test
