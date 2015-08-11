@@ -17,16 +17,16 @@ public struct Buffer <T> {
     }
 
     public init(start: UnsafePointer<T>, count: Int) {
-        self.init(data:NSData(bytes: start, length: count * Buffer <T>.elementSize))
+        self.init(data: NSData(bytes: start, length: count * Buffer <T>.elementSize))
     }
 
 //    func generate() -> UnsafeBufferPointerGenerator<T>
 
-    public var baseAddress:UnsafePointer <T> {
+    public var baseAddress: UnsafePointer <T> {
         return UnsafePointer <T> (data.bytes)
     }
 
-    public var count:Int {
+    public var count: Int {
         return data.length / Buffer <T>.elementSize
     }
 
@@ -35,14 +35,14 @@ public struct Buffer <T> {
     public init() {
     }
 
-    public init(data:NSData) {
+    public init(data: NSData) {
         assert(data.length == 0 || data.length >= Buffer <T>.elementSize)
         self.data = data.copy() as! NSData
     }
 
-    public var data:NSData = NSData()
+    public var data: NSData = NSData()
 
-    public static var elementSize:Int {
+    public static var elementSize: Int {
         return max(sizeof(T), 1)
     }
 }
@@ -51,17 +51,17 @@ public struct Buffer <T> {
 
 extension Buffer {
 
-    public init(pointer:UnsafePointer <T>, length:Int) {
+    public init(pointer: UnsafePointer <T>, length: Int) {
         assert(length >= Buffer <T>.elementSize)
         self.init(data: NSData(bytes: pointer, length: length))
     }
 
-    public init(bufferPointer:UnsafeBufferPointer <T>) {
+    public init(bufferPointer: UnsafeBufferPointer <T>) {
         self.init(data: NSData(bytes: bufferPointer.baseAddress, length: bufferPointer.length))
     }
 
-    public var bufferPointer:UnsafeBufferPointer <T> {
-        return UnsafeBufferPointer <T> (start:self.baseAddress, count:count)
+    public var bufferPointer: UnsafeBufferPointer <T> {
+        return UnsafeBufferPointer <T> (start: self.baseAddress, count: count)
     }
 }
 
@@ -79,14 +79,14 @@ public func == <T>(lhs: Buffer <T>, rhs: Buffer <T>) -> Bool {
 
 // MARK: -
 
-public func + <T> (lhs:Buffer <T>, rhs:Buffer <T>) -> Buffer <T> {
+public func + <T> (lhs: Buffer <T>, rhs: Buffer <T>) -> Buffer <T> {
     let data = NSMutableData(data: lhs.data)
     data.appendData(data)
-    return Buffer <T> (data:data)
+    return Buffer <T> (data: data)
 }
 
-public func + <T> (lhs:Buffer <T>, rhs:UnsafeBufferPointer <T>) -> Buffer <T> {
+public func + <T> (lhs: Buffer <T>, rhs: UnsafeBufferPointer <T>) -> Buffer <T> {
     let data = NSMutableData(data: lhs.data)
     data.appendBytes(rhs.baseAddress, length: rhs.length)
-    return Buffer <T> (data:data)
+    return Buffer <T> (data: data)
 }

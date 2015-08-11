@@ -10,14 +10,14 @@ import Foundation
 
 public class DataScanner {
     public typealias BufferType = UnsafeBufferPointer <UInt8>
-    public let buffer:BufferType
-    public var current:BufferType.Index
+    public let buffer: BufferType
+    public var current: BufferType.Index
 
-    public var remaining:BufferType {
+    public var remaining: BufferType {
         return BufferType(start: buffer.baseAddress + current, count: buffer.count - current)
     }
 
-    public init(buffer:BufferType) {
+    public init(buffer: BufferType) {
         self.buffer = buffer
         current = self.buffer.startIndex
     }
@@ -32,8 +32,8 @@ public class DataScanner {
     }
 
     public func scan() -> Int8? {
-        if let unsigned:UInt8 = scan() {
-            return Int8(bitPattern:unsigned)
+        if let unsigned: UInt8 = scan() {
+            return Int8(bitPattern: unsigned)
         }
         else {
             return nil
@@ -54,8 +54,8 @@ public class DataScanner {
     }
 
     public func scan() -> Int16? {
-        if let unsigned:UInt16 = scan() {
-            return Int16(bitPattern:unsigned)
+        if let unsigned: UInt16 = scan() {
+            return Int16(bitPattern: unsigned)
         }
         else {
             return nil
@@ -76,8 +76,8 @@ public class DataScanner {
     }
 
     public func scan() -> Int32? {
-        if let unsigned:UInt32 = scan() {
-            return Int32(bitPattern:unsigned)
+        if let unsigned: UInt32 = scan() {
+            return Int32(bitPattern: unsigned)
         }
         else {
             return nil
@@ -98,8 +98,8 @@ public class DataScanner {
     }
 
     public func scan() -> Int64? {
-        if let unsigned:UInt64 = scan() {
-            return Int64(bitPattern:unsigned)
+        if let unsigned: UInt64 = scan() {
+            return Int64(bitPattern: unsigned)
         }
         else {
             return nil
@@ -132,8 +132,8 @@ public class DataScanner {
         return result
     }
 
-    public func scan(value:UInt8) -> Bool {
-        if let scannedValue:UInt8 = scan() {
+    public func scan(value: UInt8) -> Bool {
+        if let scannedValue: UInt8 = scan() {
             return scannedValue == value
         }
         else {
@@ -141,7 +141,7 @@ public class DataScanner {
         }
     }
 
-    public func scanBuffer(count:Int) -> UnsafeBufferPointer <UInt8>? {
+    public func scanBuffer(count: Int) -> UnsafeBufferPointer <UInt8>? {
         if atEnd {
             return nil
         }
@@ -150,11 +150,11 @@ public class DataScanner {
         return scannedBuffer
     }
 
-    public func scanString(count:Int) -> String? {
+    public func scanString(count: Int) -> String? {
         if atEnd {
             return nil
         }
-        if let buffer:UnsafeBufferPointer <CChar> = scanBuffer(count)?.toUnsafeBufferPointer() {
+        if let buffer: UnsafeBufferPointer <CChar> = scanBuffer(count)?.toUnsafeBufferPointer() {
             // TODO: bil byte???
 
             // Use NSData etc
@@ -166,7 +166,7 @@ public class DataScanner {
         }
     }
 
-    public var atEnd:Bool {
+    public var atEnd: Bool {
         return current == buffer.endIndex
     }
 }
@@ -174,7 +174,7 @@ public class DataScanner {
 
 public extension DataScanner {
 
-    func scanUpTo(byte:UInt8) -> UnsafeBufferPointer <UInt8>? {
+    func scanUpTo(byte: UInt8) -> UnsafeBufferPointer <UInt8>? {
         let start = current
         for ; current != buffer.endIndex; ++current {
             if buffer[current] == byte {

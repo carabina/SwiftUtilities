@@ -18,17 +18,17 @@ public extension BoolEnum {
 }
 
 public extension BoolEnum {
-    init(_ bool:BooleanType) { self = bool.boolValue ? .True : .False }
+    init(_ bool: BooleanType) { self = bool.boolValue ? .True: .False }
 }
 
-extension BoolEnum : BooleanLiteralConvertible {
+extension BoolEnum: BooleanLiteralConvertible {
 
     public init(booleanLiteral value: BooleanLiteralType) {
-        self = value ? .True : .False
+        self = value ? .True: .False
     }
 }
 
-extension BoolEnum : BooleanType {
+extension BoolEnum: BooleanType {
     public var boolValue: Bool {
         switch self {
         case .True: return true
@@ -37,7 +37,7 @@ extension BoolEnum : BooleanType {
     }
 }
 
-extension BoolEnum : Equatable {
+extension BoolEnum: Equatable {
 }
 
 public func ==(lhs: BoolEnum, rhs: BoolEnum) -> Bool {

@@ -9,7 +9,7 @@
 import Foundation
 
 // TODO: This is kinda crap.
-public enum Error:ErrorType {
+public enum Error: ErrorType {
     case none
     case generic(String)
     case dispatchIO(Int32, String)
@@ -34,7 +34,7 @@ extension Error: CustomStringConvertible {
     }
 }
 
-public func tryAndLogError <T> (@autoclosure block:(Void) throws -> T) -> T {
+public func tryAndLogError <T> (@autoclosure block: (Void) throws -> T) -> T {
     do {
         let result = try block()
         return result
@@ -44,12 +44,12 @@ public func tryAndLogError <T> (@autoclosure block:(Void) throws -> T) -> T {
     }
 }
 
-public func makeOSStatusError <T:IntegerType>(status:T, description:String? = nil) -> ErrorType {
+public func makeOSStatusError <T: IntegerType>(status: T, description: String? = nil) -> ErrorType {
 
-    var userInfo:[NSObject : AnyObject]? = nil
+    var userInfo: [NSObject: AnyObject]? = nil
 
     if let description = description {
-        userInfo = [NSLocalizedDescriptionKey:description]
+        userInfo = [NSLocalizedDescriptionKey: description]
     }
 
 
@@ -59,16 +59,16 @@ public func makeOSStatusError <T:IntegerType>(status:T, description:String? = ni
 
 
 @noreturn public func unimplementedFailure(@autoclosure message: () -> String = "", file: StaticString = __FILE__, line: UInt = __LINE__) {
-    preconditionFailure(message, file:file, line:line)
+    preconditionFailure(message, file: file, line: line)
 }
 
-public func withNoOutput <R>(@noescape block:() throws -> R) throws -> R {
+public func withNoOutput <R>(@noescape block: () throws -> R) throws -> R {
 
     fflush(stderr)
     let savedStdOut = dup(fileno(stdout))
     let savedStdErr = dup(fileno(stderr))
 
-    var fd:[Int32] = [ 0, 0 ]
+    var fd: [Int32] = [ 0, 0 ]
     var err = pipe(&fd)
     guard err >= 0 else {
         throw NSError(domain: NSPOSIXErrorDomain, code: Int(err), userInfo: nil)

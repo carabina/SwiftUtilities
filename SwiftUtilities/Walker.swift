@@ -8,52 +8,52 @@
 
 // TODO: This should be nested but Swift b5 can't deal with that quite yet.
 public struct WalkerState <T> {
-    public var depth : Int = 0
-    public var stack : [T] = []
+    public var depth: Int = 0
+    public var stack: [T] = []
 
-    public func filler(string:String = " ") -> String {
-        return String(count:self.depth, repeatedValue:Character(string))
+    public func filler(string: String = " ") -> String {
+        return String(count: self.depth, repeatedValue: Character(string))
     }
 }
 
 public struct Walker <T> {
 
     public typealias State = WalkerState <T>
-    public typealias Children = (node:T) -> [T]?
-    public typealias StatelessVisitor = (node:T, depth:Int) -> Void
-    public typealias StatefulVisitor = (node:T, state:State) -> Void
+    public typealias Children = (node: T) -> [T]?
+    public typealias StatelessVisitor = (node: T, depth: Int) -> Void
+    public typealias StatefulVisitor = (node: T, state: State) -> Void
 
-    public let childrenBlock : Children!
+    public let childrenBlock: Children!
 
-    public init(childrenBlock:Children) {
+    public init(childrenBlock: Children) {
         self.childrenBlock = childrenBlock
     }
 
-    public func walk(node:T, visitor:StatefulVisitor) {
-        self.walk(node, state:State(), visitor:visitor)
+    public func walk(node: T, visitor: StatefulVisitor) {
+        self.walk(node, state: State(), visitor: visitor)
     }
 
-    public func walk(node:T, var state:State, visitor:StatefulVisitor) {
-        visitor(node:node, state:state)
-        state = State(depth:state.depth + 1, stack:state.stack + [node])
-        if let children = self.childrenBlock(node:node) {
+    public func walk(node: T, var state: State, visitor: StatefulVisitor) {
+        visitor(node: node, state: state)
+        state = State(depth: state.depth + 1, stack: state.stack + [node])
+        if let children = self.childrenBlock(node: node) {
         
             for child in children {
-                walk(child, state:state, visitor:visitor)
+                walk(child, state: state, visitor: visitor)
             }
         }
     }
 
-    public func walk(node:T, visitor:StatelessVisitor) {
-        self.walk(node, depth:0, visitor:visitor)
+    public func walk(node: T, visitor: StatelessVisitor) {
+        self.walk(node, depth: 0, visitor: visitor)
     }
 
-    func walk(node:T, depth:Int, visitor:StatelessVisitor) {
-        visitor(node:node, depth:depth)
-        if let children = self.childrenBlock(node:node) {
+    func walk(node: T, depth: Int, visitor: StatelessVisitor) {
+        visitor(node: node, depth: depth)
+        if let children = self.childrenBlock(node: node) {
         
             for child in children {
-                walk(child, depth:depth + 1, visitor:visitor)
+                walk(child, depth: depth + 1, visitor: visitor)
             }
         }
     }
@@ -65,10 +65,10 @@ public struct Walker <T> {
 
 // MARK: Types
 class Node <T> {
-    var value : T
-    var children : [Node <T>] = []
+    var value: T
+    var children: [Node <T>] = []
     
-    init(_ value:T) {
+    init(_ value: T) {
         self.value = value
     }
 }
@@ -86,12 +86,12 @@ let walker = Walker <StringNode> () {
     }
 
 walker.walk(root) {
-    (node:StringNode, depth:Int) in
+    (node: StringNode, depth: Int) in
     print("\(depth): \(node)")
     }
     
 walker.walk(root) {
-    (node:StringNode, state:_State <StringNode>) in
+    (node: StringNode, state: _State <StringNode>) in
     let filler = state.filler("\t")
     print("\(filler)\(node)\(state.stack)")
     }

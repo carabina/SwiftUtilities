@@ -12,38 +12,38 @@ import CoreGraphics
 
 infix operator ** { associativity none precedence 160 }
 
-public func ** (lhs:Float, rhs:Float) -> Float {
+public func ** (lhs: Float, rhs: Float) -> Float {
     if rhs == 2 {
         return lhs * lhs
     }    
     return pow(lhs, rhs)
 }
 
-public func ** (lhs:Double, rhs:Double) -> Double {
+public func ** (lhs: Double, rhs: Double) -> Double {
     if rhs == 2 {
         return lhs * lhs
     }    
     return pow(lhs, rhs)
 }
 
-public func ** (lhs:CGFloat, rhs:CGFloat) -> CGFloat {
+public func ** (lhs: CGFloat, rhs: CGFloat) -> CGFloat {
     if rhs == 2 {
         return lhs * lhs
     }    
     return pow(lhs, rhs)
 }
 
-public func log(x:Double, base:Double) -> Double {
+public func log(x: Double, base: Double) -> Double {
     return log(x) / log(base)
 }
 
 // MARK: Basics
 
-public func clamp <T:Comparable> (value:T, lower:T, upper:T) -> T {
+public func clamp <T: Comparable> (value: T, lower: T, upper: T) -> T {
     return max(min(value, upper), lower)
 }
 
-public func round(value:CGFloat, decimal:Int) -> CGFloat {
+public func round(value: CGFloat, decimal: Int) -> CGFloat {
     let e10n = pow(10.0, CGFloat(clamp(decimal, lower: -6, upper: 7)))
     let fl = floor(e10n * value + 0.5)
     return fl / e10n
@@ -51,85 +51,85 @@ public func round(value:CGFloat, decimal:Int) -> CGFloat {
 
 // MARK: Degrees/Radians
 
-// In the spirit of UInt(bigEndian:) etc
+// In the spirit of UInt(bigEndian: ) etc
 
 extension Float {
-    init(radians:Float) {
+    init(radians: Float) {
         self = radians
     }
 
-    init(degrees:Float) {
+    init(degrees: Float) {
         self = degrees * Float(M_PI) / 180
     }
 
-    var radians:Float {
+    var radians: Float {
         return self
     }
 
-    var degrees:Float {
+    var degrees: Float {
         return self * 180 / Float(M_PI)
     }
 }
 
 extension Double {
-    init(radians:Double) {
+    init(radians: Double) {
         self = radians
     }
 
-    init(degrees:Double) {
+    init(degrees: Double) {
         self = degrees * M_PI / 180
     }
 
-    var radians:Double {
+    var radians: Double {
         return self
     }
 
-    var degrees:Double {
+    var degrees: Double {
         return self * 180 / M_PI
     }
 }
 
 extension CGFloat {
-    init(radians:CGFloat) {
+    init(radians: CGFloat) {
         self = radians
     }
 
-    init(degrees:CGFloat) {
+    init(degrees: CGFloat) {
         self = degrees * CGFloat(M_PI) / 180
     }
 
-    var radians:CGFloat {
+    var radians: CGFloat {
         return self
     }
 
-    var degrees:CGFloat {
+    var degrees: CGFloat {
         return self * 180 / CGFloat(M_PI)
     }
 }
 
 // Basic functions
 
-public func DegreesToRadians(v:Float) -> Float {
+public func DegreesToRadians(v: Float) -> Float {
     return v * Float(M_PI) / 180
 }
 
-public func RadiansToDegrees(v:Float) -> Float {
+public func RadiansToDegrees(v: Float) -> Float {
     return v * 180 / Float(M_PI)
 }
 
-public func DegreesToRadians(v:Double) -> Double {
+public func DegreesToRadians(v: Double) -> Double {
     return v * M_PI / 180
 }
 
-public func RadiansToDegrees(v:Double) -> Double {
+public func RadiansToDegrees(v: Double) -> Double {
     return v * 180 / M_PI
 }
 
-public func DegreesToRadians(v:CGFloat) -> CGFloat {
+public func DegreesToRadians(v: CGFloat) -> CGFloat {
     return v * CGFloat(M_PI) / 180
 }
 
-public func RadiansToDegrees(v:CGFloat) -> CGFloat {
+public func RadiansToDegrees(v: CGFloat) -> CGFloat {
     return v * 180 / CGFloat(M_PI)
 }
 

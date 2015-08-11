@@ -19,34 +19,34 @@ public enum Endianess {
 }
 
 extension UInt16 {
-    init(endianess:Endianess, value:UInt16) {
+    init(endianess: Endianess, value: UInt16) {
         switch endianess {
             case .big:
-                self = UInt16(bigEndian:value)
+                self = UInt16(bigEndian: value)
             case .little:
-                self = UInt16(littleEndian:value)
+                self = UInt16(littleEndian: value)
         }
     }
 }
 
 extension UInt32 {
-    init(endianess:Endianess, value:UInt32) {
+    init(endianess: Endianess, value: UInt32) {
         switch endianess {
             case .big:
-                self = UInt32(bigEndian:value)
+                self = UInt32(bigEndian: value)
             case .little:
-                self = UInt32(littleEndian:value)
+                self = UInt32(littleEndian: value)
         }
     }
 }
 
 extension UInt64 {
-    init(endianess:Endianess, value:UInt64) {
+    init(endianess: Endianess, value: UInt64) {
         switch endianess {
             case .big:
-                self = UInt64(bigEndian:value)
+                self = UInt64(bigEndian: value)
             case .little:
-                self = UInt64(littleEndian:value)
+                self = UInt64(littleEndian: value)
         }
     }
 }

@@ -15,9 +15,9 @@ public extension UnsafeMutableBufferPointer {
 }
 
 //extension UnsafeBufferPointer {
-//    public func dump(cap:Int = 256) -> String {
+//    public func dump(cap: Int = 256) -> String {
 //        let limit = min(length, cap)
-//        var dump:String = " ".join(stride(from: 0, to: limit, by: 4).map() {
+//        var dump: String = " ".join(stride(from: 0, to: limit, by: 4).map() {
 //            let region = self[$0..<min($0 + 4, limit)]
 //            return region.toHex()
 //        })

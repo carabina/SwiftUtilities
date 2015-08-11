@@ -12,12 +12,12 @@ import Foundation
 
 public struct CRC16 {
     public typealias CRCType = UInt16
-    public internal(set) var crc:CRCType!
+    public internal(set) var crc: CRCType!
 
     public init() {
     }
 
-    public static func accumulate(buffer:UnsafeBufferPointer <UInt8>, crc:CRCType = 0xFFFF) -> CRCType {
+    public static func accumulate(buffer: UnsafeBufferPointer <UInt8>, crc: CRCType = 0xFFFF) -> CRCType {
         var accum = crc
         for b in buffer {
             var tmp = CRCType(b) ^ (accum & 0xFF)
@@ -27,7 +27,7 @@ public struct CRC16 {
         return accum
     }
 
-    public mutating func accumulate(buffer:UnsafeBufferPointer <UInt8>) -> CRCType {
+    public mutating func accumulate(buffer: UnsafeBufferPointer <UInt8>) -> CRCType {
         if crc == nil {
             crc = 0xFFFF
         }
@@ -38,18 +38,18 @@ public struct CRC16 {
 
 public extension CRC16 {
 
-    mutating func accumulate(bytes:[UInt8]) -> CRCType {
+    mutating func accumulate(bytes: [UInt8]) -> CRCType {
         bytes.withUnsafeBufferPointer() {
-            (body:UnsafeBufferPointer <UInt8>) -> Void in
+            (body: UnsafeBufferPointer <UInt8>) -> Void in
             accumulate(body)
         }
         return crc
     }
 
 
-    mutating func accumulate(string:String) -> CRCType {
+    mutating func accumulate(string: String) -> CRCType {
         string.withCString() {
-            (ptr:UnsafePointer<Int8>) -> Void in
+            (ptr: UnsafePointer<Int8>) -> Void in
             let buffer = UnsafeBufferPointer <UInt8> (start: UnsafePointer <UInt8> (ptr), count: Int(strlen(ptr)))
             accumulate(buffer)
         }

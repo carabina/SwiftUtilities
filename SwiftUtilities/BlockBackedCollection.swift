@@ -12,7 +12,7 @@
 public struct BlockBackedCollection <T>: CollectionType, SequenceType {
     public typealias Element = T
     public typealias Index = Int
-    public typealias Block = (index:Index) -> T
+    public typealias Block = (index: Index) -> T
     public typealias Generator = BlockBackedCollectionGenerator <T>
 
     public var startIndex: Index { return 0 }
@@ -20,24 +20,24 @@ public struct BlockBackedCollection <T>: CollectionType, SequenceType {
     public let count: Int
     public let block: Block
 
-    public init(count:Index, block:Block) {
+    public init(count: Index, block: Block) {
         self.count = count
         self.block = block
     }
 
-    public subscript (index:Index) -> T {
+    public subscript (index: Index) -> T {
         assert(index >= 0 && index < self.count)
         return block(index: index)
     }
 
     public func generate() -> Generator {
-        return Generator(sequence:self)
+        return Generator(sequence: self)
     }
 }
 
 extension BlockBackedCollection: CustomStringConvertible {
     public var description: String {
-        let strings:[String] = self.map {
+        let strings: [String] = self.map {
             return String($0)
         }
         let content = ", ".join(strings)
@@ -58,7 +58,7 @@ public struct BlockBackedCollectionGenerator <T>: GeneratorType {
     public let block: Block
     public var nextIndex: Index = 0
 
-    public init(sequence:Sequence) {
+    public init(sequence: Sequence) {
         self.count = sequence.count
         self.block = sequence.block
     }
@@ -68,7 +68,7 @@ public struct BlockBackedCollectionGenerator <T>: GeneratorType {
             return nil
         }
         else if nextIndex < endIndex {
-            let element = block(index:nextIndex++)
+            let element = block(index: nextIndex++)
             return element
         }
         else {

@@ -14,9 +14,9 @@ public protocol Random {
     var max: UInt64 { get }
     var seed: UInt64 { get }
     init()
-    init(seed:UInt64)
+    init(seed: UInt64)
     func random() -> UInt64
-    func random(uniform:UInt64) -> UInt64
+    func random(uniform: UInt64) -> UInt64
 }
 
 // MARK: Random
@@ -28,17 +28,17 @@ public let random = DefaultRandom()
 public extension Random {
 
     func random() -> Int {
-        let value:UInt64 = random()
+        let value: UInt64 = random()
         return Int(value)
     }
 
-    func random(uniform:Int) -> Int {
+    func random(uniform: Int) -> Int {
         assert(UInt64(uniform) <= max && uniform >= 0)
-        let value:UInt64 = random(UInt64(uniform))
+        let value: UInt64 = random(UInt64(uniform))
         return Int(value)
     }
 
-    func random(range:Range<Int>) -> Int {
+    func random(range: Range<Int>) -> Int {
         return random(range.endIndex - range.startIndex) + range.startIndex
     }
 }
@@ -49,17 +49,17 @@ public extension Random {
 
     func random() -> Double {
         typealias Type = Double
-        let value:UInt64 = random()
+        let value: UInt64 = random()
         return Type(value) / Type(max)
     }
 
-    func random(uniform:Double) -> Double {
+    func random(uniform: Double) -> Double {
         typealias Type = Double
-        let value:UInt64 = random()
+        let value: UInt64 = random()
         return Type(value) / Type(max - 1) * uniform
     }
 
-    func random(range:ClosedInterval<Double>) -> Double {
+    func random(range: ClosedInterval<Double>) -> Double {
         let r = random() * (range.end - range.start) + range.start
         return r
     }
@@ -71,25 +71,25 @@ public extension Random {
 
     func random() -> CGFloat {
         typealias Type = CGFloat
-        let value:UInt64 = random()
+        let value: UInt64 = random()
         return Type(value) / Type(max)
     }
 
-    func random(uniform:CGFloat) -> CGFloat {
+    func random(uniform: CGFloat) -> CGFloat {
         typealias Type = CGFloat
-        let value:UInt64 = random()
+        let value: UInt64 = random()
         return Type(value) / Type(max - 1) * uniform
     }
 
-    func random(range:ClosedInterval<CGFloat>) -> CGFloat {
+    func random(range: ClosedInterval<CGFloat>) -> CGFloat {
         let r = random() * (range.end - range.start) + range.start
         return r
     }
 
-    func random(range:CGRect) -> CGPoint {
+    func random(range: CGRect) -> CGPoint {
         let r = CGPoint(
-            x:range.origin.x + random() * range.size.width,
-            y:range.origin.y + random() * range.size.height
+            x: range.origin.x + random() * range.size.width,
+            y: range.origin.y + random() * range.size.height
         )
         return r
     }
@@ -99,7 +99,7 @@ public extension Random {
 
 public extension Random {
 
-    func shuffle <T>(inout a:Array <T>) {
+    func shuffle <T>(inout a: Array <T>) {
         //To shuffle an array a of n elements (indices 0..n-1):
         //  for i from 0 to n − 1 do
         //       j ← random integer with i ≤ j < n
@@ -111,14 +111,14 @@ public extension Random {
         }
     }
 
-    func shuffled <T> (source:Array <T>) -> Array <T> {
+    func shuffled <T> (source: Array <T>) -> Array <T> {
         if source.count == 0 {
             return []
         }
-        return random_array(source.count, initial:source[0]) { source[$0] }
+        return random_array(source.count, initial: source[0]) { source[$0] }
     }
 
-    func random_array <T> (count:Int, initial:T, @noescape block:Int -> T) -> Array <T> {
+    func random_array <T> (count: Int, initial: T, @noescape block: Int -> T) -> Array <T> {
         //To initialize an array a of n elements to a randomly shuffled copy of source, both 0-based:
         //  for i from 0 to n − 1 do
         //      j ← random integer with 0 ≤ j ≤ i
@@ -128,9 +128,9 @@ public extension Random {
         if count == 0 {
             return []
         }
-        var a = Array <T> (count:count, repeatedValue: initial)
+        var a = Array <T> (count: count, repeatedValue: initial)
         for i in 0 ..< count {
-            let j = i > 0 ? random(0..<i) : 0
+            let j = i > 0 ? random(0..<i): 0
             if j != i {
                 a[i] = a[j]
             }
@@ -150,16 +150,16 @@ public class MT19937Random: Random {
 
     public let seedless: Bool = false
     public let max: UInt64 = UInt64.max
-    public let seed:UInt64
+    public let seed: UInt64
 
     public var engine: UnsafeMutablePointer<Void>
 
     public convenience required init() {
         let seed = UInt64(arc4random()) << 32 | UInt64(arc4random())
-        self.init(seed:seed)
+        self.init(seed: seed)
     }
 
-    public required init(seed:UInt64) {
+    public required init(seed: UInt64) {
         self.seed = seed
         engine = NewMT19937Engine(seed)
     }
@@ -172,7 +172,7 @@ public class MT19937Random: Random {
         return MT19937EngineGenerate(engine, 0, max)
     }
 
-    public func random(uniform:UInt64) -> UInt64 {
+    public func random(uniform: UInt64) -> UInt64 {
         return MT19937EngineGenerate(engine, 0, uniform)
     }
 

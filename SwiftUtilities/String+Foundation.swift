@@ -19,12 +19,12 @@ import Foundation
  */
 public extension String {
 
-    func convert(index:NSInteger) -> String.Index? {
+    func convert(index: NSInteger) -> String.Index? {
         let utf16Index = utf16.startIndex.advancedBy(index)
         return utf16Index.samePositionIn(self)
     }
 
-    func convert(range:NSRange) -> Range <String.Index>? {
+    func convert(range: NSRange) -> Range <String.Index>? {
         let swiftRange = range.asRange
         if let startIndex = convert(swiftRange.startIndex), let endIndex = convert(swiftRange.endIndex) {
             return startIndex..<endIndex
@@ -34,12 +34,12 @@ public extension String {
         }
     }
 
-    func convert(index:String.Index) -> NSInteger {
+    func convert(index: String.Index) -> NSInteger {
         let utf16Index = index.samePositionIn(utf16)
         return distance(utf16.startIndex, utf16Index)
     }
 
-    func convert(range:Range <String.Index>) -> NSRange {
+    func convert(range: Range <String.Index>) -> NSRange {
         let startIndex = convert(range.startIndex)
         let endIndex = convert(range.endIndex)
         return NSMakeRange(startIndex, endIndex - startIndex)

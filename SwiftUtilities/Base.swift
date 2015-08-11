@@ -10,16 +10,16 @@
 
 public extension NSData {
 
-    static func fromHex(string:String) throws -> NSData {
-        var octets:[UInt8] = []
+    static func fromHex(string: String) throws -> NSData {
+        var octets: [UInt8] = []
 
         var hiNibble = true
-        var octet:UInt8 = 0
+        var octet: UInt8 = 0
         for hexNibble in string.utf8 {
             if hexNibble == 0x20 {
                 continue
             }
-            
+
             if let nibble = try hexNibbleToInt(hexNibble) {
                 if hiNibble {
                     octet = nibble << 4
@@ -36,13 +36,13 @@ public extension NSData {
             octets.append(octet)
         }
         return octets.withUnsafeBufferPointer() {
-            return NSData(bytes:$0.baseAddress, length:$0.count)
+            return NSData(bytes: $0.baseAddress, length: $0.count)
         }
     }
 
-    convenience init(hexString string:String) throws {
+    convenience init(hexString string: String) throws {
         let data = try NSData.fromHex(string)
-        self.init(data:data)
+        self.init(data: data)
     }
 }
 
@@ -50,10 +50,10 @@ public extension NSData {
 
 public extension UIntMax {
 
-    static func fromString(var string:String, base:Int, expectPrefix:Bool = false) throws -> UIntMax {
+    static func fromString(var string: String, base: Int, expectPrefix: Bool = false) throws -> UIntMax {
 
         if expectPrefix == true {
-            let prefix:String
+            let prefix: String
             switch base {
                 case 2:
                     prefix = "0b"
@@ -67,15 +67,15 @@ public extension UIntMax {
             string = try string.substringFromPrefix(prefix)
         }
 
-        var result:UIntMax = 0
+        var result: UIntMax = 0
 
-        let conversion:(UInt8) throws -> UInt8?
+        let conversion: (UInt8) throws -> UInt8?
         if base == 16 {
             conversion = hexNibbleToInt
         }
         else {
             conversion = {
-                (c:UInt8) throws -> UInt8? in
+                (c: UInt8) throws -> UInt8? in
                 if  (0x30 ... 0x39).contains(c) {
                     return c - 0x30
                 }
@@ -98,13 +98,13 @@ public extension UIntMax {
 }
 
 public extension UnsignedIntegerType {
-    init(fromString string:String, base:Int, expectPrefix:Bool = true) throws {
-        self.init(try UIntMax.fromString(string, base: base, expectPrefix:expectPrefix))
+    init(fromString string: String, base: Int, expectPrefix: Bool = true) throws {
+        self.init(try UIntMax.fromString(string, base: base, expectPrefix: expectPrefix))
     }
 
-    init(fromString string:String) throws {
-        let base:Int
-        let expectPrefix:Bool
+    init(fromString string: String) throws {
+        let base: Int
+        let expectPrefix: Bool
         if string.hasPrefix("0b") {
             base = 2
             expectPrefix = true
@@ -122,32 +122,32 @@ public extension UnsignedIntegerType {
             expectPrefix = false
         }
 
-        try self.init(fromString:string, base:base, expectPrefix:expectPrefix)
+        try self.init(fromString: string, base: base, expectPrefix: expectPrefix)
     }
 }
 
 public extension String {
 
-    init(value:UIntMax, base:Int, prefix:Bool = false, uppercase:Bool = false, width:Int? = nil) {
+    init(value: UIntMax, base: Int, prefix: Bool = false, uppercase: Bool = false, width: Int? = nil) {
 
-        var s:String = "0"
+        var s: String = "0"
         if value != 0 {
             let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
             s = ""
-            let count = UIntMax(log(Double(value), base:Double(base)))
+            let count = UIntMax(log(Double(value), base: Double(base)))
             var value = value
             for _ in stride(from: 0, through: count, by: 1) {
                 let digit = value % UIntMax(base)
 
                 let char = digits[Int(digit)]
-                s = (uppercase ? char.uppercaseString : char) + s
+                s = (uppercase ? char.uppercaseString: char) + s
                 value /= UIntMax(base)
             }
         }
 
        if let width = width {
             let count = s.utf8.count
-            let pad = "".stringByPaddingToLength(max(width - count, 0), withString:"0", startingAtIndex:0)
+            let pad = "".stringByPaddingToLength(max(width - count, 0), withString: "0", startingAtIndex: 0)
             s = pad + s
         }
 
@@ -165,9 +165,9 @@ public extension String {
         self = s
     }
 
-    init <T:UnsignedIntegerType> (value:T, base:Int, prefix:Bool = false, uppercase:Bool = false, width:Int? = nil) {
+    init <T: UnsignedIntegerType> (value: T, base: Int, prefix: Bool = false, uppercase: Bool = false, width: Int? = nil) {
         let value = value.toUIntMax()
-        self.init(value: value, base:base, prefix:prefix, uppercase:uppercase, width:width)
+        self.init(value: value, base: base, prefix: prefix, uppercase: uppercase, width: width)
     }
 
     func toInt() -> Int {
@@ -177,42 +177,42 @@ public extension String {
 }
 
 // TODO; Deprecate
-public func binary <T:UnsignedIntegerType> (value:T, width:Int? = nil) -> String {
+public func binary <T: UnsignedIntegerType> (value: T, width: Int? = nil) -> String {
     return String(value: value, base: 2, prefix: true, width: width)
 }
 
 public extension UInt8 {
-    var asHex:String {
+    var asHex: String {
         return intToHex(Int(self))
     }
 }
 
 public extension UInt16 {
-    var asHex:String {
+    var asHex: String {
         return intToHex(Int(self))
     }
 }
 
-public func intToHex(value:Int, skipLeadingZeros:Bool = true, addPrefix:Bool = false, lowercase:Bool = false) -> String {
+public func intToHex(value: Int, skipLeadingZeros: Bool = true, addPrefix: Bool = false, lowercase: Bool = false) -> String {
     var s = ""
     var skipZeros = skipLeadingZeros
     let digits = log2(Int.max) / 8
-    for var n:Int = digits; n >= 0; --n {
+    for var n: Int = digits; n >= 0; --n {
         let shift = n * 4
         let nibble = (value >> shift) & 0xF
         if !(skipZeros == true && nibble == 0) {
-            s += nibbleAsHex(nibble, lowercase:lowercase)
+            s += nibbleAsHex(nibble, lowercase: lowercase)
             skipZeros = false
         }
     }
-    return addPrefix ? "0x" + s : s
+    return addPrefix ? "0x" + s: s
 }
 
 // MARK: -
 
 public extension UnsafeBufferPointer {
-    var asHex:String {
-        let buffer:UnsafeBufferPointer <UInt8> = toUnsafeBufferPointer()
+    var asHex: String {
+        let buffer: UnsafeBufferPointer <UInt8> = toUnsafeBufferPointer()
         let hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
         return "".join(buffer.map {
             let hiNibble = Int($0) >> 4
@@ -224,17 +224,17 @@ public extension UnsafeBufferPointer {
 
 // MARK: -
 
-func log2(v:Int) -> Int {
+func log2(v: Int) -> Int {
     return Int(log2(Float(v)))
 }
 
-func nibbleAsHex(nibble:Int, lowercase:Bool = false) -> String {
+func nibbleAsHex(nibble: Int, lowercase: Bool = false) -> String {
     let uppercaseDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
     let lowercaseDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
-    return lowercase ? lowercaseDigits[nibble] : uppercaseDigits[nibble]
+    return lowercase ? lowercaseDigits[nibble]: uppercaseDigits[nibble]
 }
 
-func hexNibbleToInt(nibble:UInt8) throws -> UInt8? {
+func hexNibbleToInt(nibble: UInt8) throws -> UInt8? {
     switch nibble {
         case 0x30 ... 0x39:
             return UInt8(nibble) - 0x30

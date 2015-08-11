@@ -17,26 +17,26 @@ public struct MutableBuffer <T> {
     }
 
     init(start: UnsafePointer<T>, count: Int) {
-        self.init(mutableData:NSMutableData(bytes: start, length: count * MutableBuffer <T>.elementSize))
+        self.init(mutableData: NSMutableData(bytes: start, length: count * MutableBuffer <T>.elementSize))
     }
 
 //    func generate() -> UnsafeBufferPointerGenerator<T>
 
-    public var baseAddress:UnsafeMutablePointer <T> {
+    public var baseAddress: UnsafeMutablePointer <T> {
         return UnsafeMutablePointer <T> (mutableData.mutableBytes)
     }
 
-    public var count:Int {
+    public var count: Int {
         return mutableData.length / MutableBuffer <T>.elementSize
     }
 
     // MARK: -
 
-    internal init(mutableData:NSMutableData) {
+    internal init(mutableData: NSMutableData) {
         self.mutableData = mutableData
     }
 
-    internal var mutableData:NSMutableData = NSMutableData()
+    internal var mutableData: NSMutableData = NSMutableData()
 }
 
 // MARK: -
@@ -46,24 +46,24 @@ extension MutableBuffer {
     public init() {
     }
 
-    public init(data:NSData) {
+    public init(data: NSData) {
         assert(data.length == 0 || data.length >= MutableBuffer <T>.elementSize)
-        self.init(mutableData:NSMutableData(data:data))
+        self.init(mutableData: NSMutableData(data: data))
     }
 
-    public init(pointer:UnsafePointer <T>, length:Int) {
+    public init(pointer: UnsafePointer <T>, length: Int) {
         assert(length >= MutableBuffer <T>.elementSize)
         self.init(mutableData: NSMutableData(bytes: pointer, length: length))
     }
 
-    public init(bufferPointer:UnsafeBufferPointer <T>) {
+    public init(bufferPointer: UnsafeBufferPointer <T>) {
         self.init(mutableData: NSMutableData(bytes: bufferPointer.baseAddress, length: bufferPointer.count * MutableBuffer <T>.elementSize))
     }
 
 
-    public var bufferPointer:UnsafeBufferPointer <T> {
+    public var bufferPointer: UnsafeBufferPointer <T> {
         let count = mutableData.length / MutableBuffer <T>.elementSize
-        return UnsafeBufferPointer <T> (start:self.baseAddress, count:count)
+        return UnsafeBufferPointer <T> (start: self.baseAddress, count: count)
     }
 }
 
@@ -71,11 +71,11 @@ extension MutableBuffer {
 
 public extension MutableBuffer {
 
-    var length:Int {
+    var length: Int {
         return mutableData.length
     }
 
-    static var elementSize:Int {
+    static var elementSize: Int {
         return max(sizeof(T), 1)
     }
 
@@ -85,15 +85,15 @@ public extension MutableBuffer {
 
 public extension MutableBuffer {
 
-    func append <Buffer:BufferType> (buffer:Buffer) {
+    func append <Buffer: BufferType> (buffer: Buffer) {
         mutableData.appendBytes(buffer.baseAddress, length: buffer.length)
     }
 
-    func append <T>(value:T) {
+    func append <T>(value: T) {
         var copy = value
         withUnsafePointer(&copy) {
-            (pointer:UnsafePointer <T>) -> Void in
-            let buffer = UnsafeBufferPointer <T> (start:pointer, count:1)
+            (pointer: UnsafePointer <T>) -> Void in
+            let buffer = UnsafeBufferPointer <T> (start: pointer, count: 1)
             append(buffer)
         }
     }
@@ -103,8 +103,8 @@ public extension MutableBuffer {
 
 public extension MutableBuffer {
 
-    init(buffer:Buffer <T>) {
-        self.init(mutableData:buffer.data.mutableCopy() as! NSMutableData)
+    init(buffer: Buffer <T>) {
+        self.init(mutableData: buffer.data.mutableCopy() as! NSMutableData)
     }
 
 }

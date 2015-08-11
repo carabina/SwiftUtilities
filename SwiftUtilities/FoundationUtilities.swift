@@ -12,8 +12,8 @@ import Foundation
 
 public extension NSURL {
     func URLByResolvingURL() throws -> NSURL {
-        let bookmarkData = try self.bookmarkDataWithOptions(NSURLBookmarkCreationOptions.MinimalBookmark, includingResourceValuesForKeys:nil, relativeToURL:nil)
-        return try NSURL(byResolvingBookmarkData:bookmarkData, options: .WithoutUI, relativeToURL:nil, bookmarkDataIsStale:nil)
+        let bookmarkData = try self.bookmarkDataWithOptions(NSURLBookmarkCreationOptions.MinimalBookmark, includingResourceValuesForKeys: nil, relativeToURL: nil)
+        return try NSURL(byResolvingBookmarkData: bookmarkData, options: .WithoutUI, relativeToURL: nil, bookmarkDataIsStale: nil)
     }
 }
 
@@ -31,21 +31,21 @@ public class BlockValueTransformer: NSValueTransformer {
 
     public typealias TransformerBlock = (AnyObject!) -> (AnyObject!)
 
-    public let block : TransformerBlock
+    public let block: TransformerBlock
 
     /*
     Generally used:
     
-    BlockValueTransformer.register(name:"Foo") { return Foo($0) }
+    BlockValueTransformer.register(name: "Foo") { return Foo($0) }
     }
     */
-    public static func register(name:String, block:TransformerBlock) -> BlockValueTransformer {
-        let transformer = BlockValueTransformer(block:block)
-        self.setValueTransformer(transformer, forName:name)
+    public static func register(name: String, block: TransformerBlock) -> BlockValueTransformer {
+        let transformer = BlockValueTransformer(block: block)
+        self.setValueTransformer(transformer, forName: name)
         return transformer
     }
 
-    public init(block:TransformerBlock) {
+    public init(block: TransformerBlock) {
         self.block = block
     }
     

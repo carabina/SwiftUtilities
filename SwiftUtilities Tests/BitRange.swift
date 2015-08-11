@@ -23,10 +23,10 @@ class BitRange_Tests: XCTestCase {
 //        XCTAssertEqual(binary(0b1000), "1000")
 //        XCTAssertEqual(binary(0b11111111), "11111111")
 //
-//        XCTAssertEqual(binary(0b0, padding:8), "00000000")
-//        XCTAssertEqual(binary(0b1, padding:8), "00000001")
-//        XCTAssertEqual(binary(0b1000, padding:8), "00001000")
-//        XCTAssertEqual(binary(0b11111111, padding:8), "11111111")
+//        XCTAssertEqual(binary(0b0, padding: 8), "00000000")
+//        XCTAssertEqual(binary(0b1, padding: 8), "00000001")
+//        XCTAssertEqual(binary(0b1000, padding: 8), "00001000")
+//        XCTAssertEqual(binary(0b11111111, padding: 8), "11111111")
     }
 
 
@@ -38,13 +38,13 @@ class BitRange_Tests: XCTestCase {
 
 //    func testBitRange2() {
 //
-//        let inputBuffer:Array <UInt64> = [
+//        let inputBuffer: Array <UInt64> = [
 //            0b1001000000000000000000000000000000000000000000000000000000000000,
 //            0b0000000000000000000000000000000000000000000000000000000000000101,
 //            ]
 //
 //        inputBuffer.withUnsafeBufferPointer {
-//            (p:UnsafeBufferPointer<UInt64>) -> Void in
+//            (p: UnsafeBufferPointer<UInt64>) -> Void in
 //            let value = bitRange(p.baseAddress, range: 60..<68)
 //            XCTAssertEqual(value, 0b1001101)
 //        }
