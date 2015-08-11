@@ -19,6 +19,10 @@ public struct Timestamp {
     public init() {
         absoluteTime = CFAbsoluteTimeGetCurrent()
     }
+
+    public init(absoluteTime:CFAbsoluteTime) {
+        self.absoluteTime = absoluteTime
+    }
 }
 
 // MARK: -
