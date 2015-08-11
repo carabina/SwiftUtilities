@@ -89,9 +89,12 @@ public struct DispatchData <T> {
     public func map <R> (@noescape block:UnsafeBufferPointer <Void> throws -> R) rethrows -> R {
         var pointer:UnsafePointer <Void> = nil
         var size:Int = 0
-        let _ = dispatch_data_create_map(data, &pointer, &size)
-        let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
-        return try block(buffer)
+        let mappedData = dispatch_data_create_map(data, &pointer, &size)
+
+        return withExtendedLifetime(mappedData) {
+            let buffer = UnsafeBufferPointer <Void> (start:pointer, count:size)
+            return try! block(buffer)
+        }
     }
 
     // MARK: -
