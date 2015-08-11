@@ -31,7 +31,7 @@ extension Timestamp: Equatable {
 }
 
 public func ==(lhs: Timestamp, rhs: Timestamp) -> Bool {
-    return lhs.absoluteTime != rhs.absoluteTime
+    return lhs.absoluteTime == rhs.absoluteTime
 }
 
 // MARK: -
