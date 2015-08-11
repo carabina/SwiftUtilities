@@ -62,12 +62,16 @@ public struct DispatchData <T> {
 
     // MARK: -
 
+    // TODO: Should not use try! here - but meh.
+
     public func map <R> (@noescape block: (DispatchData <T>, UnsafeBufferPointer <Void>) -> R) -> R {
         var pointer: UnsafePointer <Void> = nil
         var size: Int = 0
         let mappedData = dispatch_data_create_map(data, &pointer, &size)
-        let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
-        return block(DispatchData <T> (data: mappedData), buffer)
+        return withExtendedLifetime(mappedData) {
+            let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
+            return block(DispatchData <T> (data: mappedData), buffer)
+        }
     }
 
     public func map <R> (@noescape block: UnsafeBufferPointer <Void> -> R) -> R {
@@ -84,8 +88,10 @@ public struct DispatchData <T> {
         var pointer: UnsafePointer <Void> = nil
         var size: Int = 0
         let mappedData = dispatch_data_create_map(data, &pointer, &size)
-        let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
-        return try block(DispatchData <T> (data: mappedData), buffer)
+        return withExtendedLifetime(mappedData) {
+            let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
+            return try! block(DispatchData <T> (data: mappedData), buffer)
+        }
     }
 
     public func map <R> (@noescape block: UnsafeBufferPointer <Void> throws -> R) rethrows -> R {
