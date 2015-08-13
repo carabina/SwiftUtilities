@@ -60,49 +60,24 @@ public struct DispatchData <T> {
         return DispatchData <T> (data: dispatch_data_create_subrange(data, range.startIndex * elementSize, (range.endIndex - range.startIndex) * elementSize))
     }
 
-    // MARK: -
+    // MARK: Mapping data.
 
-    // TODO: Should not use try! here - but meh.
-
+    /// IMPORTANT: If you need to keep the buffer beyond the scope of block uyou must retain data too.
     public func map <R> (@noescape block: (DispatchData <T>, UnsafeBufferPointer <Void>) -> R) -> R {
         var pointer: UnsafePointer <Void> = nil
         var size: Int = 0
         let mappedData = dispatch_data_create_map(data, &pointer, &size)
-        return withExtendedLifetime(mappedData) {
-            let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
-            return block(DispatchData <T> (data: mappedData), buffer)
-        }
+        let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
+        return block(DispatchData <T> (data: mappedData), buffer)
     }
 
-    public func map <R> (@noescape block: UnsafeBufferPointer <Void> -> R) -> R {
-        var pointer: UnsafePointer <Void> = nil
-        var size: Int = 0
-        let mappedData = dispatch_data_create_map(data, &pointer, &size)
-        return withExtendedLifetime(mappedData) {
-            let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
-            return block(buffer)
-        }
-    }
-
+    /// IMPORTANT: If you need to keep the buffer beyond the scope of block uyou must retain data too.
     public func map <R> (@noescape block: (DispatchData <T>, UnsafeBufferPointer <Void>) throws -> R) rethrows -> R {
         var pointer: UnsafePointer <Void> = nil
         var size: Int = 0
         let mappedData = dispatch_data_create_map(data, &pointer, &size)
-        return withExtendedLifetime(mappedData) {
-            let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
-            return try! block(DispatchData <T> (data: mappedData), buffer)
-        }
-    }
-
-    public func map <R> (@noescape block: UnsafeBufferPointer <Void> throws -> R) rethrows -> R {
-        var pointer: UnsafePointer <Void> = nil
-        var size: Int = 0
-        let mappedData = dispatch_data_create_map(data, &pointer, &size)
-
-        return withExtendedLifetime(mappedData) {
-            let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
-            return try! block(buffer)
-        }
+        let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
+        return try block(DispatchData <T> (data: mappedData), buffer)
     }
 
     // MARK: -
@@ -204,7 +179,8 @@ public extension DispatchData {
 public extension DispatchData {
     func toBuffer() -> Buffer <Void> {
         return map() {
-            return Buffer <Void> (buffer: $0)
+            (data, ptr) in
+            return Buffer <Void> (buffer: ptr)
         }
     }
 }

@@ -20,10 +20,10 @@ public func == <T> (lhs: DispatchData <T>, rhs: DispatchData <T>) -> Bool {
     }
 
     return lhs.map() {
-        (lhsBuffer: UnsafeBufferPointer) -> Bool in
+        (lhsData, lhsBuffer) -> Bool in
 
         return rhs.map() {
-            (rhsBuffer: UnsafeBufferPointer) -> Bool in
+            (rhsData, rhsBuffer) -> Bool in
 
             let result = memcmp(lhsBuffer.baseAddress, rhsBuffer.baseAddress, lhsBuffer.length)
             return result == 0
