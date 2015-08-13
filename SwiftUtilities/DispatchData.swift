@@ -134,16 +134,16 @@ public extension DispatchData {
 
 // MARK: -
 
-//extension DispatchData: CustomStringConvertible {
-//    public var description: String {
-//        var chunks: [String] = []
-//        apply() {
-//            chunks.append("\($0.startIndex)..+\($0.endIndex - $0.startIndex) \($1.dump(16))")
-//        }
-//        let chunksString = ", ".join(chunks)
-//        return "DispatchData(count: \(count), length: \(length), chunk count: \(chunks.count), chunks: \(chunksString))"
-//    }
-//}
+extension DispatchData: CustomStringConvertible {
+    public var description: String {
+        var chunkCount = 0
+        apply() {
+            (range, pointer) in
+            chunkCount++
+        }
+        return "DispatchData(count: \(count), length: \(length), chunk count: \(chunkCount), data: \(data))"
+    }
+}
 
 //extension DispatchData: CustomReflectable {
 //    public func customMirror() -> Mirror {
