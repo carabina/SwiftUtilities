@@ -150,20 +150,49 @@ public class DataScanner {
         return scannedBuffer
     }
 
-    public func scanString(count: Int) -> String? {
-        if atEnd {
+    var currentPointer: UnsafePointer <UInt8> {
+        return buffer.baseAddress.advancedBy(current)
+    }
+
+    public func scanString(maxCount: Int? = nil, encoding:NSStringEncoding = NSUTF8StringEncoding) throws -> String? {
+        guard atEnd == false else {
             return nil
         }
-        if let buffer: UnsafeBufferPointer <CChar> = scanBuffer(count)?.toUnsafeBufferPointer() {
-            // TODO: bil byte???
 
-            // Use NSData etc
-
-            return String.fromCString(buffer.baseAddress)
+        var count = 0
+        var index = current
+        var nilByteFound = false
+        while index != buffer.endIndex {
+            if buffer[index++] == 0x00 {
+                nilByteFound = true
+                break
+            }
+            if let maxCount = maxCount where count >= maxCount {
+                break
+            }
+            count++
         }
-        else {
+
+        if count == 0 {
+            if nilByteFound {
+                current = current.advancedBy(1)
+                return ""
+            }
             return nil
         }
+
+        let bytes = UnsafeMutablePointer <Void> (currentPointer)
+        current = current.advancedBy(count)
+        if nilByteFound {
+            current = current.advancedBy(1)
+        }
+
+        let data = NSData(bytesNoCopy: bytes, length: count, freeWhenDone: false)
+        guard let string = NSString(data: data, encoding: encoding) else {
+            throw Error.generic("Unable to create string from data.")
+        }
+
+        return string as String
     }
 
     public var atEnd: Bool {

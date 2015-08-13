@@ -9,8 +9,13 @@
 import Foundation
 
 public extension NSData {
+    // Deprecated
     var buffer: UnsafeBufferPointer <Void> {
         return UnsafeBufferPointer <Void> (start: bytes, count: length)
+    }
+
+    func toUnsafeBufferPointer <T>() -> UnsafeBufferPointer <T> {
+        return UnsafeBufferPointer <T> (start: UnsafePointer <T> (bytes), length: length)
     }
 
     func withUnsafeBufferPointer<T, R>(@noescape body: (UnsafeBufferPointer<T>) -> R) -> R {

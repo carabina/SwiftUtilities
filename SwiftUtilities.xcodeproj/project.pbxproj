@@ -35,6 +35,8 @@
 		452E96FE1B3CA523002269CD /* NumberBases_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FC1B3CA523002269CD /* NumberBases_Tests.swift */; };
 		452E96FF1B3CA523002269CD /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E96FD1B3CA523002269CD /* Utilities.swift */; };
 		452E97011B3CA529002269CD /* BitRange_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452E97001B3CA529002269CD /* BitRange_Tests.swift */; };
+		453E47821B7C2D950070218B /* DataScannerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E47811B7C2D950070218B /* DataScannerTest.swift */; };
+		453E47831B7C31E30070218B /* SwiftUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45E8EEA4199A8E080035C722 /* SwiftUtilities.framework */; };
 		454280131B433B0400FEC0D0 /* NSData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454280121B433B0400FEC0D0 /* NSData+Extensions.swift */; };
 		454280141B433B0E00FEC0D0 /* NSData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454280121B433B0400FEC0D0 /* NSData+Extensions.swift */; };
 		454F7D9D1B3E009E00A2B37E /* MutableBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */; };
@@ -124,6 +126,7 @@
 		452E96FC1B3CA523002269CD /* NumberBases_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberBases_Tests.swift; sourceTree = "<group>"; };
 		452E96FD1B3CA523002269CD /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		452E97001B3CA529002269CD /* BitRange_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BitRange_Tests.swift; sourceTree = "<group>"; };
+		453E47811B7C2D950070218B /* DataScannerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataScannerTest.swift; sourceTree = "<group>"; };
 		454280121B433B0400FEC0D0 /* NSData+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSData+Extensions.swift"; sourceTree = "<group>"; };
 		454F7D9C1B3E009E00A2B37E /* MutableBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MutableBuffer.swift; sourceTree = "<group>"; };
 		454F7D9F1B3E00CA00A2B37E /* Buffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
@@ -181,6 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				453E47831B7C31E30070218B /* SwiftUtilities.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +301,7 @@
 				452E97001B3CA529002269CD /* BitRange_Tests.swift */,
 				452E96FD1B3CA523002269CD /* Utilities.swift */,
 				45EA099E1B44C62B00505D14 /* DispatchDataTest.swift */,
+				453E47811B7C2D950070218B /* DataScannerTest.swift */,
 				45E8EEE4199A90720035C722 /* Supporting Files */,
 				45B929D11B39F31100206F2C /* BitRange.swift */,
 			);
@@ -534,6 +539,7 @@
 				452E97011B3CA529002269CD /* BitRange_Tests.swift in Sources */,
 				45BA691019C4C48E00FA7252 /* NSRange_Tests.swift in Sources */,
 				45E8EEE7199A90720035C722 /* SwiftUtilities_Tests.swift in Sources */,
+				453E47821B7C2D950070218B /* DataScannerTest.swift in Sources */,
 				452E96FF1B3CA523002269CD /* Utilities.swift in Sources */,
 				45EA099F1B44C62B00505D14 /* DispatchDataTest.swift in Sources */,
 				45B929D21B39F31100206F2C /* BitRange.swift in Sources */,
