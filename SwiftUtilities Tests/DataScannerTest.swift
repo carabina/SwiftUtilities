@@ -12,10 +12,19 @@ import SwiftUtilities
 
 class DataScannerTest: XCTestCase {
 
+    func testTooLittleDat() {
+
+        let inputData = try! NSData.fromHex("FF")
+        let buffer: UnsafeBufferPointer <Void> = inputData.toUnsafeBufferPointer()
+        let scanner = DataScanner(buffer: buffer)
+        let B1:UInt64? = try! scanner.scan()
+        XCTAssert(B1 == nil)
+    }
+
     func testNumbers() {
 
         let inputData = try! NSData.fromHex("DEADBEEF")
-        let buffer: UnsafeBufferPointer <UInt8> = inputData.toUnsafeBufferPointer()
+        let buffer: UnsafeBufferPointer <Void> = inputData.toUnsafeBufferPointer()
         let scanner = DataScanner(buffer: buffer)
 
         let B1:UInt8? = try! scanner.scan()
@@ -33,7 +42,7 @@ class DataScannerTest: XCTestCase {
         let inputData = "Hello world\0".dataUsingEncoding(NSASCIIStringEncoding)!
         print(inputData)
 
-        let buffer:UnsafeBufferPointer <UInt8> = inputData.toUnsafeBufferPointer()
+        let buffer:UnsafeBufferPointer <Void> = inputData.toUnsafeBufferPointer()
 
         let scanner = DataScanner(buffer: buffer)
 
