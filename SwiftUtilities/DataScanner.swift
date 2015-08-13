@@ -37,7 +37,7 @@ public class DataScanner {
 
 public extension DataScanner {
 
-    public func scan <Type:IntegerType>() throws -> Type? {
+    func scan <Type:IntegerType>() throws -> Type? {
         guard remainingSize >= sizeof(Type) else {
             return nil
         }
@@ -48,7 +48,7 @@ public extension DataScanner {
         return result
     }
 
-    public func scan <Type:IntegerType>() throws -> Type {
+    func scan <Type:IntegerType>() throws -> Type {
         guard let value:Type = try scan() else {
             throw Error.generic("Unable to scan element.")
         }
@@ -58,9 +58,9 @@ public extension DataScanner {
 
 // MARK: Floats
 
-extension DataScanner {
+public extension DataScanner {
 
-    public func scan <Type:FloatingPointType> () throws -> Type? {
+    func scan <Type:FloatingPointType> () throws -> Type? {
         guard remainingSize >= sizeof(Type) else {
             return nil
         }
@@ -83,9 +83,9 @@ extension DataScanner {
 
 // MARK: Misc.
 
-extension DataScanner {
+public extension DataScanner {
 
-    public func scan(value: UInt8) throws -> Bool {
+    func scan(value: UInt8) throws -> Bool {
         if let scannedValue: UInt8 = try scan() {
             return scannedValue == value
         }
@@ -94,7 +94,7 @@ extension DataScanner {
         }
     }
 
-    public func scanBuffer(count: Int) throws -> UnsafeBufferPointer <Void>? {
+    func scanBuffer(count: Int) throws -> UnsafeBufferPointer <Void>? {
         if atEnd {
             return nil
         }
@@ -103,7 +103,7 @@ extension DataScanner {
         return scannedBuffer
     }
 
-    public func scanString(maxCount: Int? = nil, encoding:NSStringEncoding = NSUTF8StringEncoding) throws -> String? {
+    func scanString(maxCount: Int? = nil, encoding:NSStringEncoding = NSUTF8StringEncoding) throws -> String? {
         guard atEnd == false else {
             return nil
         }
@@ -146,7 +146,7 @@ extension DataScanner {
         return string as String
     }
 
-    public var atEnd: Bool {
+    var atEnd: Bool {
         return current == buffer.endIndex
     }
 
