@@ -22,7 +22,7 @@ public class DataScanner {
         current = self.buffer.startIndex
     }
 
-    public func scan() -> UInt8? {
+    public func scan() throws -> UInt8? {
         if atEnd {
             return nil
         }
@@ -31,8 +31,8 @@ public class DataScanner {
         return result
     }
 
-    public func scan() -> Int8? {
-        if let unsigned: UInt8 = scan() {
+    public func scan() throws -> Int8? {
+        if let unsigned: UInt8 = try scan() {
             return Int8(bitPattern: unsigned)
         }
         else {
@@ -40,7 +40,7 @@ public class DataScanner {
         }
     }
 
-    public func scan() -> UInt16? {
+    public func scan() throws -> UInt16? {
         typealias Type = UInt16
         if atEnd {
             return nil
@@ -53,8 +53,8 @@ public class DataScanner {
         return result
     }
 
-    public func scan() -> Int16? {
-        if let unsigned: UInt16 = scan() {
+    public func scan() throws -> Int16? {
+        if let unsigned: UInt16 = try scan() {
             return Int16(bitPattern: unsigned)
         }
         else {
@@ -62,7 +62,7 @@ public class DataScanner {
         }
     }
 
-    public func scan() -> UInt32? {
+    public func scan() throws -> UInt32? {
         typealias Type = UInt32
         if atEnd {
             return nil
@@ -75,8 +75,8 @@ public class DataScanner {
         return result
     }
 
-    public func scan() -> Int32? {
-        if let unsigned: UInt32 = scan() {
+    public func scan() throws -> Int32? {
+        if let unsigned: UInt32 = try scan() {
             return Int32(bitPattern: unsigned)
         }
         else {
@@ -84,7 +84,7 @@ public class DataScanner {
         }
     }
 
-    public func scan() -> UInt64? {
+    public func scan() throws -> UInt64? {
         typealias Type = UInt64
         if atEnd {
             return nil
@@ -97,8 +97,8 @@ public class DataScanner {
         return result
     }
 
-    public func scan() -> Int64? {
-        if let unsigned: UInt64 = scan() {
+    public func scan() throws -> Int64? {
+        if let unsigned: UInt64 = try scan() {
             return Int64(bitPattern: unsigned)
         }
         else {
@@ -106,7 +106,7 @@ public class DataScanner {
         }
     }
 
-    public func scan() -> Float? {
+    public func scan() throws -> Float? {
         typealias Type = Float
         if atEnd {
             return nil
@@ -119,7 +119,7 @@ public class DataScanner {
         return result
     }
 
-    public func scan() -> Double? {
+    public func scan() throws -> Double? {
         typealias Type = Double
         if atEnd {
             return nil
@@ -132,8 +132,8 @@ public class DataScanner {
         return result
     }
 
-    public func scan(value: UInt8) -> Bool {
-        if let scannedValue: UInt8 = scan() {
+    public func scan(value: UInt8) throws -> Bool {
+        if let scannedValue: UInt8 = try scan() {
             return scannedValue == value
         }
         else {
@@ -141,7 +141,7 @@ public class DataScanner {
         }
     }
 
-    public func scanBuffer(count: Int) -> UnsafeBufferPointer <UInt8>? {
+    public func scanBuffer(count: Int) throws -> UnsafeBufferPointer <UInt8>? {
         if atEnd {
             return nil
         }
@@ -203,7 +203,7 @@ public class DataScanner {
 
 public extension DataScanner {
 
-    func scanUpTo(byte: UInt8) -> UnsafeBufferPointer <UInt8>? {
+    func scanUpTo(byte: UInt8) throws -> UnsafeBufferPointer <UInt8>? {
         let start = current
         for ; current != buffer.endIndex; ++current {
             if buffer[current] == byte {

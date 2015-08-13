@@ -12,7 +12,23 @@ import SwiftUtilities
 
 class DataScannerTest: XCTestCase {
 
-    func testExample() {
+    func testNumbers() {
+
+        let inputData = try! NSData.fromHex("DEADBEEF")
+        let buffer: UnsafeBufferPointer <UInt8> = inputData.toUnsafeBufferPointer()
+        let scanner = DataScanner(buffer: buffer)
+
+        let B1:UInt8? = try! scanner.scan()
+        XCTAssertEqual(B1, 0xDE)
+        let B2:UInt16? = try! scanner.scan()
+        XCTAssertEqual(UInt16(bigEndian:B2!), 0xADBE)
+        let B3:UInt8? = try! scanner.scan()
+        XCTAssertEqual(B3, 0xEF)
+
+        XCTAssert(scanner.atEnd)
+    }
+
+    func testStrings() {
 
         let inputData = "Hello world\0".dataUsingEncoding(NSASCIIStringEncoding)!
         print(inputData)
@@ -31,7 +47,5 @@ class DataScannerTest: XCTestCase {
 
         let S3 = try! scanner.scanString()
         XCTAssertEqual(S3, nil)
-
-
     }
 }
