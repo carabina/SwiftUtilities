@@ -28,6 +28,10 @@ public class DataScanner {
         return BufferType(start: buffer.baseAddress + current, count: buffer.count - current)
     }
 
+    public var atEnd: Bool {
+        return current == buffer.endIndex
+    }
+
     private var currentPointer: UnsafePointer <Void> {
         return buffer.baseAddress.advancedBy(current)
     }
@@ -85,6 +89,26 @@ public extension DataScanner {
 
 public extension DataScanner {
 
+    func scan(count: Int) throws -> UnsafeBufferPointer <Void>? {
+        if remainingSize < count {
+            return nil
+        }
+        let scannedBuffer = UnsafeBufferPointer <Void> (start: buffer.baseAddress.advancedBy(current), count: count)
+        current = current.advancedBy(count)
+        return scannedBuffer
+    }
+
+    func scan(count: Int) throws -> UnsafeBufferPointer <Void> {
+        guard let value:UnsafeBufferPointer <Void> = try scan(count) else {
+            throw Error.generic("Not enough data in buffer")
+        }
+        return value
+    }
+
+}
+
+public extension DataScanner {
+
     func scan(value: UInt8) throws -> Bool {
         if let scannedValue: UInt8 = try scan() {
             return scannedValue == value
@@ -94,13 +118,10 @@ public extension DataScanner {
         }
     }
 
-    func scanBuffer(count: Int) throws -> UnsafeBufferPointer <Void>? {
-        if atEnd {
-            return nil
+    func scan(value: UInt8) throws {
+        if try scan(value) == false {
+            throw Error.generic("Cannot scan value")
         }
-        let scannedBuffer = UnsafeBufferPointer <Void> (start: buffer.baseAddress.advancedBy(current), count: count)
-        current = current.advancedBy(count)
-        return scannedBuffer
     }
 
     func scanString(maxCount: Int? = nil, encoding:NSStringEncoding = NSUTF8StringEncoding) throws -> String? {
@@ -144,10 +165,6 @@ public extension DataScanner {
         }
 
         return string as String
-    }
-
-    var atEnd: Bool {
-        return current == buffer.endIndex
     }
 
     func scanUpTo(byte: UInt8) throws -> UnsafeBufferPointer <UInt8>? {
