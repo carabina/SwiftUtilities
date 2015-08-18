@@ -124,7 +124,6 @@ public func bitSet(buffer: UnsafeMutableBufferPointer <Void>, start: Int, length
             let offset = start / wordSize
             let value = pointer[offset].bigEndian
             let result = UIntMax(bigEndian: bitSet(value, start: start % wordSize, length: length, flipped: true, newValue: newValue))
-            binary(result, width: 64)
             pointer[offset] = result
         }
         else {
