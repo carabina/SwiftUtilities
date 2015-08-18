@@ -18,8 +18,6 @@ public protocol BufferType {
 
     init(start: UnsafePointer<T>, count: Int)
 
-//    func generate() -> UnsafeBufferPointerGenerator<T>
-
     var baseAddress: UnsafePointer <T> { get }
     var count: Int { get }
 }

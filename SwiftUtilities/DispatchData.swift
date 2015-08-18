@@ -168,23 +168,6 @@ extension DispatchData: CustomStringConvertible {
     }
 }
 
-//extension DispatchData: CustomReflectable {
-//    public func customMirror() -> Mirror {
-//
-//        var chunks: [(Range <Int>,String)] = []
-//        apply() {
-//            (range: Range<Int>, buffer: UnsafeBufferPointer <T>) -> Void in
-//            chunks.append((range, buffer.dump(16)))
-//        }
-//
-//        return Mirror(self, children: [
-//            "count": count,
-//            "length": length,
-//            "data": chunks,
-//        ])
-//    }
-//}
-
 // MARK: -
 
 public extension DispatchData {

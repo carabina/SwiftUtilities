@@ -50,18 +50,11 @@ extension Timestamp: Hashable {
         return absoluteTime.hashValue
     }
 }
+
 // MARK: -
 
 extension Timestamp: CustomStringConvertible {
     public var description: String {
         return String(absoluteTime)
     }
-}
-
-extension Timestamp: CustomReflectable {
-
-    public func customMirror() -> Mirror {
-        return Mirror(reflecting: absoluteTime)
-    }
-
 }
