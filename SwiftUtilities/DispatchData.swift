@@ -51,6 +51,10 @@ public struct DispatchData <T> {
         self.init(data: dispatch_data_create(buffer.baseAddress, buffer.length, nil, nil))
     }
 
+    public init(start: UnsafePointer <Element>, count:Int) {
+        self.init(data: dispatch_data_create(start, count * DispatchData <Element>.elementSize, nil, nil))
+    }
+
     // MARK: -
 
     public func subBuffer(range: Range <Int>) -> DispatchData <T> {
