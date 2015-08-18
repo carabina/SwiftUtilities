@@ -62,7 +62,7 @@ class DispatchDataTest: XCTestCase {
 }
 
 extension DispatchData {
-    init(array: Array <T>) {
+    init(array: Array <Element>) {
         let data: DispatchData = array.withUnsafeBufferPointer() {
             return DispatchData(buffer: $0)
         }
