@@ -10,27 +10,6 @@ import XCTest
 
 import SwiftUtilities
 
-extension DispatchData: Equatable {
-}
-
-public func == <T> (lhs: DispatchData <T>, rhs: DispatchData <T>) -> Bool {
-
-    guard lhs.count == rhs.count else {
-        return false
-    }
-
-    return lhs.map() {
-        (lhsData, lhsBuffer) -> Bool in
-
-        return rhs.map() {
-            (rhsData, rhsBuffer) -> Bool in
-
-            let result = memcmp(lhsBuffer.baseAddress, rhsBuffer.baseAddress, lhsBuffer.length)
-            return result == 0
-        }
-    }
-}
-
 class DispatchDataTest: XCTestCase {
 
     func testBasic1() {

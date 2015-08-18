@@ -134,6 +134,29 @@ public extension DispatchData {
 
 // MARK: -
 
+extension DispatchData: Equatable {
+}
+
+public func == <T> (lhs: DispatchData <T>, rhs: DispatchData <T>) -> Bool {
+
+    guard lhs.count == rhs.count else {
+        return false
+    }
+
+    return lhs.map() {
+        (lhsData, lhsBuffer) -> Bool in
+
+        return rhs.map() {
+            (rhsData, rhsBuffer) -> Bool in
+
+            let result = memcmp(lhsBuffer.baseAddress, rhsBuffer.baseAddress, lhsBuffer.length)
+            return result == 0
+        }
+    }
+}
+
+// MARK: -
+
 extension DispatchData: CustomStringConvertible {
     public var description: String {
         var chunkCount = 0
@@ -182,5 +205,19 @@ public extension DispatchData {
             (data, ptr) in
             return Buffer <Void> (buffer: ptr)
         }
+    }
+}
+
+// MARK: -
+
+public extension DispatchData {
+
+    init <U> (value:U) {
+        var copy = value
+        let data:dispatch_data_t = withUnsafePointer(&copy) {
+            let buffer = UnsafeBufferPointer <U> (start:$0, count:1)
+            return dispatch_data_create(buffer.baseAddress, buffer.length, nil, nil)
+        }
+        self.init(data:data)
     }
 }
