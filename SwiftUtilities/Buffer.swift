@@ -8,60 +8,66 @@
 
 import Foundation
 
-public struct Buffer <T> {
+public struct Buffer <Element> {
 
     public var startIndex: Int { return 0 }
     public var endIndex: Int { return count }
-    public subscript (i: Int) -> T {
+    public subscript (i: Int) -> Element {
         return baseAddress[i]
     }
 
-    public init(start: UnsafePointer<T>, count: Int) {
-        self.init(data: NSData(bytes: start, length: count * Buffer <T>.elementSize))
-    }
+//    func generate() -> UnsafeBufferPointerGenerator<Element>
 
-//    func generate() -> UnsafeBufferPointerGenerator<T>
-
-    public var baseAddress: UnsafePointer <T> {
-        return UnsafePointer <T> (data.bytes)
+    public var baseAddress: UnsafePointer <Element> {
+        return UnsafePointer <Element> (data.bytes)
     }
 
     public var count: Int {
-        return data.length / Buffer <T>.elementSize
+        return data.length / Buffer <Element>.elementSize
     }
+
+    public static var elementSize: Int {
+        return max(sizeof(Element), 1)
+    }
+
+    public var length: Int {
+        return count * max(sizeof(Element), 1)
+    }
+
+    public init(start: UnsafePointer<Element>, count: Int) {
+        self.init(NSData(bytes: start, length: count * Buffer <Element>.elementSize))
+    }
+
+
 
     // MARK: -
 
     public init() {
     }
 
-    public init(data: NSData) {
-        assert(data.length == 0 || data.length >= Buffer <T>.elementSize)
+    public init(_ data: NSData) {
+        assert(data.length == 0 || data.length >= Buffer <Element>.elementSize)
         self.data = data.copy() as! NSData
     }
 
     public var data: NSData = NSData()
-
-    public static var elementSize: Int {
-        return max(sizeof(T), 1)
-    }
 }
 
 // MARK: -
 
 extension Buffer {
 
-    public init(pointer: UnsafePointer <T>, length: Int) {
-        assert(length >= Buffer <T>.elementSize)
-        self.init(data: NSData(bytes: pointer, length: length))
+    public init(pointer: UnsafePointer <Element>, length: Int) {
+        assert(length >= Buffer <Element>.elementSize)
+        self.init(NSData(bytes: pointer, length: length))
     }
 
-    public init(bufferPointer: UnsafeBufferPointer <T>) {
-        self.init(data: NSData(bytes: bufferPointer.baseAddress, length: bufferPointer.length))
+    public init(_ bufferPointer: UnsafeBufferPointer <Element>) {
+        self.init(NSData(bytes: bufferPointer.baseAddress, length: bufferPointer.length))
     }
 
-    public var bufferPointer: UnsafeBufferPointer <T> {
-        return UnsafeBufferPointer <T> (start: self.baseAddress, count: count)
+    public var bufferPointer: UnsafeBufferPointer <Element> {
+        return UnsafeBufferPointer <Element> (start: self.baseAddress, count: count)
     }
 }
 
@@ -70,7 +76,7 @@ extension Buffer {
 extension Buffer: Equatable {
 }
 
-public func == <T>(lhs: Buffer <T>, rhs: Buffer <T>) -> Bool {
+public func == <Element>(lhs: Buffer <Element>, rhs: Buffer <Element>) -> Bool {
     if lhs.length != rhs.length {
         return false
     }
@@ -79,14 +85,14 @@ public func == <T>(lhs: Buffer <T>, rhs: Buffer <T>) -> Bool {
 
 // MARK: -
 
-public func + <T> (lhs: Buffer <T>, rhs: Buffer <T>) -> Buffer <T> {
+public func + <Element> (lhs: Buffer <Element>, rhs: Buffer <Element>) -> Buffer <Element> {
     let data = NSMutableData(data: lhs.data)
     data.appendData(data)
-    return Buffer <T> (data: data)
+    return Buffer <Element> (data)
 }
 
-public func + <T> (lhs: Buffer <T>, rhs: UnsafeBufferPointer <T>) -> Buffer <T> {
+public func + <Element> (lhs: Buffer <Element>, rhs: UnsafeBufferPointer <Element>) -> Buffer <Element> {
     let data = NSMutableData(data: lhs.data)
     data.appendBytes(rhs.baseAddress, length: rhs.length)
-    return Buffer <T> (data: data)
+    return Buffer <Element> (data)
 }

@@ -190,7 +190,7 @@ public extension DispatchData {
     func toBuffer() -> Buffer <Void> {
         return map() {
             (data, ptr) in
-            return Buffer <Void> (buffer: ptr)
+            return Buffer <Void> (ptr)
         }
     }
 }

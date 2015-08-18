@@ -85,7 +85,7 @@ public extension MutableBuffer {
 
 public extension MutableBuffer {
 
-    func append <Buffer: BufferType> (buffer: Buffer) {
+    func append <Buffer: IndexedBufferType> (buffer: Buffer) {
         mutableData.appendBytes(buffer.baseAddress, length: buffer.length)
     }
 
