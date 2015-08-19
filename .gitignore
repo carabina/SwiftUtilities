@@ -1,9 +1,30 @@
-# CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control?
-#
-# Pods/
+#### Mac OS X Finder droppings
+.DS_Store
+.AppleDouble
+.LSOverride
 
-Carthage
+#### Xcode Per User Files
+*.pbxuser
+*.perspectivev3
+xcuserdata/
+*.xcworkspace/xcshareddata/*.xccheckout
+*.xcworkspace/xcshareddata/*.xcscmblueprint
+*.xcodeproj/*.xcworkspace/xcshareddata/*.xccheckout
+*.xcodeproj/*.xcworkspace/xcshareddata/*.xcscmblueprint
+
+#### Python
+*.egg-info
+*.pyc
+*.pyo
+.idea
+
+#### Misc
+*.orig
+
+# Thumbnails
+._*
+
+### Carthage
+# Cartfile.resolved
+Carthage/Builds
+Carthage/Checkouts
