@@ -203,18 +203,4 @@ public extension DataScanner {
         }
         return buffer[start..<current]
     }
-
-    func scanUpTo(byte: UInt8) throws -> DispatchData <UInt8>? {
-        let start = current
-        let buffer:UnsafeBufferPointer <UInt8> = self.buffer.toUnsafeBufferPointer()
-        for ; current != buffer.endIndex; ++current {
-            if buffer[current] == byte {
-                break
-            }
-        }
-        if start == current {
-            return nil
-        }
-        return DispatchData <UInt8> (buffer: buffer[start..<current])
-    }
 }
