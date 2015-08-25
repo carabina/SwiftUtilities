@@ -59,7 +59,7 @@ public extension String {
 
     func convert(index: String.Index) -> NSInteger {
         let utf16Index = index.samePositionIn(utf16)
-        return distance(utf16.startIndex, utf16Index)
+        return utf16.startIndex.distanceTo(utf16Index)
     }
 
     func convert(range: Range <String.Index>) -> NSRange {

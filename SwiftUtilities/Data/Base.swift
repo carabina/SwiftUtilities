@@ -159,7 +159,8 @@ public extension String {
             s = ""
             let count = UIntMax(log(Double(value), base: Double(base)))
             var value = value
-            for _ in stride(from: 0, through: count, by: 1) {
+
+            for _ in UIntMax(0).stride(through: count, by: 1) {
                 let digit = value % UIntMax(base)
 
                 let char = digits[Int(digit)]
@@ -237,11 +238,11 @@ public extension UnsafeBufferPointer {
     var asHex: String {
         let buffer: UnsafeBufferPointer <UInt8> = toUnsafeBufferPointer()
         let hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
-        return "".join(buffer.map {
+        return buffer.map({
             let hiNibble = Int($0) >> 4
             let loNibble = Int($0) & 0b1111
             return hex[hiNibble] + hex[loNibble]
-        })
+        }).joinWithSeparator("")
     }
 }
 

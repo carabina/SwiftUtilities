@@ -63,7 +63,7 @@ extension BlockBackedCollection: CustomStringConvertible {
         let strings: [String] = self.map {
             return String($0)
         }
-        let content = ", ".join(strings)
+        let content = strings.joinWithSeparator(", ")
         return "[\(content)]"
     }
 }
