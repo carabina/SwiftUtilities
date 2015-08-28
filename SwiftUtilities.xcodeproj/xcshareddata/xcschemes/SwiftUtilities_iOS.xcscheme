@@ -23,7 +23,7 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "45E8EEE1199A90720035C722"
-               BuildableName = "SwiftUtilities Tests.xctest"
-               BlueprintName = "SwiftUtilities Tests"
+               BlueprintIdentifier = "458824EE1B90BF8300D438AD"
+               BuildableName = "SwiftUtilities_iOS_Tests.xctest"
+               BlueprintName = "SwiftUtilities_iOS_Tests"
                ReferencedContainer = "container:SwiftUtilities.xcodeproj">
             </BuildableReference>
          </TestableReference>
