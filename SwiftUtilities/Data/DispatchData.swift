@@ -78,37 +78,22 @@ public struct DispatchData <Element> {
         self.init(data: dispatch_data_create(start, count * DispatchData <Element>.elementSize, nil, nil))
     }
 
-    // MARK: -
-
-    public func subBuffer(range: Range <Int>) -> DispatchData <Element> {
-        assert(range.startIndex >= startIndex && range.startIndex <= endIndex)
-        assert(range.endIndex >= startIndex && range.endIndex <= endIndex)
-        assert(range.startIndex <= range.endIndex)
-        return DispatchData <Element> (data: dispatch_data_create_subrange(data, range.startIndex * elementSize, (range.endIndex - range.startIndex) * elementSize))
-    }
-
     // MARK: Mapping data.
 
-    /// IMPORTANT: If you need to keep the buffer beyond the scope of block uyou must retain data too.
-    public func map <R> (@noescape block: (DispatchData <Element>, UnsafeBufferPointer <Void>) -> R) -> R {
-        var pointer: UnsafePointer <Void> = nil
-        var size: Int = 0
-        let mappedData = dispatch_data_create_map(data, &pointer, &size)
-        let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
-        return block(DispatchData <Element> (data: mappedData), buffer)
-    }
+    // TODO: Rename to "with", "withUnsafeBufferPointer", "withDataAndUnsafeBufferPointer"
 
-    /// IMPORTANT: If you need to keep the buffer beyond the scope of block uyou must retain data too.
-    public func map <R> (@noescape block: (DispatchData <Element>, UnsafeBufferPointer <Void>) throws -> R) rethrows -> R {
+    /// IMPORTANT: If you need to keep the buffer beyond the scope of block you must hold on to data DispatchData instance too. The DispatchData and the buffer share the same life time.
+    public func createMap <R> (@noescape block: (DispatchData <Element>, UnsafeBufferPointer <Element>) throws -> R) rethrows -> R {
         var pointer: UnsafePointer <Void> = nil
         var size: Int = 0
         let mappedData = dispatch_data_create_map(data, &pointer, &size)
-        let buffer = UnsafeBufferPointer <Void> (start: pointer, count: size)
+        let buffer = UnsafeBufferPointer <Element> (start: UnsafePointer <Element> (pointer), count: size)
         return try block(DispatchData <Element> (data: mappedData), buffer)
     }
 
     // MARK: -
 
+    /// Unfortunately cannot make this method "rethrows" or @noescape because it gets passed across a non-swift closure
     public func apply(applier: (Range<Int>, UnsafeBufferPointer <Element>) -> Bool) {
         dispatch_data_apply(data) {
             (region: dispatch_data_t!, offset: Int, buffer: UnsafePointer <Void>, size: Int) -> Bool in
@@ -139,7 +124,15 @@ public extension DispatchData {
 
 // MARK: -
 
+/// Do not really like these function names but they're very useful.
 public extension DispatchData {
+
+    public func subBuffer(range: Range <Int>) -> DispatchData <Element> {
+        assert(range.startIndex >= startIndex && range.startIndex <= endIndex)
+        assert(range.endIndex >= startIndex && range.endIndex <= endIndex)
+        assert(range.startIndex <= range.endIndex)
+        return DispatchData <Element> (data: dispatch_data_create_subrange(data, range.startIndex * elementSize, (range.endIndex - range.startIndex) * elementSize))
+    }
 
     public func subBuffer(startIndex startIndex: Int, count: Int) -> DispatchData <Element> {
         return subBuffer(Range <Int> (start: startIndex, end: startIndex + count))
@@ -151,9 +144,9 @@ public extension DispatchData {
         return subBuffer(startIndex: startInset, count: count - (startInset + endInset))
     }
 
-    public func split(count: Int) -> (DispatchData <Element>, DispatchData <Element>) {
-        let lhs = subBuffer(startIndex: 0, count: count)
-        let rhs = subBuffer(startIndex: count, count: self.count - count)
+    public func split(startIndex: Int) -> (DispatchData <Element>, DispatchData <Element>) {
+        let lhs = subBuffer(startIndex: 0, count: startIndex)
+        let rhs = subBuffer(startIndex: startIndex, count: count - startIndex)
         return (lhs, rhs)
     }
 }
@@ -169,10 +162,10 @@ public func == <Element> (lhs: DispatchData <Element>, rhs: DispatchData <Elemen
         return false
     }
 
-    return lhs.map() {
+    return lhs.createMap() {
         (lhsData, lhsBuffer) -> Bool in
 
-        return rhs.map() {
+        return rhs.createMap() {
             (rhsData, rhsBuffer) -> Bool in
 
             let result = memcmp(lhsBuffer.baseAddress, rhsBuffer.baseAddress, lhsBuffer.length)
@@ -210,10 +203,10 @@ public extension DispatchData {
 // MARK: -
 
 public extension DispatchData {
-    func toBuffer() -> Buffer <Void> {
-        return map() {
+    func toBuffer() -> Buffer <Element> {
+        return createMap() {
             (data, ptr) in
-            return Buffer <Void> (ptr)
+            return Buffer <Element> (ptr)
         }
     }
 }
