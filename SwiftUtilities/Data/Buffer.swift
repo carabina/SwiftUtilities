@@ -33,13 +33,21 @@ import Foundation
 
 public struct Buffer <Element> {
 
+    public let data: NSData
     public var startIndex: Int { return 0 }
     public var endIndex: Int { return count }
     public subscript (i: Int) -> Element {
         return baseAddress[i]
     }
 
-//    func generate() -> UnsafeBufferPointerGenerator<Element>
+    public init() {
+        self.data = NSData()
+    }
+
+    public init(_ data: NSData) {
+        assert(data.length == 0 || data.length >= Buffer <Element>.elementSize)
+        self.data = data.copy() as! NSData
+    }
 
     public var baseAddress: UnsafePointer <Element> {
         return UnsafePointer <Element> (data.bytes)
@@ -60,20 +68,6 @@ public struct Buffer <Element> {
     public init(start: UnsafePointer<Element>, count: Int) {
         self.init(NSData(bytes: start, length: count * Buffer <Element>.elementSize))
     }
-
-
-
-    // MARK: -
-
-    public init() {
-    }
-
-    public init(_ data: NSData) {
-        assert(data.length == 0 || data.length >= Buffer <Element>.elementSize)
-        self.data = data.copy() as! NSData
-    }
-
-    public var data: NSData = NSData()
 }
 
 // MARK: -
@@ -118,4 +112,18 @@ public func + <Element> (lhs: Buffer <Element>, rhs: UnsafeBufferPointer <Elemen
     let data = NSMutableData(data: lhs.data)
     data.appendBytes(rhs.baseAddress, length: rhs.length)
     return Buffer <Element> (data)
+}
+
+// MARK: -
+
+extension Buffer {
+
+    public init(count: Int, repeatedValue:Element) {
+        let value = [Element](count: count, repeatedValue:repeatedValue)
+        let data = value.withUnsafeBufferPointer() {
+            (buffer) in
+            return NSData(buffer: buffer)
+        }
+        self.init(data)
+   }
 }

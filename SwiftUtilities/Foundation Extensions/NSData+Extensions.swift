@@ -32,18 +32,18 @@
 import Foundation
 
 public extension NSData {
-    // Deprecated
-    var buffer: UnsafeBufferPointer <Void> {
-        return UnsafeBufferPointer <Void> (start: bytes, count: length)
+
+    convenience init <Element>(buffer:UnsafeBufferPointer <Element>) {
+        self.init(bytes: UnsafeMutablePointer <Void> (buffer.baseAddress), length: buffer.length)
     }
 
     func toUnsafeBufferPointer <T>() -> UnsafeBufferPointer <T> {
         return UnsafeBufferPointer <T> (start: UnsafePointer <T> (bytes), length: length)
     }
 
-    func withUnsafeBufferPointer<T, R>(@noescape body: (UnsafeBufferPointer<T>) -> R) -> R {
+    func withUnsafeBufferPointer<T, R>(@noescape body: (UnsafeBufferPointer<T>) throws -> R) rethrows -> R {
         let voidBuffer = UnsafeBufferPointer<Void> (start: bytes, count: length)
         let buffer: UnsafeBufferPointer<T> = voidBuffer.toUnsafeBufferPointer()
-        return body(buffer)
+        return try body(buffer)
     }
 }
