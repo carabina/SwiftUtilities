@@ -109,12 +109,11 @@ public struct DispatchData <Element> {
 
     // MARK: -
 
-    public func apply(applier: (Range<Int>, UnsafeBufferPointer <Element>) -> Void) {
+    public func apply(applier: (Range<Int>, UnsafeBufferPointer <Element>) -> Bool) {
         dispatch_data_apply(data) {
             (region: dispatch_data_t!, offset: Int, buffer: UnsafePointer <Void>, size: Int) -> Bool in
             let buffer = UnsafeBufferPointer <Element> (start: UnsafePointer <Element> (buffer), count: size / self.elementSize)
-            applier(offset..<offset + size, buffer)
-            return true
+            return applier(offset..<offset + size, buffer)
         }
     }
 
@@ -190,6 +189,7 @@ extension DispatchData: CustomStringConvertible {
         apply() {
             (range, pointer) in
             chunkCount++
+            return true
         }
         return "DispatchData(count: \(count), length: \(length), chunk count: \(chunkCount), data: \(data))"
     }
