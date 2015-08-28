@@ -33,10 +33,12 @@ import XCTest
 
 import SwiftUtilities
 
+let deadbeef:UInt32 = 0xDEADBEEF
+
 class DispatchDataTest: XCTestCase {
 
     func testBasic1() {
-        let data = DispatchData <Void> (value: UInt32(0xDEADBEEF).bigEndian)
+        let data = DispatchData <Void> (value: UInt32(deadbeef).bigEndian)
         XCTAssertEqual(data.elementSize, 1)
         XCTAssertEqual(data.count, 4)
         XCTAssertEqual(data.length, 4)
@@ -57,19 +59,19 @@ class DispatchDataTest: XCTestCase {
 //        let data1 = DispatchData <Void> (value: UInt16(0xDEAD).bigEndian)
 //        let data2 = DispatchData <Void> (value: UInt16(0xBEEF).bigEndian)
 //        let result = data1 + data2
-//        let expectedResult = DispatchData <Void> (value: UInt32(0xDEADBEEF).bigEndian)
+//        let expectedResult = DispatchData <Void> (value: UInt32(deadbeef).bigEndian)
 //        XCTAssertTrue(result == expectedResult)
 //    }
 
     func testSplit() {
-        let data = DispatchData <Void> (value: UInt32(0xDEADBEEF).bigEndian)
+        let data = DispatchData <Void> (value: UInt32(deadbeef).bigEndian)
         let (lhs, rhs) = data.split(2)
         XCTAssertTrue(lhs == DispatchData <Void> (value: UInt16(0xDEAD).bigEndian))
         XCTAssertTrue(rhs == DispatchData <Void> (value: UInt16(0xBEEF).bigEndian))
     }
 
     func testInset() {
-        let data = DispatchData <Void> (value: UInt32(0xDEADBEEF).bigEndian)
+        let data = DispatchData <Void> (value: UInt32(deadbeef).bigEndian)
         let insettedData = data.inset(startInset: 1, endInset: 1)
         let expectedResult = DispatchData <Void> (value: UInt16(0xADBE).bigEndian)
         XCTAssertEqual(insettedData, expectedResult)
