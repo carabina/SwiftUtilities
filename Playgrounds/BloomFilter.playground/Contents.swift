@@ -4,28 +4,52 @@ import Cocoa
 
 import SwiftUtilities
 
+enum Contains {
+    case False
+    case Maybe
+}
 
 struct BloomFilter <Element: Hashable> {
 
-    let data:MutableBuffer <UInt8>
+    var data:Array <UInt8>
 
     let count:Int
 
     init(count:Int) {
         self.count = count
-        self.data = MutableBuffer <UInt8> (count: Int(ceil(Double(count) / 8)), repeatedValue: 0)
+        self.data = Array <UInt8> (count: Int(ceil(Double(count) / 8)), repeatedValue: 0)
     }
 
-    func add(value:Element) {
-
+    mutating func add(value:Element) {
         let hash = value.hashValue
-        let position = hash % count
+        let position = Int(unsafeBitCast(hash, UInt.self) % UInt(count))
+        data.withUnsafeMutableBufferPointer() {
+            (buffer) in
 
-//        bitSet(<#T##buffer: UnsafeMutableBufferPointer<Void>##UnsafeMutableBufferPointer<Void>#>, range: <#T##Range<Int>#>, newValue: <#T##UIntMax#>)
+            
 
+            bitSet(buffer, start: position, length: 1, newValue: 1)
+            return
+        }
+    }
 
+    func contains(value:Element) -> Contains {
+        let hash = value.hashValue
+        let position = Int(unsafeBitCast(hash, UInt.self) % UInt(count))
+        return data.withUnsafeBufferPointer() {
+            (buffer) in
+            return bitRange(buffer, start: position, length: 1) == 0 ? Contains.False : Contains.Maybe
+        }
     }
 
 }
 
-let filter = BloomFilter <String>(count:100)
+var filter = BloomFilter <String>(count:100)
+filter.data
+filter.add("hello world")
+filter.data
+filter.add("girafe")
+filter.data
+filter.contains("hello world")
+filter.contains("donkey")
+

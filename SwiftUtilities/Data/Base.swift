@@ -29,13 +29,143 @@
 //  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-// MARK: -
+// MARK: Base Protocols
 
-public extension NSData {
+public protocol BaseDecodable {
+    static func decodeFromString(string: String, base: Int?) throws -> Self
+}
 
-    static func fromHex(string: String) throws -> NSData {
+public protocol BaseEncodable {
+    func encodeToString(base base:Int, prefix:Bool, width:Int?) throws -> String
+}
+
+public extension BaseDecodable {
+    init(fromString string: String, base: Int? = nil) throws {
+        self = try Self.decodeFromString(string, base: base)
+    }
+}
+
+// MARK: UInt types + BaseDecodable
+
+extension UIntMax: BaseDecodable {
+}
+
+extension UInt: BaseDecodable {
+}
+
+extension UInt32: BaseDecodable {
+}
+
+extension UInt16: BaseDecodable {
+}
+
+extension UInt8: BaseDecodable {
+}
+
+extension UnsignedIntegerType {
+    public static func decodeFromString(string: String, base: Int?) throws -> Self {
+        var string = string
+
+        // TODO: Base guessing/expectation is broken
+
+        var finalRadix:NamedRadix
+        if let base = base {
+            guard let radix = NamedRadix(rawValue: base) else {
+                throw Error.generic("No standard prefix for base \(base).")
+            }
+            finalRadix = radix
+        }
+        else {
+            finalRadix = NamedRadix.fromString(string)
+        }
+
+        let prefix = finalRadix.constantPrefix
+        string = try string.substringFromPrefix(prefix)
+
+        var result: Self = 0
+
+        let base = finalRadix.rawValue
+
+        for c in string.utf8 {
+            if let value = try decodeCodeUnit(c, base:base) {
+                result *= Self.init(UIntMax(base))
+                result += Self.init(UIntMax(value))
+            }
+        }
+
+        return result
+    }
+}
+
+// MARK: UInt types + BaseEncodable
+
+extension UIntMax: BaseEncodable {
+}
+
+extension UInt: BaseEncodable {
+}
+
+extension UInt32: BaseEncodable {
+}
+
+extension UInt16: BaseEncodable {
+}
+
+extension UInt8: BaseEncodable {
+}
+
+extension UnsignedIntegerType {
+
+    public func encodeToString(base base:Int, prefix:Bool = false, width:Int? = nil) throws -> String {
+        let value = toUIntMax()
+
+        var s: String = "0"
+        if value != 0 {
+            let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+            s = ""
+            let count = UIntMax(log(Double(value), base: Double(base)))
+            var value = value
+
+            for _ in UIntMax(0).stride(through: count, by: 1) {
+                let digit = value % UIntMax(base)
+                let char = digits[Int(digit)]
+                s = String(char) + s
+                value /= UIntMax(base)
+            }
+        }
+
+       if let width = width {
+            let count = s.utf8.count
+            let pad = "".stringByPaddingToLength(max(width - count, 0), withString: "0", startingAtIndex: 0)
+            s = pad + s
+        }
+
+
+        if let radix = NamedRadix(rawValue: base) {
+            s = radix.constantPrefix + s
+        }
+
+        return s
+    }
+}
+
+// MARK: DispatchData + BaseDecodable
+
+extension DispatchData: BaseDecodable {
+    public static func decodeFromString(string: String, base: Int?) throws -> DispatchData {
+        let data = try NSData.decodeFromString(string, base:base!)
+        return DispatchData(data)
+    }
+}
+
+// MARK: DispatchData + BaseDecodable(ish)
+
+extension NSData: BaseDecodable {
+
+    static public func decodeFromString(string: String, base: Int?) throws -> Self {
+        precondition(base == 16)
+
         var octets: [UInt8] = []
-
         var hiNibble = true
         var octet: UInt8 = 0
         for hexNibble in string.utf8 {
@@ -43,7 +173,7 @@ public extension NSData {
                 continue
             }
 
-            if let nibble = try hexNibbleToInt(hexNibble) {
+            if let nibble = try decodeCodeUnit(hexNibble, base:base!) {
                 if hiNibble {
                     octet = nibble << 4
                     hiNibble = false
@@ -58,184 +188,22 @@ public extension NSData {
         if hiNibble == false {
             octets.append(octet)
         }
-        return octets.withUnsafeBufferPointer() {
-            return NSData(bytes: $0.baseAddress, length: $0.count)
+        let data = octets.withUnsafeBufferPointer() {
+            return self.init(bytes: $0.baseAddress, length: $0.count)
         }
-    }
 
-    convenience init(hexString string: String) throws {
-        let data = try NSData.fromHex(string)
-        self.init(data: data)
+        return self.init(data: data)
     }
 }
 
-// MARK: -
+// MARK: UnsafeBufferPointer + BaseEncodable
 
-public extension UIntMax {
+extension UnsafeBufferPointer: BaseEncodable {
+    public func encodeToString(base base:Int, prefix:Bool = false, width:Int? = nil) throws -> String {
+        precondition(base == 16)
+        precondition(prefix == false)
+        precondition(width == nil)
 
-    static func fromString(var string: String, base: Int, expectPrefix: Bool = false) throws -> UIntMax {
-
-        if expectPrefix == true {
-            let prefix: String
-            switch base {
-                case 2:
-                    prefix = "0b"
-                case 8:
-                    prefix = "0o"
-                case 16:
-                    prefix = "0x"
-                default:
-                    throw Error.generic("No standard prefix for base \(base).")
-            }
-            string = try string.substringFromPrefix(prefix)
-        }
-
-        var result: UIntMax = 0
-
-        let conversion: (UInt8) throws -> UInt8?
-        if base == 16 {
-            conversion = hexNibbleToInt
-        }
-        else {
-            conversion = {
-                (c: UInt8) throws -> UInt8? in
-                if  (0x30 ... 0x39).contains(c) {
-                    return c - 0x30
-                }
-                else {
-                    throw Error.generic("Character not a digit.")
-                }
-            }
-        }
-
-        for c in string.utf8 {
-            if let value = try conversion(c) {
-                result *= UIntMax(base)
-                result += UIntMax(value)
-            }
-        }
-
-        return result
-    }
-
-}
-
-public extension UnsignedIntegerType {
-    init(fromString string: String, base: Int, expectPrefix: Bool = true) throws {
-        self.init(try UIntMax.fromString(string, base: base, expectPrefix: expectPrefix))
-    }
-
-    init(fromString string: String) throws {
-        let base: Int
-        let expectPrefix: Bool
-        if string.hasPrefix("0b") {
-            base = 2
-            expectPrefix = true
-        }
-        else if string.hasPrefix("0o") {
-            base = 8
-            expectPrefix = true
-        }
-        else if string.hasPrefix("0x") {
-            base = 16
-            expectPrefix = true
-        }
-        else {
-            base = 10
-            expectPrefix = false
-        }
-
-        try self.init(fromString: string, base: base, expectPrefix: expectPrefix)
-    }
-}
-
-public extension String {
-
-    init(value: UIntMax, base: Int, prefix: Bool = false, uppercase: Bool = false, width: Int? = nil) {
-
-        var s: String = "0"
-        if value != 0 {
-            let digits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
-            s = ""
-            let count = UIntMax(log(Double(value), base: Double(base)))
-            var value = value
-
-            for _ in UIntMax(0).stride(through: count, by: 1) {
-                let digit = value % UIntMax(base)
-
-                let char = digits[Int(digit)]
-                s = (uppercase ? char.uppercaseString: char) + s
-                value /= UIntMax(base)
-            }
-        }
-
-       if let width = width {
-            let count = s.utf8.count
-            let pad = "".stringByPaddingToLength(max(width - count, 0), withString: "0", startingAtIndex: 0)
-            s = pad + s
-        }
-
-        switch (prefix, base) {
-            case (true, 2):
-                s = "0b" + s
-            case (true, 8):
-                s = "0o" + s
-            case (true, 16):
-                s = "0x" + s
-            default:
-                break
-        }
-
-        self = s
-    }
-
-    init <T: UnsignedIntegerType> (value: T, base: Int, prefix: Bool = false, uppercase: Bool = false, width: Int? = nil) {
-        let value = value.toUIntMax()
-        self.init(value: value, base: base, prefix: prefix, uppercase: uppercase, width: width)
-    }
-
-    func toInt() -> Int {
-        return (self as NSString).integerValue
-    }
-
-}
-
-// TODO; Deprecate
-public func binary <T: UnsignedIntegerType> (value: T, width: Int? = nil) -> String {
-    return String(value: value, base: 2, prefix: true, width: width)
-}
-
-public extension UInt8 {
-    var asHex: String {
-        return intToHex(Int(self))
-    }
-}
-
-public extension UInt16 {
-    var asHex: String {
-        return intToHex(Int(self))
-    }
-}
-
-public func intToHex(value: Int, skipLeadingZeros: Bool = true, addPrefix: Bool = false, lowercase: Bool = false) -> String {
-    var s = ""
-    var skipZeros = skipLeadingZeros
-    let digits = log2(Int.max) / 8
-    for var n: Int = digits; n >= 0; --n {
-        let shift = n * 4
-        let nibble = (value >> shift) & 0xF
-        if !(skipZeros == true && nibble == 0) {
-            s += nibbleAsHex(nibble, lowercase: lowercase)
-            skipZeros = false
-        }
-    }
-    return addPrefix ? "0x" + s: s
-}
-
-// MARK: -
-
-public extension UnsafeBufferPointer {
-    var asHex: String {
         let buffer: UnsafeBufferPointer <UInt8> = toUnsafeBufferPointer()
         let hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
         return buffer.map({
@@ -246,27 +214,82 @@ public extension UnsafeBufferPointer {
     }
 }
 
-// MARK: -
+// MARK: Internal helpers.
 
-func log2(v: Int) -> Int {
-    return Int(log2(Float(v)))
+enum NamedRadix: Int {
+    case Binary = 2
+    case Octal = 8
+    case Decimal = 10
+    case Hexadecimal = 16
 }
 
-func nibbleAsHex(nibble: Int, lowercase: Bool = false) -> String {
-    let uppercaseDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
-    let lowercaseDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
-    return lowercase ? lowercaseDigits[nibble]: uppercaseDigits[nibble]
+extension NamedRadix {
+    var constantPrefix: String {
+        switch self {
+            case .Binary:
+                return "0b"
+            case .Octal:
+                return "0o"
+            case .Decimal:
+                return ""
+            case .Hexadecimal:
+                return "0x"
+        }
+    }
+
+    static func fromString(string:String) -> NamedRadix {
+        if string.hasPrefix(self.Binary.constantPrefix) {
+            return .Binary
+        }
+        else if string.hasPrefix(self.Octal.constantPrefix) {
+            return .Octal
+        }
+        else if string.hasPrefix(self.Hexadecimal.constantPrefix) {
+            return .Hexadecimal
+        }
+        else {
+            return .Decimal
+        }
+    }
 }
 
-func hexNibbleToInt(nibble: UInt8) throws -> UInt8? {
-    switch nibble {
+func decodeCodeUnit(codeUnit:UTF8.CodeUnit, base:Int) throws -> UInt8? {
+    let value:UInt8
+    switch codeUnit {
+        // "0" ... "9"
         case 0x30 ... 0x39:
-            return UInt8(nibble) - 0x30
-        case 0x41 ... 0x46:
-            return UInt8(nibble) - 0x41 + 0x0A
-        case 0x61 ... 0x66:
-            return UInt8(nibble) - 0x61 + 0x0A
+            value = codeUnit - 0x30
+        // "A" ... "F"
+        case 0x41 ... 0x46 where base >= 16:
+            value = codeUnit - 0x41 + 0x0A
+        // "a" ... "f"
+        case 0x61 ... 0x66 where base >= 16:
+            value = codeUnit - 0x61 + 0x0A
         default:
-            return nil
+            throw Error.generic("Not a digit of base \(base)")
+    }
+
+    if value >= UInt8(base) {
+        throw Error.generic("Not a digit of base \(base)")
+    }
+
+    return value
+}
+
+// MARK: Convenience methods that will probably be deprecated or at least renamed in future
+
+public func binary <T: BaseEncodable> (value: T, prefix:Bool = false, width: Int? = nil) throws -> String {
+    return try value.encodeToString(base: 2, prefix: prefix, width: width)
+}
+
+public extension BaseDecodable {
+    static func fromHex(hex:String) throws -> Self {
+        return try Self.decodeFromString(hex, base:16)
+    }
+}
+
+public extension BaseEncodable {
+    func toHex() throws -> String {
+        return try encodeToString(base:16, prefix:false, width:nil)
     }
 }
