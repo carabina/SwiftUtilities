@@ -33,6 +33,9 @@ import Foundation
 
 public extension String {
     func substringFromPrefix(prefix: String) throws -> String {
+        if prefix.isEmpty {
+            return self
+        }
         if let range = rangeOfString(prefix) where range.startIndex == startIndex {
             return substringFromIndex(range.endIndex)
         }
