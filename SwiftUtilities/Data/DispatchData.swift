@@ -215,7 +215,7 @@ public extension DispatchData {
 
 public extension DispatchData {
 
-    init <U> (value:U) {
+    init <U> (_ value:U) {
         var copy = value
         let data:dispatch_data_t = withUnsafePointer(&copy) {
             let buffer = UnsafeBufferPointer <U> (start:$0, count:1)
