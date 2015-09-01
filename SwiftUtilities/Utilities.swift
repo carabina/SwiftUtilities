@@ -31,7 +31,7 @@
 
 import Foundation
 
-public func bitwiseEquality <T> (lhs: T, _ rhs: T) -> Bool {
+public func unsafeBitwiseEquality <T> (lhs: T, _ rhs: T) -> Bool {
     var lhs = lhs
     var rhs = rhs
     return withUnsafePointers(&lhs, &rhs) {

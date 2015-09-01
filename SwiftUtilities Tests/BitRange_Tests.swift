@@ -1,5 +1,5 @@
 //
-//  Tests.swift
+//  BitRange_Tests.swift
 //  Tests
 //
 //  Created by Jonathan Wight on 6/24/15.
@@ -32,7 +32,7 @@
 import XCTest
 import SwiftUtilities
 
-class Tests: XCTestCase {
+class BitRange_Tests: XCTestCase {
 
     func testScalarBitRange() {
         XCTAssertEqual(bitRange(UInt8(0b00011011), start: 0, length: 2, flipped: false), 0b11)
@@ -46,26 +46,35 @@ class Tests: XCTestCase {
         XCTAssertEqual(bitRange(UInt8(0b00011011), start: 6, length: 2, flipped: true), 0b11)
     }
 
-    func testBufferBitRange() {
-//        let data = try! NSData(hexString: "0001020304050607F0F1F2F3F4F5F6F7")
-
-//        data.withUnsafeBufferPointer {
-//            (p: UnsafeBufferPointer<UInt8>) -> Void in
-//            for n: Int in stride(from: 0, through: 7, by: 1) {
-//                XCTAssertEqual(bitRange(p, start: bits(n), length: 8), UIntMax(n))
-//                XCTAssertEqual(bitRange(p, start: bits(n + 8), length: 8), 0xF0 + UIntMax(n))
-//            }
-//            for n: Int in stride(from: 0, through: 7, by: 1) {
-//                XCTAssertEqual(bitRange(p, start: bits(n) + 1, length: 7), UIntMax(n))
-//            }
-//        }
-    }
-
     func testScalarBitSet() {
         XCTAssertEqual(bitSet(UInt8(0b00011011), start: 0, length: 3, flipped: false, newValue: UInt8(0b100)), UInt8(0b00011100))
         XCTAssertEqual(bitSet(UInt8(0b00011011), start: 2, length: 1, flipped: false, newValue: UInt8(0b1)), UInt8(0b00011111))
         XCTAssertEqual(bitSet(UInt8(0b00011111), start: 0, length: 3, flipped: true, newValue: UInt8(0b111)), UInt8(0b11111111))
         XCTAssertEqual(bitSet(UInt8(0b00000000), range: 5..<8, flipped: true, newValue: UInt8(5)), UInt8(5))
     }
+
+/// TODO
+//    func testBufferRange1() {
+//
+//        let tests:[(Int,Int,UIntMax)] = [
+////            (0, 1, 0x1),
+//            (0, 4, 0x1111),
+//        ]
+//
+//        let length = 32
+//
+//        for test in tests {
+//            let result = buildBinary(length) {
+//                (buffer) in
+//                bitSet(buffer, start: test.0, length: test.1, newValue: test.2)
+//                print(test.0, test.1)
+//            }
+//
+//            var bitString = BitString(count: length)
+//            try! bitString.bitSet(test.0, length: test.1, newValue: test.2)
+//
+//            XCTAssertEqual(bitString.string, try! byteArrayToBinary(result))
+//        }
+//    }
 
 }

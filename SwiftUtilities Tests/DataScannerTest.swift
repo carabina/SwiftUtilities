@@ -35,7 +35,7 @@ import SwiftUtilities
 
 class DataScannerTest: XCTestCase {
 
-    func testTooLittleDat() {
+    func testTooLittleData() {
 
         let inputData = try! NSData.fromHex("FF")
         let buffer: UnsafeBufferPointer <Void> = inputData.toUnsafeBufferPointer()

@@ -56,8 +56,8 @@ public func bitRange <T: UnsignedIntegerType> (value: T, range: Range <Int>, fli
 
 // MARK: -
 
-public func bitRange(buffer: UnsafeBufferPointer <Void>, start: Int, length: Int) -> UIntMax {
-    let pointer = buffer.baseAddress
+public func bitRange <Element>(buffer: UnsafeBufferPointer <Element>, start: Int, length: Int) -> UIntMax {
+    let pointer = UnsafePointer <Void> (buffer.baseAddress)
 
     // Fast path; we want whole integers and the range is aligned to integer size.
     if length == 64 && start % 64 == 0 {
@@ -97,7 +97,7 @@ public func bitRange(buffer: UnsafeBufferPointer <Void>, start: Int, length: Int
     }
 }
 
-public func bitRange(buffer: UnsafeBufferPointer <Void>, range: Range <Int>) -> UIntMax {
+public func bitRange <Element>(buffer: UnsafeBufferPointer <Element>, range: Range <Int>) -> UIntMax {
     return bitRange(buffer, start: range.startIndex, length: range.endIndex - range.startIndex)
 }
 
@@ -118,8 +118,8 @@ public func bitSet <T: UnsignedIntegerType> (value: T, range: Range <Int>, flipp
 
 // MARK: -
 
-public func bitSet(buffer: UnsafeMutableBufferPointer <Void>, start: Int, length: Int, newValue: UIntMax) {
-    let pointer = buffer.baseAddress
+public func bitSet <Element>(buffer: UnsafeMutableBufferPointer <Element>, start: Int, length: Int, newValue: UIntMax) {
+    let pointer = UnsafeMutablePointer <Void> (buffer.baseAddress)
 
     // Fast path; we want whole integers and the range is aligned to integer size.
     if length == 64 && start % 64 == 0 {
@@ -156,7 +156,7 @@ public func bitSet(buffer: UnsafeMutableBufferPointer <Void>, start: Int, length
     }
 }
 
-public func bitSet(buffer: UnsafeMutableBufferPointer <Void>, range: Range <Int>, newValue: UIntMax) {
+public func bitSet <Element>(buffer: UnsafeMutableBufferPointer <Element>, range: Range <Int>, newValue: UIntMax) {
     bitSet(buffer, start: range.startIndex, length: range.endIndex - range.startIndex, newValue: newValue)
 }
 

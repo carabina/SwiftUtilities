@@ -77,13 +77,13 @@ class DispatchDataTest: XCTestCase {
         XCTAssertEqual(insettedData, expectedResult)
     }
 
-    func testNonByteSized() {
-        let data = DispatchData <UInt16> (array: [ 1, 2, 3, 4 ])
-        XCTAssertEqual(data.subBuffer(1 ..< 3), DispatchData <UInt16> (array: [ 2, 3 ]))
-        XCTAssertEqual(data.subBuffer(startIndex: 1, count: 2), DispatchData <UInt16> (array: [ 2, 3 ]))
-        XCTAssertEqual(data[1 ..< 3], DispatchData <UInt16> (array: [ 2, 3 ]))
-//        XCTAssertEqual(data.subBuffer(startIndex: 1, length: 2 * sizeof(UInt16)), DispatchData <UInt16> (array: [ 2, 3 ]))
-    }
+//    func testNonByteSized() {
+//        let data = DispatchData <UInt16> (array: [ 1, 2, 3, 4 ])
+//        XCTAssertEqual(data.subBuffer(1 ..< 3), DispatchData <UInt16> (array: [ 2, 3 ]))
+//        XCTAssertEqual(data.subBuffer(startIndex: 1, count: 2), DispatchData <UInt16> (array: [ 2, 3 ]))
+//        XCTAssertEqual(data[1 ..< 3], DispatchData <UInt16> (array: [ 2, 3 ]))
+////        XCTAssertEqual(data.subBuffer(startIndex: 1, length: 2 * sizeof(UInt16)), DispatchData <UInt16> (array: [ 2, 3 ]))
+//    }
 }
 
 extension DispatchData {
