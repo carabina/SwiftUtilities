@@ -36,6 +36,17 @@ import XCTest
 //    XCTAssertEqual(expression2, expression3, message, file: file, line: line)
 //    XCTAssertEqual(expression3, expression1, message, file: file, line: line)
 //}
+import SwiftUtilities
+
+func XCTAssertThrows(closure:() throws -> Void) {
+    do {
+        try closure()
+        XCTAssert(false)
+    }
+    catch {
+        return
+    }
+}
 
 func bits(bits: Int) -> Int {
     return bits * 8
