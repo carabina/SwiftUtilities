@@ -33,16 +33,6 @@ import Foundation
 
 public extension NSRange {
 
-    init(location: Int, length: Int) {
-        self.location = location
-        self.length = length
-    }
-
-    init(_ location: Int, _ length: Int) {
-        self.location = location
-        self.length = length
-    }
-
     init(range: Range <Int>) {
         self.location = range.startIndex
         self.length = range.endIndex - range.startIndex
