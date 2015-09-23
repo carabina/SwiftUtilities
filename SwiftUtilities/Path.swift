@@ -8,16 +8,16 @@
 
 import Foundation
 
-struct Path {
-    let path:String
-    init(_ path:String) {
+public struct Path {
+    public let path:String
+    public init(_ path:String) {
         self.path = path
     }
 
-    init(_ URL:NSURL) {
+    public init(_ URL:NSURL) {
         self.path = URL.path!
     }
-    var url:NSURL {
+    public var url:NSURL {
         return NSURL(fileURLWithPath: path)
     }
 }
@@ -25,14 +25,14 @@ struct Path {
 // MARK: -
 
 extension Path: CustomStringConvertible {
-    var description:String {
+    public var description:String {
         return path
     }
 }
 
 // MARK: -
 
-extension Path {
+public extension Path {
 
     var components:[String] {
         return (path as NSString).pathComponents
@@ -75,7 +75,7 @@ extension Path {
 
 // MARK: -
 
-extension Path {
+public extension Path {
     static var applicationSupportDirectory: Path {
         let url = try! NSFileManager().URLForDirectory(.ApplicationSupportDirectory, inDomain: .UserDomainMask, appropriateForURL: nil, create: true)
         return Path(url)
@@ -94,7 +94,7 @@ extension Path {
 
 // MARK: -
 
-func + (lhs:Path, rhs:String) -> Path {
+public func + (lhs:Path, rhs:String) -> Path {
     let URL = lhs.url.URLByAppendingPathComponent(rhs)
     return Path(URL)
 }
@@ -107,14 +107,14 @@ func + (lhs:Path, rhs:String) -> Path {
 
 // MARK: -
 
-enum FileType {
+public enum FileType {
     case Regular
     case Directory
 }
 
 // MARK: -
 
-extension Path {
+public extension Path {
 
     static var currentDirectory:Path {
         get {
@@ -126,7 +126,7 @@ extension Path {
     }
 }
 
-extension Path {
+public extension Path {
 
     var exists:Bool {
         return url.checkResourceIsReachableAndReturnError(nil)
@@ -162,7 +162,7 @@ extension Path {
 
 }
 
-extension Path {
+public extension Path {
 
     var permissions: Int {
         return try! getAttributes()[NSFilePosixPermissions] as! Int
@@ -176,7 +176,7 @@ extension Path {
 
 // MARK: -
 
-extension Path {
+public extension Path {
 
     func createDirectory(withIntermediateDirectories withIntermediateDirectories:Bool = false, attributes:[String: AnyObject]? = nil) throws {
         try NSFileManager().createDirectoryAtPath(path, withIntermediateDirectories: withIntermediateDirectories, attributes: attributes)
@@ -184,7 +184,7 @@ extension Path {
 
 }
 
-extension Path {
+public extension Path {
     func move(destination:Path) throws {
         try NSFileManager().moveItemAtURL(url, toURL: destination.url)
     }
@@ -196,7 +196,7 @@ extension Path {
 
 // MARK: -
 
-extension Path {
+public extension Path {
     func rotate() throws {
         if exists == false {
             return
@@ -214,13 +214,13 @@ extension Path {
     }
 }
 
-extension Path {
+public extension Path {
     var attributes:FileAttributes {
         return FileAttributes(path)
     }
 }
 
-struct FileAttributes {
+public struct FileAttributes {
 
     private let path:String
 
@@ -232,16 +232,16 @@ struct FileAttributes {
         return NSURL(fileURLWithPath: path)
     }
 
-    var exists:Bool {
+    public var exists:Bool {
         return url.checkResourceIsReachableAndReturnError(nil)
     }
 
-    func getAttributes() throws -> [String : AnyObject] {
+    public func getAttributes() throws -> [String : AnyObject] {
         let attributes = try NSFileManager().attributesOfItemAtPath(path)
         return attributes
     }
 
-    var fileType:FileType! {
+    public var fileType:FileType! {
         switch try! getAttributes()[NSFileType] as! String {
             case NSFileTypeDirectory:
                 return .Directory
@@ -252,18 +252,18 @@ struct FileAttributes {
         }
     }
 
-    var isDirectory:Bool {
+    public var isDirectory:Bool {
         return fileType == .Directory
     }
 
-    func iter(@noescape closure:Path -> Void) {
+    public func iter(@noescape closure:Path -> Void) {
         let enumerator = NSFileManager().enumeratorAtURL(url, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants, errorHandler: nil)
         for url in enumerator! {
             closure(Path(url as! NSURL))
         }
     }
 
-    var length:Int {
+    public var length:Int {
         return try! getAttributes()[NSFileSize] as! Int
     }
 
