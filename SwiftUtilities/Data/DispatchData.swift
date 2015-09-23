@@ -202,6 +202,7 @@ public extension DispatchData {
 
 // MARK: -
 
+// TODO: Deprecate
 public extension DispatchData {
     func toBuffer() -> Buffer <Element> {
         return createMap() {
