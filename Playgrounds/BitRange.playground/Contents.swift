@@ -22,7 +22,7 @@ struct BitString {
 
     mutating func bitSet(start:Int, length:Int, newValue:UIntMax) {
 
-        let newValue = binary(newValue, width:length, prefix:false)
+        let newValue = try! binary(newValue, width:length, prefix:false)
 
         let start = string.startIndex.advancedBy(start)
         let end = start.advancedBy(length)
@@ -35,7 +35,7 @@ let result = test(128) {
     (buffer) in
     bitSet(buffer, start: 0, length: 1, newValue: 0x01)
 }
-print(result.map({ binary($0, width:8, prefix:false) }).joinWithSeparator(""))
+print(result.map({ try! binary($0, width:8, prefix:false) }).joinWithSeparator(""))
 
 
 var bitString = BitString(count: 128)
