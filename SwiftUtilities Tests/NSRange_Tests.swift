@@ -42,18 +42,18 @@ class NSRange_Tests: XCTestCase {
         XCTAssertEqual(NSRange(range: 1...10).endIndex, Range <Int> (1...10).endIndex)
         XCTAssertEqual(NSRange(range: 1..<10).endIndex, Range <Int> (1..<10).endIndex)
 
-        XCTAssertTrue(NSRange(1,0).isEmpty)
-        XCTAssertFalse(NSRange(0,1).isEmpty)
+        XCTAssertTrue(NSRange(location: 1, length: 0).isEmpty)
+        XCTAssertFalse(NSRange(location: 0, length: 1).isEmpty)
 
-        XCTAssertEqual(NSRange(1,10).clamp(5), 5)
-        XCTAssertEqual(NSRange(1,10).clamp(0), 1)
-        XCTAssertEqual(NSRange(1,10).clamp(10), 10)
-        XCTAssertEqual(NSRange(1,10).clamp(100), 10)
-        XCTAssertEqual(NSRange(1,10).clamp(-100), 1)
+        XCTAssertEqual(NSRange(location: 1, length: 10).clamp(5), 5)
+        XCTAssertEqual(NSRange(location: 1, length: 10).clamp(0), 1)
+        XCTAssertEqual(NSRange(location: 1, length: 10).clamp(10), 10)
+        XCTAssertEqual(NSRange(location: 1, length: 10).clamp(100), 10)
+        XCTAssertEqual(NSRange(location: 1, length: 10).clamp(-100), 1)
 
-        XCTAssertEqual(NSRange(range: 1...10).clamp(NSRange(-100, 200)), NSRange(range: 1...10))
-        XCTAssertEqual(NSRange(range: 1...10).clamp(NSRange(5, 200)), NSRange(range: 5...10))
-        XCTAssertEqual(NSRange(range: 1...10).clamp(NSRange(-100, 105)), NSRange(range: 1...5))
+        XCTAssertEqual(NSRange(range: 1...10).clamp(NSRange(location: -100, length: 200)), NSRange(range: 1...10))
+        XCTAssertEqual(NSRange(range: 1...10).clamp(NSRange(location: 5, length: 200)), NSRange(range: 5...10))
+        XCTAssertEqual(NSRange(range: 1...10).clamp(NSRange(location: -100, length: 105)), NSRange(range: 1...5))
 
     }
 }
