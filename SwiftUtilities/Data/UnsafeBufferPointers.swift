@@ -34,7 +34,7 @@ import Foundation
 public extension UnsafeBufferPointer {
     public init(start: UnsafePointer<Element>, length: Int) {
         precondition(length % UnsafeBufferPointer <Element>.elementSize == 0)
-        self.init(start:start, count:length / UnsafeBufferPointer <Element>.elementSize)
+        self.init(start: start, count: length / UnsafeBufferPointer <Element>.elementSize)
     }
 }
 

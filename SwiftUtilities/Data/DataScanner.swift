@@ -64,7 +64,7 @@ public class DataScanner {
 
 public extension DataScanner {
 
-    func scan <Type:IntegerType>() throws -> Type? {
+    func scan <Type: IntegerType>() throws -> Type? {
         guard remainingSize >= sizeof(Type) else {
             return nil
         }
@@ -75,8 +75,8 @@ public extension DataScanner {
         return result
     }
 
-    func scan <Type:IntegerType>() throws -> Type {
-        guard let value:Type = try scan() else {
+    func scan <Type: IntegerType>() throws -> Type {
+        guard let value: Type = try scan() else {
             throw Error.generic("Unable to scan element.")
         }
         return value
@@ -87,7 +87,7 @@ public extension DataScanner {
 
 public extension DataScanner {
 
-    func scan <Type:FloatingPointType> () throws -> Type? {
+    func scan <Type: FloatingPointType> () throws -> Type? {
         guard remainingSize >= sizeof(Type) else {
             return nil
         }
@@ -99,8 +99,8 @@ public extension DataScanner {
         return result
     }
 
-    public func scan <Type:FloatingPointType> () throws -> Type {
-        guard let value:Type = try scan() else {
+    public func scan <Type: FloatingPointType> () throws -> Type {
+        guard let value: Type = try scan() else {
             throw Error.generic("Unable to scan element.")
         }
         return value
@@ -122,7 +122,7 @@ public extension DataScanner {
     }
 
     func scan(count: Int) throws -> UnsafeBufferPointer <Void> {
-        guard let value:UnsafeBufferPointer <Void> = try scan(count) else {
+        guard let value: UnsafeBufferPointer <Void> = try scan(count) else {
             throw Error.generic("Not enough data in buffer")
         }
         return value
@@ -147,12 +147,12 @@ public extension DataScanner {
         }
     }
 
-    func scanString(maxCount: Int? = nil, encoding:NSStringEncoding = NSUTF8StringEncoding) throws -> String? {
+    func scanString(maxCount: Int? = nil, encoding: NSStringEncoding = NSUTF8StringEncoding) throws -> String? {
         guard atEnd == false else {
             return nil
         }
 
-        let buffer:UnsafeBufferPointer <UInt8> = self.buffer.toUnsafeBufferPointer()
+        let buffer: UnsafeBufferPointer <UInt8> = self.buffer.toUnsafeBufferPointer()
 
         var count = 0
         var index = current
@@ -192,7 +192,7 @@ public extension DataScanner {
 
     func scanUpTo(byte: UInt8) throws -> UnsafeBufferPointer <UInt8>? {
         let start = current
-        let buffer:UnsafeBufferPointer <UInt8> = self.buffer.toUnsafeBufferPointer()
+        let buffer: UnsafeBufferPointer <UInt8> = self.buffer.toUnsafeBufferPointer()
         for ; current != buffer.endIndex; ++current {
             if buffer[current] == byte {
                 break

@@ -118,8 +118,8 @@ public func + <Element> (lhs: Buffer <Element>, rhs: UnsafeBufferPointer <Elemen
 
 extension Buffer {
 
-    public init(count: Int, repeatedValue:Element) {
-        let value = [Element](count: count, repeatedValue:repeatedValue)
+    public init(count: Int, repeatedValue: Element) {
+        let value = [Element](count: count, repeatedValue: repeatedValue)
         let data = value.withUnsafeBufferPointer() {
             (buffer) in
             return NSData(buffer: buffer)

@@ -11,7 +11,7 @@ class Node <T> {
     var value : T
     var children : [Node <T>] = []
     
-    init(_ value:T) {
+    init(_ value: T) {
         self.value = value
     }
 }
@@ -29,12 +29,12 @@ let walker = Walker <StringNode> () {
     }
 
 walker.walk(root) {
-    (node:StringNode, depth:Int) in
+    (node: StringNode, depth: Int) in
     print("\(depth): \(node)")
     }
     
 walker.walk(root) {
-    (node:StringNode, state:WalkerState <StringNode>) in
+    (node: StringNode, state: WalkerState <StringNode>) in
     let filler = state.filler("\t")
     print("\(filler)\(node)\(state.stack)")
     }

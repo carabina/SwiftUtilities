@@ -40,7 +40,7 @@ class DataScannerTest: XCTestCase {
         let inputData = try! NSData.fromHex("FF")
         let buffer: UnsafeBufferPointer <Void> = inputData.toUnsafeBufferPointer()
         let scanner = DataScanner(buffer: buffer)
-        let B1:UInt64? = try! scanner.scan()
+        let B1: UInt64? = try! scanner.scan()
         XCTAssert(B1 == nil)
     }
 
@@ -50,11 +50,11 @@ class DataScannerTest: XCTestCase {
         let buffer: UnsafeBufferPointer <Void> = inputData.toUnsafeBufferPointer()
         let scanner = DataScanner(buffer: buffer)
 
-        let B1:UInt8? = try! scanner.scan()
+        let B1: UInt8? = try! scanner.scan()
         XCTAssertEqual(B1, 0xDE)
-        let B2:UInt16? = try! scanner.scan()
-        XCTAssertEqual(UInt16(bigEndian:B2!), 0xADBE)
-        let B3:UInt8? = try! scanner.scan()
+        let B2: UInt16? = try! scanner.scan()
+        XCTAssertEqual(UInt16(bigEndian: B2!), 0xADBE)
+        let B3: UInt8? = try! scanner.scan()
         XCTAssertEqual(B3, 0xEF)
 
         XCTAssert(scanner.atEnd)
@@ -65,7 +65,7 @@ class DataScannerTest: XCTestCase {
         let inputData = "Hello world\0".dataUsingEncoding(NSASCIIStringEncoding)!
         print(inputData)
 
-        let buffer:UnsafeBufferPointer <Void> = inputData.toUnsafeBufferPointer()
+        let buffer: UnsafeBufferPointer <Void> = inputData.toUnsafeBufferPointer()
 
         let scanner = DataScanner(buffer: buffer)
 

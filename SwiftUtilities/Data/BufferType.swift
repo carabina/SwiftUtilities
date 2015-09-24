@@ -118,7 +118,7 @@ extension UnsafeBufferPointer: IndexedBufferType {
 //    public var count: Int { return length }
 //
 //    public convenience init(start: UnsafePointer<Element>, count: Int) {
-//        self.init(bytes:start, length:count)
+//        self.init(bytes: start, length: count)
 //    }
 //}
 

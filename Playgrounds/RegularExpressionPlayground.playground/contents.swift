@@ -12,7 +12,7 @@ let match = expression.match(haystack)!
 let range = match.ranges[0]
 haystack[range]
 
-func ~= (pattern: RegularExpression, value:String) -> Bool {
+func ~= (pattern: RegularExpression, value: String) -> Bool {
     let match = pattern.match(value)
     return match != nil
 }

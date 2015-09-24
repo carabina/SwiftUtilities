@@ -56,7 +56,7 @@ class BitRange_Tests: XCTestCase {
 /// TODO
 //    func testBufferRange1() {
 //
-//        let tests:[(Int,Int,UIntMax)] = [
+//        let tests: [(Int,Int,UIntMax)] = [
 ////            (0, 1, 0x1),
 //            (0, 4, 0x1111),
 //        ]

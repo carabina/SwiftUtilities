@@ -38,7 +38,7 @@ import XCTest
 //}
 import SwiftUtilities
 
-func XCTAssertThrows(closure:() throws -> Void) {
+func XCTAssertThrows(closure: () throws -> Void) {
     do {
         try closure()
         XCTAssert(false)
@@ -52,29 +52,29 @@ func bits(bits: Int) -> Int {
     return bits * 8
 }
 
-func buildBinary(length:Int, @noescape closure:(UnsafeMutableBufferPointer <UInt8>) -> Void) -> [UInt8] {
+func buildBinary(length: Int, @noescape closure: (UnsafeMutableBufferPointer <UInt8>) -> Void) -> [UInt8] {
     var data = [UInt8](count: Int(ceil(Double(length) / 8)), repeatedValue: 0)
     data.withUnsafeMutableBufferPointer() {
-        (inout buffer:UnsafeMutableBufferPointer <UInt8>) -> Void in
+        (inout buffer: UnsafeMutableBufferPointer <UInt8>) -> Void in
         closure(buffer)
     }
     return data
 }
 
-func byteArrayToBinary(bytes:Array <UInt8>) throws -> String {
-    return try bytes.map({ try binary($0, width:8, prefix:false) }).joinWithSeparator("")
+func byteArrayToBinary(bytes: Array <UInt8>) throws -> String {
+    return try bytes.map({ try binary($0, width: 8, prefix: false) }).joinWithSeparator("")
 }
 
 struct BitString {
-    var string:String
+    var string: String
 
-    init(count:Int) {
-        string = String(count:count, repeatedValue:Character("0"))
+    init(count: Int) {
+        string = String(count: count, repeatedValue: Character("0"))
     }
 
-    mutating func bitSet(start:Int, length:Int, newValue:UIntMax) throws {
+    mutating func bitSet(start: Int, length: Int, newValue: UIntMax) throws {
 
-        let newValue = try binary(newValue, width:length, prefix:false)
+        let newValue = try binary(newValue, width: length, prefix: false)
 
         let start = string.startIndex.advancedBy(start)
         let end = start.advancedBy(length)

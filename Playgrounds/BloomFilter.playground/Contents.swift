@@ -11,16 +11,16 @@ enum Contains {
 
 struct BloomFilter <Element: Hashable> {
 
-    var data:Array <UInt8>
+    var data: Array <UInt8>
 
-    let count:Int
+    let count: Int
 
-    init(count:Int) {
+    init(count: Int) {
         self.count = count
         self.data = Array <UInt8> (count: Int(ceil(Double(count) / 8)), repeatedValue: 0)
     }
 
-    mutating func add(value:Element) {
+    mutating func add(value: Element) {
         let hash = value.hashValue
         let position = Int(unsafeBitCast(hash, UInt.self) % UInt(count))
         data.withUnsafeMutableBufferPointer() {
@@ -33,7 +33,7 @@ struct BloomFilter <Element: Hashable> {
         }
     }
 
-    func contains(value:Element) -> Contains {
+    func contains(value: Element) -> Contains {
         let hash = value.hashValue
         let position = Int(unsafeBitCast(hash, UInt.self) % UInt(count))
         return data.withUnsafeBufferPointer() {
@@ -44,7 +44,7 @@ struct BloomFilter <Element: Hashable> {
 
 }
 
-var filter = BloomFilter <String>(count:100)
+var filter = BloomFilter <String>(count: 100)
 filter.data
 filter.add("hello world")
 filter.data

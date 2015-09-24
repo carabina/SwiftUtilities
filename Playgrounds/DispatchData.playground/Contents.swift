@@ -17,10 +17,10 @@ extension DispatchData: SequenceType {
 
 public struct DispatchDataGenerator <Element>: GeneratorType {
 
-    var remaining:DispatchData <Element>
+    var remaining: DispatchData <Element>
 
     @warn_unused_result
-    public init(_ dispatchData:DispatchData <Element>) {
+    public init(_ dispatchData: DispatchData <Element>) {
         remaining = dispatchData
     }
 
@@ -53,7 +53,7 @@ for value in data {
 extension DispatchData {
 
     public func map(transform: (Element) throws -> Element) rethrows -> [Element] {
-        var result:[Element] = []
+        var result: [Element] = []
         apply() {
             (range, buffer) in
             for value in buffer {

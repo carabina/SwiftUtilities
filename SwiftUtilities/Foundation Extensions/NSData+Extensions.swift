@@ -33,7 +33,7 @@ import Foundation
 
 public extension NSData {
 
-    convenience init <Element>(buffer:UnsafeBufferPointer <Element>) {
+    convenience init <Element>(buffer: UnsafeBufferPointer <Element>) {
         self.init(bytes: UnsafeMutablePointer <Void> (buffer.baseAddress), length: buffer.length)
     }
 

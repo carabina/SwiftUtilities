@@ -33,7 +33,7 @@ import XCTest
 
 import SwiftUtilities
 
-let deadbeef:UInt32 = 0xDEADBEEF
+let deadbeef: UInt32 = 0xDEADBEEF
 
 class DispatchDataTest: XCTestCase {
 

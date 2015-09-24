@@ -36,7 +36,7 @@ public protocol BaseDecodable {
 }
 
 public protocol BaseEncodable {
-    func encodeToString(base base:Int, prefix:Bool, width:Int?) throws -> String
+    func encodeToString(base base: Int, prefix: Bool, width: Int?) throws -> String
 }
 
 public extension BaseDecodable {
@@ -68,7 +68,7 @@ extension UnsignedIntegerType {
 
         // TODO: Base guessing/expectation is broken
 
-        var finalRadix:NamedRadix
+        var finalRadix: NamedRadix
         if let base = base {
             guard let radix = NamedRadix(rawValue: base) else {
                 throw Error.generic("No standard prefix for base \(base).")
@@ -87,7 +87,7 @@ extension UnsignedIntegerType {
         let base = finalRadix.rawValue
 
         for c in string.utf8 {
-            if let value = try decodeCodeUnit(c, base:base) {
+            if let value = try decodeCodeUnit(c, base: base) {
                 result *= Self.init(UIntMax(base))
                 result += Self.init(UIntMax(value))
             }
@@ -116,7 +116,7 @@ extension UInt8: BaseEncodable {
 
 extension UnsignedIntegerType {
 
-    public func encodeToString(base base:Int, prefix:Bool = false, width:Int? = nil) throws -> String {
+    public func encodeToString(base base: Int, prefix: Bool = false, width: Int? = nil) throws -> String {
         let value = toUIntMax()
 
         var s: String = "0"
@@ -153,7 +153,7 @@ extension UnsignedIntegerType {
 
 extension DispatchData: BaseDecodable {
     public static func decodeFromString(string: String, base: Int?) throws -> DispatchData {
-        let data = try NSData.decodeFromString(string, base:base!)
+        let data = try NSData.decodeFromString(string, base: base!)
         return DispatchData(data)
     }
 }
@@ -173,7 +173,7 @@ extension NSData: BaseDecodable {
                 continue
             }
 
-            if let nibble = try decodeCodeUnit(hexNibble, base:base!) {
+            if let nibble = try decodeCodeUnit(hexNibble, base: base!) {
                 if hiNibble {
                     octet = nibble << 4
                     hiNibble = false
@@ -199,7 +199,7 @@ extension NSData: BaseDecodable {
 // MARK: UnsafeBufferPointer + BaseEncodable
 
 extension UnsafeBufferPointer: BaseEncodable {
-    public func encodeToString(base base:Int, prefix:Bool = false, width:Int? = nil) throws -> String {
+    public func encodeToString(base base: Int, prefix: Bool = false, width: Int? = nil) throws -> String {
         precondition(base == 16)
         precondition(prefix == false)
         precondition(width == nil)
@@ -237,7 +237,7 @@ extension NamedRadix {
         }
     }
 
-    static func fromString(string:String) -> NamedRadix {
+    static func fromString(string: String) -> NamedRadix {
         if string.hasPrefix(self.Binary.constantPrefix) {
             return .Binary
         }
@@ -253,8 +253,8 @@ extension NamedRadix {
     }
 }
 
-func decodeCodeUnit(codeUnit:UTF8.CodeUnit, base:Int) throws -> UInt8? {
-    let value:UInt8
+func decodeCodeUnit(codeUnit: UTF8.CodeUnit, base: Int) throws -> UInt8? {
+    let value: UInt8
     switch codeUnit {
         // "0" ... "9"
         case 0x30 ... 0x39:
@@ -278,18 +278,18 @@ func decodeCodeUnit(codeUnit:UTF8.CodeUnit, base:Int) throws -> UInt8? {
 
 // MARK: Convenience methods that will probably be deprecated or at least renamed in future
 
-public func binary <T: BaseEncodable> (value: T, prefix:Bool = false, width: Int? = nil) throws -> String {
+public func binary <T: BaseEncodable> (value: T, prefix: Bool = false, width: Int? = nil) throws -> String {
     return try value.encodeToString(base: 2, prefix: prefix, width: width)
 }
 
 public extension BaseDecodable {
-    static func fromHex(hex:String) throws -> Self {
-        return try Self.decodeFromString(hex, base:16)
+    static func fromHex(hex: String) throws -> Self {
+        return try Self.decodeFromString(hex, base: 16)
     }
 }
 
 public extension BaseEncodable {
     func toHex() throws -> String {
-        return try encodeToString(base:16, prefix:false, width:nil)
+        return try encodeToString(base: 16, prefix: false, width: nil)
     }
 }

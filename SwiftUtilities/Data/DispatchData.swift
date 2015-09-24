@@ -74,7 +74,7 @@ public struct DispatchData <Element> {
         self.init(data: dispatch_data_create(buffer.baseAddress, buffer.length, nil, nil))
     }
 
-    public init(start: UnsafePointer <Element>, count:Int) {
+    public init(start: UnsafePointer <Element>, count: Int) {
         self.init(data: dispatch_data_create(start, count * DispatchData <Element>.elementSize, nil, nil))
     }
 
@@ -216,12 +216,12 @@ public extension DispatchData {
 
 public extension DispatchData {
 
-    init <U> (_ value:U) {
+    init <U> (_ value: U) {
         var copy = value
-        let data:dispatch_data_t = withUnsafePointer(&copy) {
-            let buffer = UnsafeBufferPointer <U> (start:$0, count:1)
+        let data: dispatch_data_t = withUnsafePointer(&copy) {
+            let buffer = UnsafeBufferPointer <U> (start: $0, count: 1)
             return dispatch_data_create(buffer.baseAddress, buffer.length, nil, nil)
         }
-        self.init(data:data)
+        self.init(data: data)
     }
 }

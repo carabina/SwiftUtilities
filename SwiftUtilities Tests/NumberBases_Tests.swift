@@ -42,10 +42,10 @@ class NumberBases_Tests: XCTestCase {
     }
 
     func testFromStringWithBase() {
-        XCTAssertEqual(try! UIntMax(fromString: "0b1111", base:2), 0b1111)
-        XCTAssertEqual(try! UIntMax(fromString: "0o1234", base:8), 0o1234)
-        XCTAssertEqual(try! UIntMax(fromString: "0x1234abcd", base:16), 0x1234abcd)
-        XCTAssertEqual(try! UIntMax(fromString: "123456", base:10), 123456)
+        XCTAssertEqual(try! UIntMax(fromString: "0b1111", base: 2), 0b1111)
+        XCTAssertEqual(try! UIntMax(fromString: "0o1234", base: 8), 0o1234)
+        XCTAssertEqual(try! UIntMax(fromString: "0x1234abcd", base: 16), 0x1234abcd)
+        XCTAssertEqual(try! UIntMax(fromString: "123456", base: 10), 123456)
     }
 
     func testBadFromString() {
@@ -67,12 +67,12 @@ class NumberBases_Tests: XCTestCase {
     }
 
     func testToString() {
-        XCTAssertEqual(try! UInt32(0b1111).encodeToString(base:2, prefix:true), "0b1111")
-        XCTAssertEqual(try! UInt32(0o1234).encodeToString(base:8, prefix:true), "0o1234")
-        XCTAssertEqual(try! UInt32(0x1234abcd).encodeToString(base:16, prefix:true), "0x1234abcd")
+        XCTAssertEqual(try! UInt32(0b1111).encodeToString(base: 2, prefix: true), "0b1111")
+        XCTAssertEqual(try! UInt32(0o1234).encodeToString(base: 8, prefix: true), "0o1234")
+        XCTAssertEqual(try! UInt32(0x1234abcd).encodeToString(base: 16, prefix: true), "0x1234abcd")
     }
 
     func testToString_Lengths() {
-        XCTAssertEqual(try! UInt32(0b1111).encodeToString(base:2, prefix:true, width:8), "0b00001111")
+        XCTAssertEqual(try! UInt32(0b1111).encodeToString(base: 2, prefix: true, width: 8), "0b00001111")
     }
 }
