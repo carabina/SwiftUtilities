@@ -87,3 +87,8 @@ public struct RegularExpression {
         }
     }
 }
+
+public func ~= (pattern: RegularExpression, value:String) -> Bool {
+    let match = pattern.match(value)
+    return match != nil
+}
